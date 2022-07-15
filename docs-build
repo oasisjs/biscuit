@@ -1,0 +1,159 @@
+#!/usr/bin/env node
+
+// Node imports
+const fs = require('fs');
+const path = require('path');
+const process = require('process');
+const child_process = require('child_process');
+
+// Path with the docs.json file generated with `deno doc --json mod.ts > docs.json`
+const docsPath = path.join(__dirname, '/docs.json');
+const mainBranchURL = 'https://github.com/oasisjs/biscuit/tree/main';
+
+/**
+ * Execute a new subprocess with the given command.
+ * @param {string} cmd - The command to run
+ * @return {void}
+*/
+function exec(cmd) {
+    child_process.execSync(cmd, {stdio: 'inherit', cwd: __dirname});
+}
+
+/**
+ * Returns a new javascript object with the docs.json file.
+ * @returns {[]any}
+ */
+function getDocs() {
+    if (!fs.existsSync(docsPath)) {
+        throw new Error('The docs.json file does not exist. Use: deno doc --json mod.ts > docs.json');
+    }
+
+    const res = fs.readFileSync(docsPath, { encoding: 'utf-8' }).toString().trim().replaceAll(/[^A-Za-z0-9\"\:\{\}\[\]\.\,\/\\\_\-]/g, '');
+    return JSON.parse(res);
+}
+
+/**
+ * Get the file location at the main branch of the repository.
+ * @param {{ filename: string, line: number, col: number }} location - The filename to check
+ * @returns {string}
+*/
+function getLocationURL(location) {
+    const filename = location.filename;
+    const start = filename.indexOf('/packages/');
+    const componentPath = filename.slice(start, filename.length);
+    const lineAndCol = `#L${location.line}:${location.col}`;
+
+    return mainBranchURL + componentPath + lineAndCol;
+}
+
+/**
+ * 
+ * @param {any} docsElement
+ * @param {string} componentName
+ * @returns {string}
+ */
+function loadComponent(docsElement, componentName) {
+    if (docsElement.declarationKind != 'export') {
+        return '';
+    }
+
+    // const url = getLocationURL(docsElement.location);
+    let loaded = '';
+
+    switch (componentName) {
+        case 'variable':
+            const variableDef = docsElement.variableDef;
+            const kind = variableDef.kind;
+
+            let type = "";
+            if (variableDef.tsType) {
+                switch (variableDef.tsType.kind) {
+                    case 'literal':
+                        type = variableDef.tsType.literal.kind;
+                        break;
+                    case 'typeRef':
+                        type = variableDef.tsType.typeRef.typeName;
+                        break;
+                    default:
+                        type = variableDef.tsType.repr;
+                }
+            } else {
+                return ''
+            }
+
+            // Ex: const foo: string = 'bar'
+            const component = `${kind} ${docsElement.name}: ${type}\n`;
+            if (component.indexOf('undefined') != -1) {
+                return '';
+            }
+            
+            loaded += component;
+        break;
+
+        case 'interface':
+            // interface definition
+            const interfaceDef = docsElement.interfaceDef; 
+            
+            // creating the interface
+            loaded += `interface ${docsElement.name}`;
+            
+            // the interface extends another type
+            if (interfaceDef.extends && interfaceDef.extends.length > 0) {
+                loaded += ` extends `;
+
+                /** @type {any[]} */
+                const ext = interfaceDef.extends;
+                for (let i = 0; i < ext.length; i++) {
+                    // Current type extended
+                    loaded += `${ext[i].repr}`;
+
+                    // If type receives parameters
+                    if (ext[i].typeRef) {
+                        if (ext[i].typeRef.typeParams && ext[i].typeRef.typeParams.length > 0) {
+                            const typeParams = interfaceDef.extends[0].typeRef.typeParams;
+                            const params = typeParams.map(k => k.repr)
+
+                            loaded += `<${params.toString()}>`;
+                        }
+                    }
+
+                    // If it's not the last type extended
+                    // ex: interface Foo extends Bar<type>, Baz<type>
+                    if (i < ext.length - 1) {
+                        loaded += `, `;
+                    }
+                }
+            }
+            
+            loaded += '\n';
+        break;
+        default:
+            loaded += '';
+    }
+
+    return loaded;
+}
+
+/**
+ * 
+ * @param {any[]} docs - The docs.json file
+ * @returns {string}
+ */
+function loadAllComponents(docs) {
+    let loaded = '';
+
+    docs.forEach(element => {
+        loaded += loadComponent(element, element.kind);
+    })
+
+    return loaded;
+}
+
+try {
+    const docs = getDocs();
+    const load = loadAllComponents(docs);
+
+    console.log(load)
+} catch(err) {
+    throw err;
+}
