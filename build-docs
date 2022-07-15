@@ -110,10 +110,35 @@ function loadComponent(docsElement, componentName) {
                     // If type receives parameters
                     if (ext[i].typeRef) {
                         if (ext[i].typeRef.typeParams && ext[i].typeRef.typeParams.length > 0) {
+                            /** @type {any[]} */
                             var typeParams = interfaceDef.extends[0].typeRef.typeParams;
-                            var params = typeParams.map(k => k.repr)
+                            /** @type {any[]} */
+                            var params = [];
+                            /** @type {boolean} */
+                            var isUnion = false;
 
-                            loaded += `<${params.toString()}>`;
+                            for (var j = 0; j < typeParams.length; j++) {
+                                if (typeParams[j].kind === "typeRef") {
+                                    params.push(typeParams[j].repr);
+                                }
+
+                                if (typeParams[j].kind === "union") {
+                                    isUnion = true;
+                                    typeParams[j].union.forEach(un => {
+                                        params.push(`"${un.repr}"`);
+                                    })
+                                }
+                            }
+                        }
+                    }
+
+                    if (isUnion) {
+                        var first = params.shift();
+                        loaded += `<${first}, ${params.join(' | ')}>`;
+                        isUnion = false;
+                    } else {
+                        if (params) {
+                            loaded += `<${params}>`;
                         }
                     }
 
