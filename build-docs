@@ -50,15 +50,17 @@ function getLocationURL(location) {
  * 
  * @param {any} docsElement
  * @param {string} componentName
- * @returns {string}
+ * @returns {{expression: string, kind: string, name: string, url: string}}
  */
 function loadComponent(docsElement, componentName) {
-    if (docsElement.declarationKind != 'export') {
-        return '';
+    if (docsElement.declarationKind != 'export' || docsElement.name == "default") {
+        return null;
     }
 
-    // var url = getLocationURL(docsElement.location);
+    var url = getLocationURL(docsElement.location);
     var loaded = '';
+    var kind = docsElement.kind;
+    var name = docsElement.name;
 
     switch (componentName) {
         case 'variable':
@@ -152,11 +154,16 @@ function loadComponent(docsElement, componentName) {
             
             loaded += '\n';
         break;
+
+        case 'enum':
+            loaded += `enum ${docsElement.name}`;
+        break;
+
         default:
             loaded += '';
     }
 
-    return loaded;
+    return { expression: loaded, kind: kind, name: name, url: url };
 }
 
 /**
@@ -165,10 +172,13 @@ function loadComponent(docsElement, componentName) {
  * @returns {string}
  */
 function loadAllComponents(docs) {
-    var loaded = '';
+    var loaded = [];
 
     docs.forEach(element => {
-        loaded += loadComponent(element, element.kind);
+        var el = loadComponent(element, element.kind);
+        if (el !== null) {
+            loaded.push(el);
+        }
     })
 
     return loaded;
@@ -178,7 +188,7 @@ try {
     var docs = getDocs();
     var load = loadAllComponents(docs);
 
-    console.log(load)
+    console.log(load);
 } catch(err) {
     throw err;
 }
