@@ -49,10 +49,14 @@ function getLocationURL(location) {
 /**
  * 
  * @param {any} docsElement
- * @returns {{expression: string, kind: string, name: string, url: string}}
+ * @returns {{expression: string, kind: string, name: string, url: string} | null}
  */
 function loadComponent(docsElement) {
-    if (docsElement.declarationKind != 'export' || docsElement.name == "default") {
+    if (
+        docsElement.declarationKind != 'export' ||
+        docsElement.name == "default" ||
+        docsElement.kind == 'import'
+    ) {
         return null;
     }
 
@@ -73,7 +77,7 @@ function loadComponent(docsElement) {
 */
 function parseExpression(docsElement) {
     var loaded = '';
-    
+
     switch (docsElement.kind) {
         case 'variable':
             var variableDef = docsElement.variableDef;
@@ -96,7 +100,7 @@ function parseExpression(docsElement) {
             }
 
             // Ex: var foo: string = 'bar'
-            var component = `${kind} ${docsElement.name}: ${type}\n`;
+            var component = `${kind} ${docsElement.name}: ${type}`;
             if (component.indexOf('undefined') != -1) {
                 return '';
             }
@@ -113,63 +117,46 @@ function parseExpression(docsElement) {
             
             // the interface extends another type
             if (interfaceDef.extends && interfaceDef.extends.length > 0) {
-                loaded += ` extends `;
-
-                /** @type {any[]} */
-                var ext = interfaceDef.extends;
-                for (var i = 0; i < ext.length; i++) {
-                    // Current type extended
-                    loaded += `${ext[i].repr}`;
-
-                    // If type receives parameters
-                    if (ext[i].typeRef) {
-                        if (ext[i].typeRef.typeParams && ext[i].typeRef.typeParams.length > 0) {
-                            /** @type {any[]} */
-                            var typeParams = interfaceDef.extends[0].typeRef.typeParams;
-                            /** @type {any[]} */
-                            var params = [];
-                            /** @type {boolean} */
-                            var isUnion = false;
-
-                            for (var j = 0; j < typeParams.length; j++) {
-                                if (typeParams[j].kind === "typeRef") {
-                                    params.push(typeParams[j].repr);
-                                }
-
-                                if (typeParams[j].kind === "union") {
-                                    isUnion = true;
-                                    typeParams[j].union.forEach(un => {
-                                        params.push(`"${un.repr}"`);
-                                    })
-                                }
-                            }
-                        }
-                    }
-
-                    if (isUnion) {
-                        var first = params.shift();
-                        loaded += `<${first}, ${params.join(' | ')}>`;
-                        isUnion = false;
-                    } else {
-                        if (params) {
-                            loaded += `<${params}>`;
-                        }
-                    }
-
-                    // If it's not the last type extended
-                    // ex: interface Foo extends Bar<type>, Baz<type>
-                    if (i < ext.length - 1) {
-                        loaded += `, `;
-                    }
-                }
-            }
-            
-            loaded += '\n';
+                loaded += ` extends ${parseExtendsParam(interfaceDef)}`;
+            }                
         break;
 
         case 'enum':
             loaded += `enum ${docsElement.name}`;
         break;
+
+        case 'class':
+            if (docsElement.classDef?.isAbstract) {
+                loaded += 'abstract ';
+            }
+
+            loaded += `class ${docsElement.name}`;
+
+            if (docsElement.classDef?.constructors && docsElement.classDef?.constructors.length > 0) {
+                var classDef = docsElement.classDef;
+                loaded += '(';
+
+                for (var i = 0; i < classDef.constructors.length; i++) {
+                    var params = classDef.constructors[i].params;
+                    var args = [];
+
+                    if (params && params.length > 0) {
+                        for (var j = 0; j < params.length; j++) {
+                            if (params[j].kind && params[j].kind === 'assign') {
+                                // TODO: parse constructor params
+                                args.push('');
+                            }
+                        }
+                    }
+
+                    loaded += `${args.join(', ')}`;
+                }
+
+                loaded += ')';
+            }
+        break;
+
+        // TODO: case 'typeAlias' and parse type alias
 
         default:
             loaded += '';
@@ -180,9 +167,68 @@ function parseExpression(docsElement) {
 
 /**
  * 
- * @param {any[]} docs - The docs.json file
+ * @param {any[]} definition 
  * @returns {string}
- */
+*/
+function parseExtendsParam(definition)  {
+    var loaded = '';
+
+    /** @type {any[]} */
+    var ext = definition.extends;
+    for (var i = 0; i < ext.length; i++) {
+        // Current type extended
+        loaded += `${ext[i].repr}`;
+
+        // If type receives parameters
+        if (ext[i].typeRef) {
+            if (ext[i].typeRef.typeParams && ext[i].typeRef.typeParams.length > 0) {
+                /** @type {any[]} */
+                var typeParams = ext[i].typeRef.typeParams;
+                /** @type {any[]} */
+                var params = [];
+                /** @type {boolean} */
+                var isUnion = false;
+
+                for (var j = 0; j < typeParams.length; j++) {
+                    if (typeParams[j].kind === "typeRef") {
+                        params.push(typeParams[j].repr);
+                    }
+
+                    if (typeParams[j].kind === "union") {
+                        isUnion = true;
+                        typeParams[j].union.forEach(un => {
+                            params.push(`"${un.repr}"`);
+                        })
+                    }
+                }
+            }
+        }
+
+        if (isUnion) {
+            var first = params.shift();
+            loaded += `<${first}, ${params.join(' | ')}>`;
+            isUnion = false;
+        } else {
+            if (params) {
+                loaded += `<${params}>`;
+            }
+        }
+
+        // If it's not the last type extended
+        // ex: interface Foo extends Bar<type>, Baz<type>
+        if (i < ext.length - 1) {
+            loaded += `, `;
+        }
+    }
+
+    return loaded;
+}
+
+/**
+ * 
+ * @param {any[]} docs - The docs.json file
+ * @returns {{expression: string, kind: string, name: string, url: string}[]}
+*/
 function loadAllComponents(docs) {
     var loaded = [];
 
@@ -200,7 +246,7 @@ try {
     var docs = getDocs();
     var load = loadAllComponents(docs);
 
-    console.log(load);
+    console.log(load)
 } catch(err) {
     throw new Error(err);
 }
