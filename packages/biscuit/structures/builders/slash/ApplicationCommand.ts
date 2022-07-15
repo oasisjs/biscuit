@@ -7,14 +7,14 @@ export abstract class ApplicationCommandBuilder implements CreateApplicationComm
     protected constructor(
         // required
         public type: ApplicationCommandTypes = ApplicationCommandTypes.ChatInput,
-        public name = "",
-        public description = "",
+        public name: string = "",
+        public description: string = "",
         // non-required
         public defaultMemberPermissions?: PermissionStrings[],
         // etc
         public nameLocalizations?: Localization,
         public descriptionLocalizations?: Localization,
-        public dmPermission = true,
+        public dmPermission: boolean = true,
     ) {
         this.type = type;
         this.name = name;
