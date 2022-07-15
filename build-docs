@@ -49,20 +49,32 @@ function getLocationURL(location) {
 /**
  * 
  * @param {any} docsElement
- * @param {string} componentName
  * @returns {{expression: string, kind: string, name: string, url: string}}
  */
-function loadComponent(docsElement, componentName) {
+function loadComponent(docsElement) {
     if (docsElement.declarationKind != 'export' || docsElement.name == "default") {
         return null;
     }
 
     var url = getLocationURL(docsElement.location);
-    var loaded = '';
-    var kind = docsElement.kind;
-    var name = docsElement.name;
+    var exp = parseExpression(docsElement);
+    return {
+        expression: exp,
+        kind: docsElement.kind,
+        name: docsElement.name,
+        url: url
+    };
+}
 
-    switch (componentName) {
+/**
+ * Parse the docs element to get the expression.
+ * @param {any} docsElement 
+ * @returns {string}
+*/
+function parseExpression(docsElement) {
+    var loaded = '';
+    
+    switch (docsElement.kind) {
         case 'variable':
             var variableDef = docsElement.variableDef;
             var kind = variableDef.kind;
@@ -163,7 +175,7 @@ function loadComponent(docsElement, componentName) {
             loaded += '';
     }
 
-    return { expression: loaded, kind: kind, name: name, url: url };
+    return loaded;
 }
 
 /**
@@ -175,7 +187,7 @@ function loadAllComponents(docs) {
     var loaded = [];
 
     docs.forEach(element => {
-        var el = loadComponent(element, element.kind);
+        var el = loadComponent(element);
         if (el !== null) {
             loaded.push(el);
         }
@@ -190,5 +202,5 @@ try {
 
     console.log(load);
 } catch(err) {
-    throw err;
+    throw new Error(err);
 }
