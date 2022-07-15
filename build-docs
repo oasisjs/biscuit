@@ -103,7 +103,7 @@ function loadComponent(docsElement, componentName) {
 
                 /** @type {any[]} */
                 var ext = interfaceDef.extends;
-                for (let i = 0; i < ext.length; i++) {
+                for (var i = 0; i < ext.length; i++) {
                     // Current type extended
                     loaded += `${ext[i].repr}`;
 
@@ -140,7 +140,7 @@ function loadComponent(docsElement, componentName) {
  * @returns {string}
  */
 function loadAllComponents(docs) {
-    let loaded = '';
+    var loaded = '';
 
     docs.forEach(element => {
         loaded += loadComponent(element, element.kind);
