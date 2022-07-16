@@ -14,6 +14,12 @@ interface DocNodeProcessed {
     expression: string;
 }
 
+interface DocClass extends DocNodeProcessed {
+    kind: 'class';
+    extends?: string | null;
+    implements?: string[];
+}
+
 interface Location {
     filename: string;
     line: number;
@@ -52,7 +58,7 @@ function getLocationURL(location: Location, options: 'raw' | 'main' = 'main'): s
 // TODO: finish this
 async function makeDocumentation() {
     const docs = await loadDocs();
-    console.log(docs);
+    console.log(docs.filter(el => el.kind === 'class'));
 }
 
 async function loadDocs(): Promise<DocNodeProcessed[]> {
@@ -109,6 +115,32 @@ async function loadDocs(): Promise<DocNodeProcessed[]> {
             break;
 
             // TODO: classes, functions, interfaces.
+            case 'class':
+                if (node?.classDef && node?.classDef?.isAbstract) {
+                    element += 'abstract ';
+                }
+
+                element += `class ${node.name}`;
+
+                if (node?.classDef?.extends) {
+                    element += ` extends ${node?.classDef?.extends}`;
+                }
+
+                if (node?.classDef?.implements && node?.classDef?.implements.length > 0) {
+                    const impl = node.classDef.implements.map(el => el.repr)
+                    element += ` implements ${impl.join(', ')}`;
+                }
+
+                arr.push({
+                    kind: 'class',
+                    name: node.name,
+                    url: getLocationURL(node.location),
+                    rawURL: getLocationURL(node.location, 'raw'),
+                    expression: element,
+                    extends: node.classDef?.extends,
+                    implements: node.classDef?.implements.map(el => el.repr),
+                } as DocClass);
+            break;
         }
     }
 
