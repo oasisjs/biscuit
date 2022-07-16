@@ -1,4 +1,7 @@
-#!/usr/bin/env node
+/**
+ * Deno command:
+ *         | deno run --allow-all build-docs.ts
+*/
 
 // Node imports
 import { ensureFile } from 'https://deno.land/std@0.148.0/fs/mod.ts';
