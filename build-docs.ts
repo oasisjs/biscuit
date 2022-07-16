@@ -1,14 +1,11 @@
-/**
- * Deno command:
- *         | deno run --allow-all build-docs.ts
-*/
+#!/usr/bin/env node
 
 // Node imports
 import { ensureFile } from 'https://deno.land/std@0.148.0/fs/mod.ts';
 import { join } from "https://deno.land/std@0.148.0/path/mod.ts";
 
 // Path with the docs.json file generated with `deno doc --json mod.ts > docs.json`
-const docsPath = join(__dirname + './docs.json');
+const docsPath = join('./docs.json');
 const mainBranchURL = 'https://github.com/oasisjs/biscuit/tree/main';
 
 /** JSON Start */
