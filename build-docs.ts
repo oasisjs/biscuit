@@ -31,14 +31,20 @@ interface VariableObject extends DocumentationObject {
 }
 
 interface VariableDef {
-    tsType: tsType;
+    tsType: TsType;
     kind: string;
 }
 
-interface tsType {
+interface TsType {
     repr: string;
     kind: string;
-    keyword: string;
+    keyword?: string;
+    typeRef?: TypeRef;
+}
+
+interface TypeRef {
+    typeName?: string;
+    typeParams: TsType[] | null;
 }
 /** JSON end */
 
