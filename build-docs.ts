@@ -214,7 +214,7 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
                     return [property.name, o];
                 })),
                 expression: node.interfaceDef.extends.length > 0
-                    ? `${node.kind} ${node.name} ${node.interfaceDef.extends.join(", ")}`
+                    ? `${node.kind} ${node.name} extends ${node.interfaceDef.extends.map(f => f.repr).join(", ")}`
                     : `${node.kind} ${node.name}`,
             };
 
@@ -401,7 +401,7 @@ function makeIndexes(docs: (Showcase & Declarable)[], title = ''): string {
     }
 
     data += docs.map(v => {
-        return `  - [${v.expression}](#${v.expression.trim().toLowerCase().replaceAll(/[\:\,\(\)\-]/g, '').replaceAll(' ', '-')})\n`;
+        return `  - [${v.expression}](#${v.expression.trim().toLowerCase().replaceAll(/[\:\,\(\)\-\[\]]/g, '').replaceAll(' ', '-')})\n`;
     }).join('\n');
 
     return data
