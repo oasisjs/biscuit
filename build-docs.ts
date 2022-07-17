@@ -29,6 +29,7 @@ interface Linkable {
 }
 
 interface ShowcaseInterface {
+    kind: 'interface';
     name: string;
     description?: string;
     properties?: Record<string, ShowcaseProperty & Linkable>;
@@ -61,6 +62,7 @@ interface ShowcaseProperty {
 }
 
 interface ShowcaseFunction {
+    kind: 'function';
     name: string;
     description?: string;
     parameters: Record<string, ShowcaseParameter>;
@@ -75,6 +77,7 @@ interface ShowcaseConstructor {
 
 // classes are types and are linkable aren't they??
 interface ShowcaseClass {
+    kind: 'class'
     name: string;
     description?: string;
     extends?: ShowcaseClass & Linkable;
@@ -90,12 +93,14 @@ interface ShowcaseEnumMember {
 
 // enums are types too!
 interface ShowcaseEnum {
+    kind: 'enum'
     name: string;
     description?: string;
     members: Record<string, ShowcaseEnumMember & Linkable>;
 }
 
 interface ShowcaseVariable {
+    kind: 'variable';
     name: string;
     description?: string;
     isConstant: boolean;
@@ -122,6 +127,7 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
     switch (node.kind) {
         case "variable": {
             const result: ShowcaseVariable & Declarable = {
+                kind: 'variable',
                 name: node.name,
                 description: node.jsDoc?.doc,
                 body: node.variableDef.tsType?.repr ?? "%MISSING",
@@ -133,6 +139,7 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
         }
         case "interface": {
             const result: ShowcaseInterface & Declarable = {
+                kind: 'interface',
                 name: node.name,
                 description: node.jsDoc?.doc,
                 properties: Object.fromEntries(node.interfaceDef.properties.map((property) => {
@@ -157,6 +164,7 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
         }
         case "class": {
             const result: ShowcaseClass & Declarable = {
+                kind: 'class',
                 name: node.name,
                 description: node.jsDoc?.doc,
                 // TODO: bug
@@ -180,6 +188,7 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
                 })),
                 methods: Object.fromEntries(node.classDef.methods.map((method) => {
                     const o: ShowcaseFunction = {
+                        kind: 'function',
                         name: method.name,
                         returnType: {
                             name: method.functionDef.returnType?.repr ?? "%MISSING",
@@ -208,6 +217,7 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
         }
         case "function": {
             const result: ShowcaseFunction & Declarable = {
+                kind: 'function',
                 name: node.name,
                 description: node.jsDoc?.doc,
                 returnType: {
@@ -233,11 +243,18 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
     }
 }
 
-if (import.meta.main) {
-    console.log(Deno.cwd());
+async function loadDocs(): Promise<(Showcase & Declarable)[]> {
     const url = Deno.args[0].startsWith("http") ? Deno.args[0] : `file://${Deno.cwd()}/${Deno.args[0]}`;
 
+    let arr: (Showcase & Declarable)[] = [];
     for (const node of await doc(url)) {
-        console.log(handleNode(node));
+        let res = handleNode(node);
+        if (res) {
+            arr.push(res);
+        }
     }
+
+    return arr;
 }
+
+console.log(await loadDocs())
