@@ -119,6 +119,10 @@ interface ShowcaseVariable {
     body: string;
     url?: string;
     rawURL?: string;
+    literal?: {
+        kind?: string;
+        value?: string;
+    };
 }
 
 type ShowcaseType =
@@ -159,15 +163,23 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
 
     switch (node.kind) {
         case "variable": {
+            let literal;
+            if (node.variableDef.tsType?.kind === 'literal') {
+                literal = {
+                    kind: node.variableDef?.tsType?.literal?.kind,
+                    value: node.variableDef.tsType?.repr,
+                }
+            }
             const result: ShowcaseVariable & Declarable = {
                 kind: 'variable',
                 name: node.name,
                 description: node.jsDoc?.doc,
                 body: node.variableDef.tsType?.repr ?? "%MISSING",
                 isConstant: node.variableDef.kind === "const",
-                expression: `${node.variableDef.kind} ${node.name}: ${node.variableDef.tsType?.repr!}`,
+                expression: `${node.variableDef.kind} ${node.name}: ${literal ? literal.kind : ''}`,
                 url: getLocationURL(node.location),
-                rawURL: getLocationURL(node.location, 'raw')
+                rawURL: getLocationURL(node.location, 'raw'),
+                literal: literal
             };
 
             return result;
@@ -313,15 +325,18 @@ async function makeDocumentation(): Promise<void> {
     const functions = docs.filter((doc) => doc.kind === 'function');
     const enums = docs.filter((doc) => doc.kind === 'enum');
 
-    console.log(docs.filter(d => {
-        return d.kind == 'function'
-    }))
     // Ensuring the documentation folder exists
     fs.ensureDirSync('./docs');
 
     // TODO: finish
     // Writing the documentation file
-    //let data = variables.map(v => v.expression).join("\n");
+    let data: string = '';
+
+    data = variables.map(v => {
+        console.log(v)
+        return `- [${v.expression}](${v.url})`
+    }).join("\n\n");
+
     //Deno.writeTextFileSync('./docs/DOCUMENTATION.md', data);
 }
 
