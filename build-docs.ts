@@ -43,6 +43,8 @@ interface ShowcaseBaseType {
     kind?: string;
     name: string;
     description?: string;
+    url?: string;
+    rawURL?: string;
 }
 
 interface ShowcaseTypeWithBody extends ShowcaseBaseType {
@@ -250,8 +252,8 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
                     return [method.name, o];
                 })),
                 expression: node.classDef.extends?.length
-                    ? `${node.kind} ${node.name}(${node.classDef.properties.map((p) => p.tsType?.repr || "").join(', ')}) extends ${node.classDef.extends}`
-                    : `${node.kind} ${node.name}(${node.classDef.properties.map((p) => p.tsType?.repr || "").join(', ')})`,
+                    ? `${node.kind} ${node.name}(${node.classDef?.constructors[0]?.params.map(k => k.tsType?.repr).join(', ')}) extends ${node.classDef.extends}`
+                    : `${node.kind} ${node.name}(${node.classDef?.constructors[0]?.params.map(k => k.tsType?.repr).join(', ')})`,
             };
 
             return result;
@@ -291,9 +293,9 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
 async function loadDocs(): Promise<(Showcase & Declarable)[]> {
     const url = Deno.args[0].startsWith("http") ? Deno.args[0] : `file://${Deno.cwd()}/${Deno.args[0]}`;
 
-    let arr: (Showcase & Declarable)[] = [];
+    const arr: (Showcase & Declarable)[] = [];
     for (const node of await doc(url)) {
-        let res = handleNode(node);
+        const res = handleNode(node);
         if (res) {
             arr.push(res);
         }
@@ -311,7 +313,9 @@ async function makeDocumentation(): Promise<void> {
     const functions = docs.filter((doc) => doc.kind === 'function');
     const enums = docs.filter((doc) => doc.kind === 'enum');
 
-    console.log(docs)
+    console.log(docs.filter(d => {
+        return d.kind == 'class'
+    }))
     // Ensuring the documentation folder exists
     fs.ensureDirSync('./docs');
 
