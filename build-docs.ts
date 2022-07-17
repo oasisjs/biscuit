@@ -354,16 +354,25 @@ async function makeDocumentation(): Promise<void> {
     // Ensuring the documentation folder exists
     fs.ensureDirSync('./docs');
 
-    // TODO: finish
     // Writing the documentation file
-    Deno.writeTextFileSync('./docs/VARIABLES.md', makeMarkdown(variables, 'Variables'));
-    Deno.writeTextFileSync('./docs/CLASSES.md', makeMarkdown(classes, 'Classes'));
-    Deno.writeTextFileSync('./docs/INTERFACES.md', makeMarkdown(interfaces, 'Interfaces'));
-    Deno.writeTextFileSync('./docs/FUNCTIONS.md', makeMarkdown(functions, 'Functions'));
-    Deno.writeTextFileSync('./docs/ENUMS.md', makeMarkdown(enums, 'Enums'));
+    let data = '';
+
+    Deno.writeTextFileSync('./docs/VARIABLES.md', makeReferences(variables, 'Variables'));
+    
+    data = makeIndexes(classes, 'Classes') + makeReferences(classes);
+    Deno.writeTextFileSync('./docs/CLASSES.md', data);
+
+    data = makeIndexes(interfaces, 'Interfaces') + makeReferences(interfaces);
+    Deno.writeTextFileSync('./docs/INTERFACES.md', makeReferences(interfaces, 'Interfaces'));
+
+    data = makeIndexes(functions, 'Functions') + makeReferences(functions);
+    Deno.writeTextFileSync('./docs/FUNCTIONS.md', makeReferences(functions, 'Functions'));
+
+    data = makeIndexes(enums, 'Enums') + makeReferences(enums);
+    Deno.writeTextFileSync('./docs/ENUMS.md', data);
 }
 
-function makeMarkdown(docs: (Showcase & Declarable)[], title = ''): string {
+function makeReferences(docs: (Showcase & Declarable)[], title = ''): string {
     let data = '';
     if (title != '') {
         data = `# ${title}\n\n`
@@ -376,6 +385,19 @@ function makeMarkdown(docs: (Showcase & Declarable)[], title = ''): string {
         }
 
         return result
+    }).join('\n');
+
+    return data
+}
+
+function makeIndexes(docs: (Showcase & Declarable)[], title = ''): string {
+    let data = '';
+    if (title != '') {
+        data = `# ${title}\n\n`
+    }
+
+    data += docs.map(v => {
+        return `  - [${v.expression}](#${v.expression.trim().toLowerCase().replaceAll(/[\:\,\(\)\-]/g, '').replaceAll(' ', '-')})\n`;
     }).join('\n');
 
     return data
