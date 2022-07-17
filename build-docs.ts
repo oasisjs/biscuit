@@ -121,7 +121,7 @@ type Showcase =
     | ShowcaseInterface
     | ShowcaseEnum;
 
-function handleNode(this: any, node: DocNode): Showcase & Declarable | undefined {
+function handleNode(node: DocNode): Showcase & Declarable | undefined {
     if (node.declarationKind !== 'export' || node.name === 'default' || node.kind === 'import') {
         return;
     }
