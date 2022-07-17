@@ -363,7 +363,7 @@ async function makeDocumentation(): Promise<void> {
     Deno.writeTextFileSync('./docs/CLASSES.md', data);
 
     data = makeIndexes(interfaces, 'Interfaces') + makeReferences(interfaces);
-    Deno.writeTextFileSync('./docs/INTERFACES.md', makeReferences(interfaces, 'Interfaces'));
+    Deno.writeTextFileSync('./docs/INTERFACES.md', data);
 
     data = makeIndexes(functions, 'Functions') + makeReferences(functions);
     Deno.writeTextFileSync('./docs/FUNCTIONS.md', data);
