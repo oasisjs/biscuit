@@ -121,7 +121,7 @@ type Showcase =
     | ShowcaseInterface
     | ShowcaseEnum;
 
-function handleNode(node: DocNode): Showcase & Declarable | undefined {
+function handleNode(this: any, node: DocNode): Showcase & Declarable | undefined {
     if (node.declarationKind !== 'export' || node.name === 'default' || node.kind === 'import') {
         return;
     }
@@ -215,8 +215,8 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
                     return [method.name, o];
                 })),
                 expression: node.classDef.extends?.length
-                    ? `${node.kind} ${node.name} ${node.classDef.extends}`
-                    : `${node.kind} ${node.name}`,
+                    ? `${node.kind} ${node.name}(${node.classDef.properties.map((p) => p.tsType?.repr || "").join(', ')}) extends ${node.classDef.extends}`
+                    : `${node.kind} ${node.name}(${node.classDef.properties.map((p) => p.tsType?.repr || "").join(', ')})`,
             };
 
             return result;
@@ -243,7 +243,7 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
 
                     return [typeParam.name, o];
                 })),
-                expression: `${node.kind} ${node.name} ${node.functionDef.params.map((p) => p.tsType?.repr).join(",")}`,
+                expression: `${node.kind} ${node.name}(${node.functionDef.params.map((p) => p.tsType?.repr).join(",")})`,
             };
 
             return result;
@@ -274,13 +274,14 @@ async function makeDocumentation(): Promise<void> {
     const functions = docs.filter((doc) => doc.kind === 'function');
     const enums = docs.filter((doc) => doc.kind === 'enum');
 
+    console.log(docs)
     // Ensuring the documentation folder exists
     fs.ensureDirSync('./docs');
 
+    // TODO: finish
     // Writing the documentation file
     //let data = variables.map(v => v.expression).join("\n");
     //Deno.writeTextFileSync('./docs/DOCUMENTATION.md', data);
 }
 
-console.log(await loadDocs());
 makeDocumentation();
