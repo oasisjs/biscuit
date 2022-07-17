@@ -13,6 +13,8 @@ type PossibleKinds<S extends Kinds> =
     /** enum Errors */
     /** class Book */
     | `${S} ${string}`
+    /** abstract class */
+    | `${string} ${S} ${string}`
     /** class Dog extends Animal */
     /** interface Person extends Human, Alive */
     | `${S} ${string} ${string} ${string}`
@@ -88,6 +90,7 @@ interface ShowcaseClass {
     kind: 'class'
     name: string;
     description?: string;
+    isAbstract: boolean;
     extends?: ShowcaseClass & Linkable;
     methods: Record<string, ShowcaseFunction & Linkable>;
     properties: Record<string, ShowcaseProperty & Linkable>;
@@ -222,6 +225,7 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
                 kind: 'class',
                 name: node.name,
                 description: node.jsDoc?.doc,
+                isAbstract: node.classDef?.isAbstract ?? false,
                 url: getLocationURL(node.location),
                 rawURL: getLocationURL(node.location, 'raw'),
                 // TODO: bug
@@ -269,8 +273,8 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
                     return [method.name, o];
                 })),
                 expression: node.classDef.extends?.length
-                    ? `${node.kind} ${node.name}(${node.classDef?.constructors[0]?.params.map(k => k.tsType?.repr).join(', ')}) extends ${node.classDef.extends}`
-                    : `${node.kind} ${node.name}(${node.classDef?.constructors[0]?.params.map(k => k.tsType?.repr).join(', ')})`,
+                    ? `${node.classDef?.isAbstract ? 'abstract' : ''} ${node.kind} ${node.name}(${node.classDef?.constructors[0]?.params.map(k => k.tsType?.repr).join(', ')}) extends ${node.classDef.extends}`
+                    : `${node.classDef?.isAbstract ? 'abstract' : ''} ${node.kind} ${node.name}(${node.classDef?.constructors[0]?.params.map(k => k.tsType?.repr).join(', ')})`,
             };
 
             return result;
