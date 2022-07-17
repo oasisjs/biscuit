@@ -240,10 +240,6 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
                 })
             }
 
-            if (node.name === 'ApplicationCommandBuilder') {
-                console.log(node.classDef.constructors[0].params)
-            }
-
             const result: ShowcaseClass & Declarable = {
                 kind: 'class',
                 name: node.name,
