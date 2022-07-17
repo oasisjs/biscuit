@@ -80,7 +80,7 @@ interface ShowcaseClass {
     extends?: ShowcaseClass & Linkable;
     methods: Record<string, ShowcaseFunction & Linkable>;
     properties: Record<string, ShowcaseProperty & Linkable>;
-    constructor: ShowcaseConstructor;
+    con: ShowcaseConstructor;
 }
 
 interface ShowcaseEnumMember {
@@ -156,7 +156,7 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
                 name: node.name,
                 description: node.jsDoc?.doc,
                 // TODO: bug
-                constructor: <any> {
+                con: {
                     name: node.classDef.constructors[0]?.name ?? "constructor",
                     description: node.classDef.constructors[0]?.jsDoc?.doc,
                     parameters: node.classDef.constructors[0]?.params.map((param) => param.tsType?.repr ?? "%MISSING") ?? [],
