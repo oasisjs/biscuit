@@ -1,3 +1,4 @@
+import * as fs from "https://deno.land/std@0.148.0/fs/mod.ts";
 import type { DocNode } from "https://deno.land/x/deno_doc@0.38.0/lib/types.d.ts";
 import { doc } from "https://deno.land/x/deno_doc@0.38.0/mod.ts";
 
@@ -37,6 +38,7 @@ interface ShowcaseInterface {
 }
 
 interface ShowcaseBaseType {
+    kind?: string;
     name: string;
     description?: string;
 }
@@ -146,6 +148,7 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
                     const o: ShowcaseProperty = {
                         name: property.name,
                         type: {
+                            kind: property.tsType?.kind,
                             name: property.tsType?.repr ?? "%MISSING", // TODO: handle types better
                         },
                         description: property.jsDoc?.doc,
@@ -177,6 +180,7 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
                     const o: ShowcaseProperty = {
                         name: property.name,
                         type: {
+                            kind: property.tsType?.kind,
                             name: property.tsType?.repr ?? "%MISSING", // TODO: handle types better
                         },
                         description: property.jsDoc?.doc,
@@ -191,6 +195,7 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
                         kind: 'function',
                         name: method.name,
                         returnType: {
+                            kind: method.functionDef?.returnType?.kind,
                             name: method.functionDef.returnType?.repr ?? "%MISSING",
                         },
                         parameters: Object.fromEntries(method.functionDef.typeParams.map((typeParam) => {
@@ -198,6 +203,7 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
                                 name: typeParam.name,
                                 isOptional: typeParam.default != null,
                                 type: {
+                                    kind: typeParam.constraint?.kind,
                                     name: typeParam.constraint?.repr ?? "%MISSING",
                                 },
                             };
@@ -221,12 +227,14 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
                 name: node.name,
                 description: node.jsDoc?.doc,
                 returnType: {
+                    kind: node.functionDef?.returnType?.kind,
                     name: node.functionDef.returnType?.repr ?? "%MISSING",
                 },
                 parameters: Object.fromEntries(node.functionDef.typeParams.map((typeParam) => {
                     const o: ShowcaseParameter = {
                         name: typeParam.name,
                         type: {
+                            kind: typeParam.constraint?.kind,
                             name: typeParam.constraint?.repr ?? "%MISSING",
                         },
                         default: typeParam.default?.repr,
@@ -257,4 +265,22 @@ async function loadDocs(): Promise<(Showcase & Declarable)[]> {
     return arr;
 }
 
-console.log(await loadDocs())
+async function makeDocumentation(): Promise<void> {
+    const docs = await loadDocs();
+
+    const variables = docs.filter((doc) => doc.kind === 'variable');
+    const interfaces = docs.filter((doc) => doc.kind === 'interface');
+    const classes = docs.filter((doc) => doc.kind === 'class');
+    const functions = docs.filter((doc) => doc.kind === 'function');
+    const enums = docs.filter((doc) => doc.kind === 'enum');
+
+    // Ensuring the documentation folder exists
+    fs.ensureDirSync('./docs');
+
+    // Writing the documentation file
+    //let data = variables.map(v => v.expression).join("\n");
+    //Deno.writeTextFileSync('./docs/DOCUMENTATION.md', data);
+}
+
+console.log(await loadDocs());
+makeDocumentation();
