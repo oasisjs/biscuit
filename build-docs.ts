@@ -115,6 +115,10 @@ type Showcase =
     | ShowcaseEnum;
 
 function handleNode(node: DocNode): Showcase & Declarable | undefined {
+    if (node.declarationKind !== 'export' || node.name === 'default' || node.kind === 'import') {
+        return;
+    }
+
     switch (node.kind) {
         case "variable": {
             const result: ShowcaseVariable & Declarable = {
