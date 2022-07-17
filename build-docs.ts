@@ -282,7 +282,7 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
 
                     return [typeParam.name, o];
                 })),
-                expression: `${node.kind} ${node.name}(${node.functionDef.params.map((p) => p.tsType?.repr).join(",")})`,
+                expression: `${node.kind} ${node.name}(${node.functionDef.params.map((p) => p.tsType?.repr).join(", ")})`,
             };
 
             return result;
@@ -314,7 +314,7 @@ async function makeDocumentation(): Promise<void> {
     const enums = docs.filter((doc) => doc.kind === 'enum');
 
     console.log(docs.filter(d => {
-        return d.kind == 'class'
+        return d.kind == 'function'
     }))
     // Ensuring the documentation folder exists
     fs.ensureDirSync('./docs');
