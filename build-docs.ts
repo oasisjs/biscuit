@@ -156,11 +156,10 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
                 name: node.name,
                 description: node.jsDoc?.doc,
                 // TODO: bug
-                // deno-lint-ignore no-explicit-any
                 constructor: <any> {
-                    name: node.classDef.constructors[0].name,
-                    description: node.classDef.constructors[0].jsDoc?.doc,
-                    parameters: node.classDef.constructors[0].params.map((param) => param.tsType?.repr ?? "%MISSING"),
+                    name: node.classDef.constructors[0]?.name ?? "constructor",
+                    description: node.classDef.constructors[0]?.jsDoc?.doc,
+                    parameters: node.classDef.constructors[0]?.params.map((param) => param.tsType?.repr ?? "%MISSING") ?? [],
                 },
                 properties: Object.fromEntries(node.classDef.properties.map((property) => {
                     const o: ShowcaseProperty = {
@@ -231,7 +230,8 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
 }
 
 if (import.meta.main) {
-    const url = Deno.args[0];
+    console.log(Deno.cwd());
+    const url = Deno.args[0].startsWith("http") ? Deno.args[0] : `file://${Deno.cwd()}/${Deno.args[0]}`;
 
     for (const node of await doc(url)) {
         console.log(handleNode(node));
