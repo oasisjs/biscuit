@@ -1,5 +1,5 @@
 import * as fs from "https://deno.land/std@0.148.0/fs/mod.ts";
-import type { DocNode } from "https://deno.land/x/deno_doc@0.38.0/lib/types.d.ts";
+import type { DocNode, Location } from "https://deno.land/x/deno_doc@0.38.0/lib/types.d.ts";
 import { doc } from "https://deno.land/x/deno_doc@0.38.0/mod.ts";
 
 type Kinds = DocNode["kind"];
@@ -35,6 +35,8 @@ interface ShowcaseInterface {
     description?: string;
     properties?: Record<string, ShowcaseProperty & Linkable>;
     extends?: Record<string, ShowcaseType & Linkable>;
+    url?: string;
+    rawURL?: string;
 }
 
 interface ShowcaseBaseType {
@@ -69,6 +71,8 @@ interface ShowcaseFunction {
     description?: string;
     parameters: Record<string, ShowcaseParameter>;
     returnType: ShowcaseType & Linkable;
+    url?: string;
+    rawURL?: string;
 }
 
 interface ShowcaseConstructor {
@@ -86,6 +90,8 @@ interface ShowcaseClass {
     methods: Record<string, ShowcaseFunction & Linkable>;
     properties: Record<string, ShowcaseProperty & Linkable>;
     con: ShowcaseConstructor;
+    url?: string;
+    rawURL?: string;
 }
 
 interface ShowcaseEnumMember {
@@ -99,6 +105,8 @@ interface ShowcaseEnum {
     name: string;
     description?: string;
     members: Record<string, ShowcaseEnumMember & Linkable>;
+    url?: string;
+    rawURL?: string;
 }
 
 interface ShowcaseVariable {
@@ -107,6 +115,8 @@ interface ShowcaseVariable {
     description?: string;
     isConstant: boolean;
     body: string;
+    url?: string;
+    rawURL?: string;
 }
 
 type ShowcaseType =
@@ -120,6 +130,25 @@ type Showcase =
     | ShowcaseFunction
     | ShowcaseInterface
     | ShowcaseEnum;
+
+const branchURL = 'https://github.com/oasisjs/biscuit/tree/main';
+const rawBranchURL = 'https://raw.githubusercontent.com/oasisjs/biscuit/main';
+
+function getLocationURL(location: Location, options: 'raw' | 'main' = 'main'): string {
+    let url: string;
+    if (options === 'raw') {
+        url = rawBranchURL
+    } else {
+        url = branchURL
+    }
+
+    const filename = location.filename;
+    const start = filename.indexOf('/packages/');
+    const componentPath = filename.slice(start, filename.length);
+    const lineAndCol = `#L${location.line}:${location.col}`;
+
+    return url + componentPath + lineAndCol;
+}
 
 function handleNode(node: DocNode): Showcase & Declarable | undefined {
     if (node.declarationKind !== 'export' || node.name === 'default' || node.kind === 'import') {
@@ -135,6 +164,8 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
                 body: node.variableDef.tsType?.repr ?? "%MISSING",
                 isConstant: node.variableDef.kind === "const",
                 expression: `${node.variableDef.kind} ${node.name}: ${node.variableDef.tsType?.repr!}`,
+                url: getLocationURL(node.location),
+                rawURL: getLocationURL(node.location, 'raw')
             };
 
             return result;
@@ -144,6 +175,8 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
                 kind: 'interface',
                 name: node.name,
                 description: node.jsDoc?.doc,
+                url: getLocationURL(node.location),
+                rawURL: getLocationURL(node.location, 'raw'),
                 properties: Object.fromEntries(node.interfaceDef.properties.map((property) => {
                     const o: ShowcaseProperty = {
                         name: property.name,
@@ -170,6 +203,8 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
                 kind: 'class',
                 name: node.name,
                 description: node.jsDoc?.doc,
+                url: getLocationURL(node.location),
+                rawURL: getLocationURL(node.location, 'raw'),
                 // TODO: bug
                 con: {
                     name: node.classDef.constructors[0]?.name ?? "constructor",
@@ -226,6 +261,8 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
                 kind: 'function',
                 name: node.name,
                 description: node.jsDoc?.doc,
+                url: getLocationURL(node.location),
+                rawURL: getLocationURL(node.location, 'raw'),
                 returnType: {
                     kind: node.functionDef?.returnType?.kind,
                     name: node.functionDef.returnType?.repr ?? "%MISSING",
