@@ -169,6 +169,11 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
                     kind: node.variableDef?.tsType?.literal?.kind,
                     value: node.variableDef.tsType?.repr,
                 }
+            } else if (node.variableDef.tsType?.kind === 'typeRef') {
+                literal = {
+                    kind: node.variableDef?.tsType?.typeRef?.typeName,
+                    value: node.variableDef.tsType?.repr,
+                }
             }
             const result: ShowcaseVariable & Declarable = {
                 kind: 'variable',
@@ -176,7 +181,7 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
                 description: node.jsDoc?.doc,
                 body: node.variableDef.tsType?.repr ?? "%MISSING",
                 isConstant: node.variableDef.kind === "const",
-                expression: `${node.variableDef.kind} ${node.name}: ${literal ? literal.kind : ''}`,
+                expression: `${node.variableDef.kind} ${node.name}: ${literal ? literal.kind : node.variableDef?.tsType?.repr}`,
                 url: getLocationURL(node.location),
                 rawURL: getLocationURL(node.location, 'raw'),
                 literal: literal
@@ -299,6 +304,27 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
 
             return result;
         }
+
+        case 'enum': {
+            const result: ShowcaseEnum & Declarable = {
+                kind: 'enum',
+                name: node.name,
+                description: node.jsDoc?.doc,
+                url: getLocationURL(node.location),
+                rawURL: getLocationURL(node.location, 'raw'),
+                members: Object.fromEntries(node.enumDef.members.map((member) => {
+                    const o: ShowcaseEnumMember = {
+                        name: member.name,
+                        value: member?.init?.repr ?? "%MISSING",
+                    };
+
+                    return [member.name, o];
+                })),
+                expression: `enum ${node.name}`
+            };
+
+            return result;
+        }
     }
 }
 
@@ -330,14 +356,29 @@ async function makeDocumentation(): Promise<void> {
 
     // TODO: finish
     // Writing the documentation file
-    let data: string = '';
+    Deno.writeTextFileSync('./docs/VARIABLES.md', makeMarkdown(variables, 'Variables'));
+    Deno.writeTextFileSync('./docs/CLASSES.md', makeMarkdown(classes, 'Classes'));
+    Deno.writeTextFileSync('./docs/INTERFACES.md', makeMarkdown(interfaces, 'Interfaces'));
+    Deno.writeTextFileSync('./docs/FUNCTIONS.md', makeMarkdown(functions, 'Functions'));
+    Deno.writeTextFileSync('./docs/ENUMS.md', makeMarkdown(enums, 'Enums'));
+}
 
-    data = variables.map(v => {
-        console.log(v)
-        return `- [${v.expression}](${v.url})`
-    }).join("\n\n");
+function makeMarkdown(docs: (Showcase & Declarable)[], title = ''): string {
+    let data = '';
+    if (title != '') {
+        data = `# ${title}\n\n`
+    }
 
-    //Deno.writeTextFileSync('./docs/DOCUMENTATION.md', data);
+    data += docs.map(v => {
+        let result = `## [${v.expression}](${v.url})\n`;
+        if (v.description) {
+            result += `\`\`\`\n${v.description}\n\`\`\``;
+        }
+
+        return result
+    }).join('\n');
+
+    return data
 }
 
 makeDocumentation();
