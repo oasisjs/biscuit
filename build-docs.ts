@@ -366,7 +366,7 @@ async function makeDocumentation(): Promise<void> {
     Deno.writeTextFileSync('./docs/INTERFACES.md', makeReferences(interfaces, 'Interfaces'));
 
     data = makeIndexes(functions, 'Functions') + makeReferences(functions);
-    Deno.writeTextFileSync('./docs/FUNCTIONS.md', makeReferences(functions, 'Functions'));
+    Deno.writeTextFileSync('./docs/FUNCTIONS.md', data);
 
     data = makeIndexes(enums, 'Enums') + makeReferences(enums);
     Deno.writeTextFileSync('./docs/ENUMS.md', data);
