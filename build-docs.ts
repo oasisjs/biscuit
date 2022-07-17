@@ -1,150 +1,239 @@
-/**
- * Deno command:
- *         | deno run --allow-all build-docs.ts
-*/
+import type { DocNode } from "https://deno.land/x/deno_doc@0.38.0/lib/types.d.ts";
+import { doc } from "https://deno.land/x/deno_doc@0.38.0/mod.ts";
 
-// Imports
-import { doc } from 'https://deno.land/x/deno_doc@0.38.0/mod.ts';
+type Kinds = DocNode["kind"];
 
-interface DocNodeProcessed {
-    kind: string;
+type PossibleKinds<S extends Kinds> =
+    /** const VERSION: string */
+    | `${"var" | "const" | "let"} ${string}: ${string}`
+    /** type RawJSONData = Record<string, string> */
+    /** type Animal = Dog | Cat */
+    | `${S} ${string} = ${string}`
+    /** enum Errors */
+    /** class Book */
+    | `${S} ${string}`
+    /** class Dog extends Animal */
+    /** interface Person extends Human, Alive */
+    | `${S} ${string} ${string} ${string}`
+    /** function fib(number) */
+    | `${S} ${string} ${string}(${string})`;
+
+interface Declarable<S extends Kinds = Kinds> {
+    expression: PossibleKinds<S>;
+}
+
+// deno-lint-ignore no-empty-interface
+interface Linkable {
+    // TODO: linkable
+    // link: string;
+}
+
+interface ShowcaseInterface {
     name: string;
-    url: string;
-    rawURL: string;
-    expression: string;
+    description?: string;
+    properties?: Record<string, ShowcaseProperty & Linkable>;
+    extends?: Record<string, ShowcaseType & Linkable>;
 }
 
-interface DocClass extends DocNodeProcessed {
-    kind: 'class';
-    extends?: string | null;
-    implements?: string[];
+interface ShowcaseBaseType {
+    name: string;
+    description?: string;
 }
 
-interface Location {
-    filename: string;
-    line: number;
-    col: number;
+interface ShowcaseTypeWithBody extends ShowcaseBaseType {
+    body: string;
 }
 
-const branchURL = 'https://github.com/oasisjs/biscuit/tree/main';
-const rawBranchURL = 'https://raw.githubusercontent.com/oasisjs/biscuit/main';
-
-/**
- * Returns a new javascript object with the docs.json file.
-*/
-function getDocs() {
-    return doc(rawBranchURL + '/mod.ts');
+interface ShowcaseParameter {
+    name: string;
+    description?: string;
+    isOptional: boolean;
+    default?: string;
+    type: ShowcaseType & Linkable;
 }
 
-/**
- * Get the file location at the main branch of the repository.
-*/
-function getLocationURL(location: Location, options: 'raw' | 'main' = 'main'): string {
-    let url: string;
-    if (options === 'raw') {
-        url = rawBranchURL
-    } else {
-        url = branchURL
-    }
-
-    const filename = location.filename;
-    const start = filename.indexOf('/packages/');
-    const componentPath = filename.slice(start, filename.length);
-    const lineAndCol = `#L${location.line}:${location.col}`;
-
-    return url + componentPath + lineAndCol;
+interface ShowcaseProperty {
+    name: string;
+    description?: string;
+    type: ShowcaseType & Linkable;
+    isReadonly: boolean;
+    isOptional: boolean;
 }
 
-// TODO: finish this
-async function makeDocumentation() {
-    const docs = await loadDocs();
-    console.log(docs.filter(el => el.kind === 'class'));
+interface ShowcaseFunction {
+    name: string;
+    description?: string;
+    parameters: Record<string, ShowcaseParameter>;
+    returnType: ShowcaseType & Linkable;
 }
 
-async function loadDocs(): Promise<DocNodeProcessed[]> {
-    const docs = await getDocs();
-    const arr: DocNodeProcessed[] = [];
+interface ShowcaseConstructor {
+    name: string;
+    description?: string;
+    parameters: string[];
+}
 
-    for (const node of docs) {
-        if (node.declarationKind !== 'export' || node.name === 'default' || node.kind === 'import') {
-            continue;
+// classes are types and are linkable aren't they??
+interface ShowcaseClass {
+    name: string;
+    description?: string;
+    extends?: ShowcaseClass & Linkable;
+    methods: Record<string, ShowcaseFunction & Linkable>;
+    properties: Record<string, ShowcaseProperty & Linkable>;
+    constructor: ShowcaseConstructor;
+}
+
+interface ShowcaseEnumMember {
+    name: string;
+    value: string;
+}
+
+// enums are types too!
+interface ShowcaseEnum {
+    name: string;
+    description?: string;
+    members: Record<string, ShowcaseEnumMember & Linkable>;
+}
+
+interface ShowcaseVariable {
+    name: string;
+    description?: string;
+    isConstant: boolean;
+    body: string;
+}
+
+type ShowcaseType =
+    | ShowcaseBaseType
+    | ShowcaseClass
+    | ShowcaseInterface;
+
+type Showcase =
+    | ShowcaseClass
+    | ShowcaseType
+    | ShowcaseFunction
+    | ShowcaseInterface
+    | ShowcaseEnum;
+
+function handleNode(node: DocNode): Showcase & Declarable | undefined {
+    switch (node.kind) {
+        case "variable": {
+            const result: ShowcaseVariable & Declarable = {
+                name: node.name,
+                description: node.jsDoc?.doc,
+                body: node.variableDef.tsType?.repr ?? "%MISSING",
+                isConstant: node.variableDef.kind === "const",
+                expression: `${node.variableDef.kind} ${node.name}: ${node.variableDef.tsType?.repr!}`,
+            };
+
+            return result;
         }
+        case "interface": {
+            const result: ShowcaseInterface & Declarable = {
+                name: node.name,
+                description: node.jsDoc?.doc,
+                properties: Object.fromEntries(node.interfaceDef.properties.map((property) => {
+                    const o: ShowcaseProperty = {
+                        name: property.name,
+                        type: {
+                            name: property.tsType?.repr ?? "%MISSING", // TODO: handle types better
+                        },
+                        description: property.jsDoc?.doc,
+                        isOptional: !!property.optional,
+                        isReadonly: !!property.readonly,
+                    };
 
-        let element = '';
+                    return [property.name, o];
+                })),
+                expression: node.interfaceDef.extends.length > 0
+                    ? `${node.kind} ${node.name} ${node.interfaceDef.extends.join(", ")}`
+                    : `${node.kind} ${node.name}`,
+            };
 
-        switch (node.kind) {
-            case 'variable':
-                if (node.variableDef?.tsType === null) {
-                    continue;
-                }
+            return result;
+        }
+        case "class": {
+            const result: ShowcaseClass & Declarable = {
+                name: node.name,
+                description: node.jsDoc?.doc,
+                // TODO: bug
+                // deno-lint-ignore no-explicit-any
+                constructor: <any> {
+                    name: node.classDef.constructors[0].name,
+                    description: node.classDef.constructors[0].jsDoc?.doc,
+                    parameters: node.classDef.constructors[0].params.map((param) => param.tsType?.repr ?? "%MISSING"),
+                },
+                properties: Object.fromEntries(node.classDef.properties.map((property) => {
+                    const o: ShowcaseProperty = {
+                        name: property.name,
+                        type: {
+                            name: property.tsType?.repr ?? "%MISSING", // TODO: handle types better
+                        },
+                        description: property.jsDoc?.doc,
+                        isOptional: !!property.optional,
+                        isReadonly: !!property.readonly,
+                    };
 
-                if (node?.variableDef) {
-                    if (node?.variableDef?.kind) {
-                        element += `${node?.variableDef?.kind} ${node.name}`;
-                    }
-                    
-                    if (node?.variableDef.tsType) {
-                        if (node?.variableDef?.tsType?.kind === 'literal') {
-                            element += `: ${node?.variableDef?.tsType?.literal?.kind}`;
-                        } else if (node?.variableDef?.tsType?.kind === 'typeRef') {
-                            element += `: ${node?.variableDef?.tsType?.typeRef?.typeName}`;
-                        } else {
-                            element += `: ${node?.variableDef?.tsType?.repr}`;
-                        }
-                    }
-                }
+                    return [property.name, o];
+                })),
+                methods: Object.fromEntries(node.classDef.methods.map((method) => {
+                    const o: ShowcaseFunction = {
+                        name: method.name,
+                        returnType: {
+                            name: method.functionDef.returnType?.repr ?? "%MISSING",
+                        },
+                        parameters: Object.fromEntries(method.functionDef.typeParams.map((typeParam) => {
+                            const o: ShowcaseParameter = {
+                                name: typeParam.name,
+                                isOptional: typeParam.default != null,
+                                type: {
+                                    name: typeParam.constraint?.repr ?? "%MISSING",
+                                },
+                            };
 
-                arr.push({
-                    kind: 'variable',
-                    name: node.name,
-                    url: getLocationURL(node.location),
-                    rawURL: getLocationURL(node.location, 'raw'), 
-                    expression: element,
-                });
-            break;
-            case 'enum':
-                element = `enum ${node.name}`;
+                            return [typeParam.name, o];
+                        })),
+                    };
 
-                arr.push({
-                    kind: 'enum',
-                    name: node.name,
-                    url: getLocationURL(node.location),
-                    rawURL: getLocationURL(node.location, 'raw'), 
-                    expression: element,
-                });
-            break;
+                    return [method.name, o];
+                })),
+                expression: node.classDef.extends?.length
+                    ? `${node.kind} ${node.name} ${node.classDef.extends}`
+                    : `${node.kind} ${node.name}`,
+            };
 
-            // TODO: classes, functions, interfaces.
-            case 'class':
-                if (node?.classDef && node?.classDef?.isAbstract) {
-                    element += 'abstract ';
-                }
+            return result;
+        }
+        case "function": {
+            const result: ShowcaseFunction & Declarable = {
+                name: node.name,
+                description: node.jsDoc?.doc,
+                returnType: {
+                    name: node.functionDef.returnType?.repr ?? "%MISSING",
+                },
+                parameters: Object.fromEntries(node.functionDef.typeParams.map((typeParam) => {
+                    const o: ShowcaseParameter = {
+                        name: typeParam.name,
+                        type: {
+                            name: typeParam.constraint?.repr ?? "%MISSING",
+                        },
+                        default: typeParam.default?.repr,
+                        isOptional: typeParam.default != null,
+                    };
 
-                element += `class ${node.name}`;
+                    return [typeParam.name, o];
+                })),
+                expression: `${node.kind} ${node.name} ${node.functionDef.params.map((p) => p.tsType?.repr).join(",")}`,
+            };
 
-                if (node?.classDef?.extends) {
-                    element += ` extends ${node?.classDef?.extends}`;
-                }
-
-                if (node?.classDef?.implements && node?.classDef?.implements.length > 0) {
-                    const impl = node.classDef.implements.map(el => el.repr)
-                    element += ` implements ${impl.join(', ')}`;
-                }
-
-                arr.push({
-                    kind: 'class',
-                    name: node.name,
-                    url: getLocationURL(node.location),
-                    rawURL: getLocationURL(node.location, 'raw'),
-                    expression: element,
-                    extends: node.classDef?.extends,
-                    implements: node.classDef?.implements.map(el => el.repr),
-                } as DocClass);
-            break;
+            return result;
         }
     }
-
-    return arr;
 }
 
-makeDocumentation();
+if (import.meta.main) {
+    const url = Deno.args[0];
+
+    for (const node of await doc(url)) {
+        console.log(handleNode(node));
+    }
+}
