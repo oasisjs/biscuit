@@ -221,6 +221,29 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
             return result;
         }
         case "class": {
+            let params: string[] = [];
+            if (node.classDef?.constructors[0]?.params?.length > 0) {
+                params = node.classDef.constructors[0].params.map(param => {
+                    if (param.kind === 'assign') {
+                        return param.left?.tsType?.repr ?? "%MISSING";
+                    } else if (param.kind === 'identifier') {
+                        if (param.tsType?.kind === 'typeRef') {
+                            return param.tsType?.typeRef?.typeName;
+                        } else if (param.tsType?.kind === 'array') {
+                            return param.tsType?.array.repr + '[]';
+                        } else {
+                            return ''
+                        }
+                    } else {
+                        return param.tsType?.repr ?? "%MISSING";
+                    }
+                })
+            }
+
+            if (node.name === 'ApplicationCommandBuilder') {
+                console.log(node.classDef.constructors[0].params)
+            }
+
             const result: ShowcaseClass & Declarable = {
                 kind: 'class',
                 name: node.name,
@@ -232,7 +255,7 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
                 con: {
                     name: node.classDef.constructors[0]?.name ?? "constructor",
                     description: node.classDef.constructors[0]?.jsDoc?.doc,
-                    parameters: node.classDef.constructors[0]?.params.map((param) => param.tsType?.repr ?? "%MISSING") ?? [],
+                    parameters: params,
                 },
                 properties: Object.fromEntries(node.classDef.properties.map((property) => {
                     const o: ShowcaseProperty = {
@@ -273,8 +296,8 @@ function handleNode(node: DocNode): Showcase & Declarable | undefined {
                     return [method.name, o];
                 })),
                 expression: node.classDef.extends?.length
-                    ? `${node.classDef?.isAbstract ? 'abstract' : ''} ${node.kind} ${node.name}(${node.classDef?.constructors[0]?.params.map(k => k.tsType?.repr).join(', ')}) extends ${node.classDef.extends}`
-                    : `${node.classDef?.isAbstract ? 'abstract' : ''} ${node.kind} ${node.name}(${node.classDef?.constructors[0]?.params.map(k => k.tsType?.repr).join(', ')})`,
+                    ? `${node.classDef?.isAbstract ? 'abstract' : ''} ${node.kind} ${node.name}(${params.join(', ')}) extends ${node.classDef.extends}`
+                    : `${node.classDef?.isAbstract ? 'abstract' : ''} ${node.kind} ${node.name}(${params.join(', ')})`,
             };
 
             return result;
