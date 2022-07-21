@@ -1,6 +1,10 @@
 {
   "name": "examples",
   "scripts": {
-    "hello-world": "tsc --project tsconfig.json"
+    "build": "tsc --project tsconfig.json",
+    "hello-world": "node ./hello-world/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1"
   }
 }
