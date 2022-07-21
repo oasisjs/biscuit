@@ -1,20 +1,18 @@
 {
-	"name": "@biscuit/api-types",
+	"name": "api-types",
 	"version": "1.0.0",
 	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
-	"source": "./src/index.ts",
 	"files": [
 		"dist/**"
 	],
 	"scripts": {
-		"build": "tsc",
-		"dev": "tsc --watch"
+		"build": "tsup",
+		"clean": "rm -rf dist && rm -rf .turbo",
+		"dev": "tsup --watch"
 	},
-	"directories": {
-		"lib": "src"
-	},
-	"publishConfig": {
-		"access": "public"
+	"dependencies": {
+		"tsup": "^6.1.3"
 	}
 }

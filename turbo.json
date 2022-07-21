@@ -1,15 +1,25 @@
 {
 	"$schema": "https://turborepo.org/schema.json",
-	"baseBranch": "origin/main",
 	"pipeline": {
-		"build": {
-			"dependsOn": ["^build"],
+		"api-types#build": {
+			"dependsOn": [],
+			"outputs": ["dist/**"]
+		},
+		"discordeno#build": {
+			"dependsOn": ["api-types#build"],
+			"outputs": ["dist/**"]
+		},
+		"core#build": {
+			"dependsOn": ["api-types#build", "discordeno#build"],
 			"outputs": ["dist/**"]
 		},
 		"lint": {
 			"outputs": []
 		},
 		"dev": {
+			"cache": false
+		},
+		"clean": {
 			"cache": false
 		}
 	}

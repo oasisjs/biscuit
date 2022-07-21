@@ -1,27 +1,23 @@
 {
-	"name": "@biscuit/discordeno",
+	"name": "discordeno",
 	"version": "1.0.0",
 	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
 	"types": "./dist/index.d.ts",
-	"source": "./src/index.ts",
 	"files": [
 		"dist/**"
 	],
 	"scripts": {
-		"build": "tsc",
-		"dev": "tsc --watch"
-	},
-	"directories": {
-		"lib": "src"
+		"build": "tsup",
+		"clean": "rm -rf dist && rm -rf .turbo",
+		"dev": "tsup --watch"
 	},
 	"dependencies": {
 		"@biscuit/api-types": "*",
+		"tsup": "^6.1.3",
 		"ws": "^8.8.1"
 	},
 	"devDependencies": {
 		"@types/ws": "^8.5.3"
-	},
-	"publishConfig": {
-		"access": "public"
 	}
 }
