@@ -1,4 +1,4 @@
-import type { Session, Snowflake } from './deps.ts';
+import type { Session, Snowflake } from './deps';
 
 export class Collection<V> extends Map<Snowflake, V> {
     constructor(session: Session, entries?: Iterable<readonly [Snowflake, V]>) {

@@ -1,10 +1,10 @@
-import type { DiscordGuild, DiscordMemberWithUser } from './deps.ts';
-import type { SessionCache } from './mod.ts';
-import type { CachedMember } from './members.ts';
-import type { CachedUser } from './users.ts';
-import type { CachedGuildChannel } from './channels.ts';
-import { ChannelFactory, Guild, Member } from './deps.ts';
-import { Collection } from './Collection.ts';
+import type { DiscordGuild, DiscordMemberWithUser } from './deps';
+import type { SessionCache } from './mod';
+import type { CachedMember } from './members';
+import type { CachedUser } from './users';
+import type { CachedGuildChannel } from './channels';
+import { ChannelFactory, Guild, Member } from './deps';
+import { Collection } from './Collection';
 
 export interface CachedGuild extends Omit<Guild, 'members' | 'channels'> {
     channels: Collection<CachedGuildChannel>;

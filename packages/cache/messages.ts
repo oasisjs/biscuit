@@ -6,11 +6,11 @@ import type {
     DiscordMessageReactionRemove,
     DiscordMessageReactionRemoveAll,
     Snowflake,
-} from './deps.ts';
-import type { CachedUser } from './users.ts';
-import type { SessionCache } from './mod.ts';
-import { Emoji, GuildEmoji, Message, MessageReaction } from './deps.ts';
-import { memberBootstrapper } from './members.ts';
+} from './deps';
+import type { CachedUser } from './users';
+import type { SessionCache } from './mod';
+import { Emoji, GuildEmoji, Message, MessageReaction } from './deps';
+import { memberBootstrapper } from './members';
 
 export interface CachedMessage extends Omit<Message, 'author'> {
     authorId: Snowflake;

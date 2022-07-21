@@ -1,13 +1,13 @@
-import type { Emoji, Session, SymCache } from './deps.ts';
-import type { CachedGuild } from './guilds.ts';
-import type { CachedUser } from './users.ts';
-import type { CachedDMChannel } from './channels.ts';
-import { Collection } from './Collection.ts';
-import { memberBootstrapper } from './members.ts';
-import { userBootstrapper } from './users.ts';
-import { channelBootstrapper } from './channels.ts';
-import { guildBootstrapper } from './guilds.ts';
-import { messageBootstrapper, reactionBootstrapper, reactionBootstrapperDeletions } from './messages.ts';
+import type { Emoji, Session, SymCache } from './deps';
+import type { CachedGuild } from './guilds';
+import type { CachedUser } from './users';
+import type { CachedDMChannel } from './channels';
+import { Collection } from './Collection';
+import { memberBootstrapper } from './members';
+import { userBootstrapper } from './users';
+import { channelBootstrapper } from './channels';
+import { guildBootstrapper } from './guilds';
+import { messageBootstrapper, reactionBootstrapper, reactionBootstrapperDeletions } from './messages';
 
 export const cache_sym = Symbol('@cache');
 

@@ -1,7 +1,7 @@
-import type { DiscordMemberWithUser, Snowflake } from './deps.ts';
-import type { SessionCache } from './mod.ts';
-import type { CachedUser } from './users.ts';
-import { Member } from './deps.ts';
+import type { DiscordMemberWithUser, Snowflake } from './deps';
+import type { SessionCache } from './mod';
+import type { CachedUser } from './users';
+import { Member } from './deps';
 
 export interface CachedMember extends Omit<Member, 'user'> {
     userId: Snowflake;
