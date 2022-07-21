@@ -1,3 +1,6 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable arrow-parens */
+/* eslint-disable @typescript-eslint/no-duplicate-imports */
 import type {
 	ApplicationCommandPermissionTypes,
 	AtLeastOne,
@@ -11,21 +14,23 @@ import type {
 	Localization,
 } from '@biscuit/api-types';
 
-import type { DiscordGatewayPayload, Shard } from '@biscuit/api-types';
+import type { DiscordGatewayPayload } from '@biscuit/api-types';
+import type { Shard } from '@biscuit/discordeno';
+import {
+	createGatewayManager,
+	createRestManager,
+	GatewayOpcodes,
+	getBotIdFromToken,
+} from '@biscuit/discordeno';
+
 import type { Events } from './Actions';
 import type { PermissionResolvable } from './structures/Permissions';
 import type { Activities, StatusTypes } from './structures/Presence';
 
 import { Permissions } from './structures/Permissions';
-import { Snowflake } from './Snowflake';
+import type { Snowflake } from './Snowflake';
 import { EventEmitter } from './util/EventEmmiter';
-import {
-	ApplicationCommandTypes,
-	createGatewayManager,
-	createRestManager,
-	GatewayOpcodes,
-	getBotIdFromToken,
-} from '@biscuit/api-types';
+import { ApplicationCommandTypes } from '@biscuit/api-types';
 
 import User from './structures/User';
 import { urlToBase64 } from './util/urlToBase64';
@@ -217,6 +222,7 @@ export class Session extends EventEmitter {
 		event: K,
 		...params: Parameters<Events[K]>
 	): boolean;
+
 	override emit<K extends string>(event: K, ...params: unknown[]): boolean {
 		return super.emit(event, ...params);
 	}
@@ -229,7 +235,7 @@ export class Session extends EventEmitter {
 			Routes.USER(),
 			{
 				username: nick,
-				avatar: avatar,
+				avatar,
 			}
 		);
 		return new User(this, user);
@@ -295,7 +301,9 @@ export class Session extends EventEmitter {
 			Routes.USER(id)
 		);
 
-		if (!user.id) return;
+		if (!user.id) {
+			return;
+		}
 
 		return new User(this, user);
 	}
@@ -449,9 +457,10 @@ export class Session extends EventEmitter {
 	}
 
 	upsertApplicationCommands(
-		options: Array<
-			UpsertApplicationCommands | CreateContextApplicationCommand
-		>,
+		options: (
+			| UpsertApplicationCommands
+			| CreateContextApplicationCommand
+		)[],
 		guildId?: Snowflake
 	): Promise<DiscordApplicationCommand[]> {
 		return this.rest.runMethod<DiscordApplicationCommand[]>(

@@ -3,7 +3,7 @@ import {
 	ButtonStyles,
 	MessageComponentTypes,
 	TextStyles,
-} from '../@biscuit/api-types';
+} from '@biscuit/api-types';
 
 export class BaseComponent {
 	constructor(type: MessageComponentTypes) {

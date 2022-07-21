@@ -2,7 +2,7 @@ import type {
 	DiscordEmbed,
 	DiscordEmbedField,
 	DiscordEmbedProvider,
-} from '../@biscuit/api-types';
+} from '@biscuit/api-types';
 
 export interface EmbedFooter {
 	text: string;
@@ -29,7 +29,9 @@ export class EmbedBuilder {
 	#data: DiscordEmbed;
 	constructor(data: DiscordEmbed = {}) {
 		this.#data = data;
-		if (!this.#data.fields) this.#data.fields = [];
+		if (!this.#data.fields) {
+			this.#data.fields = [];
+		}
 	}
 
 	setAuthor(author: EmbedAuthor): EmbedBuilder {
@@ -89,7 +91,9 @@ export class EmbedBuilder {
 
 	setTitle(title: string, url?: string): EmbedBuilder {
 		this.#data.title = title;
-		if (url) this.setUrl(url);
+		if (url) {
+			this.setUrl(url);
+		}
 		return this;
 	}
 

@@ -1,3 +1,5 @@
+/* eslint-disable arrow-parens */
+/* eslint-disable lines-between-class-members */
 import type {
 	DiscordSticker,
 	DiscordStickerPack,

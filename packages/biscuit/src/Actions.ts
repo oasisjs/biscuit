@@ -1,3 +1,5 @@
+/* eslint-disable arrow-parens */
+/* eslint-disable no-mixed-spaces-and-tabs */
 import type {
 	DiscordAutoModerationActionExecution,
 	DiscordAutoModerationRule,
@@ -65,14 +67,15 @@ import User from './structures/User';
 import Integration from './structures/Integration';
 import { Guild } from './structures/guilds';
 import InteractionFactory from './structures/interactions/InteractionFactory';
-import { InviteCreate, NewInviteCreate } from './structures/Invite';
-import {
+import type { InviteCreate } from './structures/Invite';
+import { NewInviteCreate } from './structures/Invite';
+import type {
 	MessageReactionAdd,
 	MessageReactionRemove,
 	MessageReactionRemoveAll,
 	MessageReactionRemoveEmoji,
-	NewMessageReactionAdd,
 } from './structures/MessageReaction';
+import { NewMessageReactionAdd } from './structures/MessageReaction';
 
 export type RawHandler<T> = (...args: [Session, number, T]) => void;
 export type Handler<T extends [obj?: unknown, ddy?: unknown]> = (
@@ -298,7 +301,9 @@ export const CHANNEL_DELETE: RawHandler<DiscordChannel> = (
 	_shardId,
 	channel
 ) => {
-	if (!channel.guild_id) return;
+	if (!channel.guild_id) {
+		return;
+	}
 
 	session.emit(
 		'channelDelete',
@@ -311,7 +316,9 @@ export const THREAD_CREATE: RawHandler<DiscordChannel> = (
 	_shardId,
 	channel
 ) => {
-	if (!channel.guild_id) return;
+	if (!channel.guild_id) {
+		return;
+	}
 
 	session.emit(
 		'threadCreate',
@@ -324,7 +331,9 @@ export const THREAD_UPDATE: RawHandler<DiscordChannel> = (
 	_shardId,
 	channel
 ) => {
-	if (!channel.guild_id) return;
+	if (!channel.guild_id) {
+		return;
+	}
 
 	session.emit(
 		'threadUpdate',
@@ -337,7 +346,9 @@ export const THREAD_DELETE: RawHandler<DiscordChannel> = (
 	_shardId,
 	channel
 ) => {
-	if (!channel.guild_id) return;
+	if (!channel.guild_id) {
+		return;
+	}
 
 	session.emit(
 		'threadDelete',

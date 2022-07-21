@@ -1,3 +1,9 @@
+/* eslint-disable arrow-parens */
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-use-before-define */
 /** Types */
 import type { Model } from './Base';
 import type { Snowflake } from '../Snowflake';
@@ -5,8 +11,7 @@ import type { Session } from '../Session';
 import type { PermissionsOverwrites } from '../Util';
 
 /** External from vendor */
-import {
-	ChannelTypes,
+import type {
 	DiscordChannel,
 	DiscordInvite,
 	DiscordInviteMetadata,
@@ -15,22 +20,19 @@ import {
 	DiscordOverwrite,
 	DiscordThreadMember,
 	DiscordWebhook,
-	GatewayOpcodes,
 	TargetTypes,
 	VideoQualityModes,
 } from '@biscuit/api-types';
+import { ChannelTypes, GatewayOpcodes } from '@biscuit/api-types';
 
 /** Functions and others */
-import { calculateShardId } from '../../discordeno/gateway/calculateShardId';
+import { calculateShardId } from '@biscuit/discordeno';
 import { urlToBase64 } from '../util/urlToBase64';
 
 /** Classes and routes */
 import * as Routes from '../Routes';
-import Message, {
-	CreateMessage,
-	EditMessage,
-	EmojiResolvable,
-} from './Message';
+import type { CreateMessage, EditMessage, EmojiResolvable } from './Message';
+import Message from './Message';
 import Invite from './Invite';
 import Webhook from './Webhook';
 import User from './User';
@@ -221,11 +223,8 @@ export class TextChannel {
 	 * Mixin
 	 */
 	// deno-lint-ignore ban-types
-	static applyTo(
-		klass: Function,
-		ignore: Array<keyof TextChannel> = []
-	): void {
-		const methods: Array<keyof TextChannel> = [
+	static applyTo(klass: Function, ignore: (keyof TextChannel)[] = []): void {
+		const methods: (keyof TextChannel)[] = [
 			'fetchPins',
 			'createInvite',
 			'fetchMessages',
@@ -242,7 +241,9 @@ export class TextChannel {
 		];
 
 		for (const method of methods) {
-			if (ignore.includes(method)) continue;
+			if (ignore.includes(method)) {
+				continue;
+			}
 
 			klass.prototype[method] = TextChannel.prototype[method];
 		}
@@ -297,7 +298,9 @@ export class TextChannel {
 	async fetchMessages(
 		options?: Routes.GetMessagesOptions
 	): Promise<Message[] | []> {
-		if (options?.limit! > 100) throw Error('Values must be between 0-100');
+		if (options?.limit! > 100) {
+			throw Error('Values must be between 0-100');
+		}
 		const messages = await this.session.rest.runMethod<DiscordMessage[]>(
 			this.session.rest,
 			'GET',
@@ -566,6 +569,7 @@ export class GuildChannel extends BaseChannel implements Model {
 		ChannelTypes,
 		ChannelTypes.DM | ChannelTypes.GroupDm
 	>;
+
 	guildId: Snowflake;
 	topic?: string;
 	position?: number;
@@ -714,6 +718,7 @@ export abstract class BaseVoiceChannel extends GuildChannel {
 			this.rtcRegion = data.rtc_region;
 		}
 	}
+
 	override type: ChannelTypes.GuildVoice | ChannelTypes.GuildStageVoice;
 	bitRate?: number;
 	userLimit: number;
@@ -789,6 +794,7 @@ export class VoiceChannel extends BaseVoiceChannel {
 		super(session, data, guildId);
 		this.type = data.type as number;
 	}
+
 	override type: ChannelTypes.GuildVoice;
 }
 
@@ -831,6 +837,7 @@ export class StageChannel extends BaseVoiceChannel {
 		this.type = data.type as number;
 		this.topic = data.topic ? data.topic : undefined;
 	}
+
 	override type: ChannelTypes.GuildStageVoice;
 	topic?: string;
 }
@@ -857,6 +864,7 @@ export class ThreadChannel extends GuildChannel implements Model {
 		| ChannelTypes.GuildNewsThread
 		| ChannelTypes.GuildPrivateThread
 		| ChannelTypes.GuildPublicThread;
+
 	archived?: boolean;
 	archiveTimestamp?: string;
 	autoArchiveDuration?: number;

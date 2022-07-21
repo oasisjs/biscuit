@@ -1,10 +1,10 @@
-import {
+import type {
 	AutoModerationTriggerTypes,
 	DiscordAutoModerationActionExecution,
 } from '@biscuit/api-types';
 import type { Session } from '../Session';
 import type { Snowflake } from '../Snowflake';
-import { AutoModerationAction } from './AutoModerationRule';
+import type { AutoModerationAction } from './AutoModerationRule';
 
 export class AutoModerationExecution {
 	constructor(session: Session, data: DiscordAutoModerationActionExecution) {
@@ -39,6 +39,7 @@ export class AutoModerationExecution {
 			this.matched_content = data.matched_content;
 		}
 	}
+
 	session: Session;
 	guildId: Snowflake;
 	action: AutoModerationAction;

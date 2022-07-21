@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable arrow-parens */
 import {
 	ApplicationCommandOptionTypes,
 	type ChannelTypes,
 	type Localization,
-} from '../../@biscuit/api-types';
-import { ApplicationCommandOptionChoice } from '../../interactions/BaseInteraction';
+} from '@biscuit/api-types';
+import type { ApplicationCommandOptionChoice } from '../../interactions/BaseInteraction';
 
 export class ChoiceBuilder {
 	name?: string;
@@ -20,8 +23,12 @@ export class ChoiceBuilder {
 	}
 
 	toJSON(): ApplicationCommandOptionChoice {
-		if (!this.name) throw new TypeError("Property 'name' is required");
-		if (!this.value) throw new TypeError("Property 'value' is required");
+		if (!this.name) {
+			throw new TypeError("Property 'name' is required");
+		}
+		if (!this.value) {
+			throw new TypeError("Property 'value' is required");
+		}
 
 		return {
 			name: this.name,
@@ -64,8 +71,12 @@ export class OptionBuilder {
 	}
 
 	toJSON(): ApplicationCommandOption {
-		if (!this.type) throw new TypeError("Property 'type' is required");
-		if (!this.name) throw new TypeError("Property 'name' is required");
+		if (!this.type) {
+			throw new TypeError("Property 'type' is required");
+		}
+		if (!this.name) {
+			throw new TypeError("Property 'name' is required");
+		}
 		if (!this.description) {
 			throw new TypeError("Property 'description' is required");
 		}
@@ -301,11 +312,8 @@ export class OptionBased {
 	}
 
 	// deno-lint-ignore ban-types
-	static applyTo(
-		klass: Function,
-		ignore: Array<keyof OptionBased> = []
-	): void {
-		const methods: Array<keyof OptionBased> = [
+	static applyTo(klass: Function, ignore: (keyof OptionBased)[] = []): void {
+		const methods: (keyof OptionBased)[] = [
 			'addOption',
 			'addNestedOption',
 			'addStringOption',
@@ -321,7 +329,9 @@ export class OptionBased {
 		];
 
 		for (const method of methods) {
-			if (ignore.includes(method)) continue;
+			if (ignore.includes(method)) {
+				continue;
+			}
 
 			klass.prototype[method] = OptionBased.prototype[method];
 		}
@@ -343,8 +353,12 @@ export class OptionBuilderNested extends OptionBuilder {
 	}
 
 	override toJSON(): ApplicationCommandOption {
-		if (!this.type) throw new TypeError("Property 'type' is required");
-		if (!this.name) throw new TypeError("Property 'name' is required");
+		if (!this.type) {
+			throw new TypeError("Property 'type' is required");
+		}
+		if (!this.name) {
+			throw new TypeError("Property 'name' is required");
+		}
 		if (!this.description) {
 			throw new TypeError("Property 'description' is required");
 		}

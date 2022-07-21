@@ -1,3 +1,4 @@
+/* eslint-disable lines-between-class-members */
 import type { Model } from './Base';
 import type { Snowflake } from '../Snowflake';
 import type { Session } from '../Session';

@@ -1,10 +1,11 @@
+/* eslint-disable arrow-parens */
 import type { Session } from '../../Session';
 import type {
 	DiscordComponent,
 	DiscordInputTextComponent,
-} from '../@biscuit/api-types';
+} from '@biscuit/api-types';
 import type { ActionRowComponent, Component } from './Component';
-import { ButtonStyles, MessageComponentTypes } from '../@biscuit/api-types';
+import { ButtonStyles, MessageComponentTypes } from '@biscuit/api-types';
 import BaseComponent from './Component';
 import Button from './ButtonComponent';
 import LinkButton from './LinkButtonComponent';
@@ -41,7 +42,7 @@ export class ActionRow extends BaseComponent implements ActionRowComponent {
 
 	readonly session: Session;
 	override type: MessageComponentTypes.ActionRow;
-	components: Array<Exclude<Component, ActionRowComponent>>;
+	components: Exclude<Component, ActionRowComponent>[];
 }
 
 export default ActionRow;

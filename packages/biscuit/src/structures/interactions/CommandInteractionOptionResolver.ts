@@ -1,8 +1,9 @@
+/* eslint-disable arrow-parens */
 import type {
 	DiscordInteractionDataOption,
 	DiscordInteractionDataResolved,
-} from '../@biscuit/api-types';
-import { ApplicationCommandOptionTypes } from '../@biscuit/api-types';
+} from '@biscuit/api-types';
+import { ApplicationCommandOptionTypes } from '@biscuit/api-types';
 
 export function transformOasisInteractionDataOption(
 	o: DiscordInteractionDataOption
@@ -106,7 +107,7 @@ export class CommandInteractionOptionResolver {
 	private getTypedOption(
 		name: string | number,
 		type: ApplicationCommandOptionTypes,
-		properties: Array<keyof CommandInteractionOption>,
+		properties: (keyof CommandInteractionOption)[],
 		required: boolean
 	): CommandInteractionOption | void {
 		const option: CommandInteractionOption | undefined = this.get(
@@ -141,6 +142,7 @@ export class CommandInteractionOptionResolver {
 		name: string | number,
 		required: boolean
 	): CommandInteractionOption | undefined;
+
 	get(name: string | number, required?: boolean) {
 		const option: CommandInteractionOption | undefined =
 			this.hoistedOptions.find((o) =>
@@ -250,6 +252,7 @@ export class CommandInteractionOptionResolver {
 		name: string | number,
 		required?: boolean
 	): string | undefined;
+
 	getMentionable(name: string | number, required = false) {
 		const option: CommandInteractionOption | void = this.getTypedOption(
 			name,
@@ -281,6 +284,7 @@ export class CommandInteractionOptionResolver {
 		name: string | number,
 		required?: boolean
 	): string | undefined;
+
 	getAttachment(name: string | number, required = false) {
 		const option: CommandInteractionOption | void = this.getTypedOption(
 			name,

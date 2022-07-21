@@ -1,19 +1,21 @@
-import type { Localization, PermissionStrings } from '../../@biscuit/api-types';
-import { ApplicationCommandTypes } from '../../@biscuit/api-types';
+/* eslint-disable brace-style */
+/* eslint-disable arrow-parens */
+import type { Localization, PermissionStrings } from '@biscuit/api-types';
+import { ApplicationCommandTypes } from '@biscuit/api-types';
 import { OptionBased } from './ApplicationCommandOption';
-import { CreateApplicationCommand } from '../../../Session';
+import type { CreateApplicationCommand } from '../../../Session';
 
 export abstract class ApplicationCommandBuilder
 	implements CreateApplicationCommand
 {
 	constructor(
 		type: ApplicationCommandTypes = ApplicationCommandTypes.ChatInput,
-		name: string = '',
-		description: string = '',
+		name = '',
+		description = '',
 		defaultMemberPermissions?: PermissionStrings[],
 		nameLocalizations?: Localization,
 		descriptionLocalizations?: Localization,
-		dmPermission: boolean = true
+		dmPermission = true
 	) {
 		this.type = type;
 		this.name = name;
@@ -23,6 +25,7 @@ export abstract class ApplicationCommandBuilder
 		this.descriptionLocalizations = descriptionLocalizations;
 		this.dmPermission = dmPermission;
 	}
+
 	type: ApplicationCommandTypes;
 	name: string;
 	description: string;
@@ -73,7 +76,9 @@ export class MessageApplicationCommandBuilder {
 	}
 
 	toJSON(): { name: string; type: ApplicationCommandTypes.Message } {
-		if (!this.name) throw new TypeError("Propety 'name' is required");
+		if (!this.name) {
+			throw new TypeError("Propety 'name' is required");
+		}
 
 		return {
 			type: ApplicationCommandTypes.Message,
@@ -86,8 +91,12 @@ export class ChatInputApplicationCommandBuilder extends ApplicationCommandBuilde
 	type: ApplicationCommandTypes.ChatInput = ApplicationCommandTypes.ChatInput;
 
 	toJSON(): CreateApplicationCommand {
-		if (!this.type) throw new TypeError("Propety 'type' is required");
-		if (!this.name) throw new TypeError("Propety 'name' is required");
+		if (!this.type) {
+			throw new TypeError("Propety 'type' is required");
+		}
+		if (!this.name) {
+			throw new TypeError("Propety 'name' is required");
+		}
 		if (!this.description) {
 			throw new TypeError("Propety 'description' is required");
 		}

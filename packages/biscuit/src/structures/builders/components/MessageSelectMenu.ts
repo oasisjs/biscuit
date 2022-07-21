@@ -1,7 +1,8 @@
+/* eslint-disable arrow-parens */
 import {
 	type DiscordSelectMenuComponent,
 	MessageComponentTypes,
-} from '../../@biscuit/api-types';
+} from '@biscuit/api-types';
 import type { SelectMenuOptionBuilder } from './SelectMenuOptionBuilder';
 
 export class SelectMenuBuilder {
@@ -10,6 +11,7 @@ export class SelectMenuBuilder {
 		this.type = MessageComponentTypes.SelectMenu;
 		this.options = [];
 	}
+
 	#data: DiscordSelectMenuComponent;
 	type: MessageComponentTypes.SelectMenu;
 	options: SelectMenuOptionBuilder[];

@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import type { Session } from '../Session';
 import type {
 	DiscordMemberWithUser,

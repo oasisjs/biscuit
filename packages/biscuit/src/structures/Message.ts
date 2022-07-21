@@ -1,3 +1,6 @@
+/* eslint-disable arrow-parens */
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable @typescript-eslint/no-duplicate-imports */
 import type { Model } from './Base';
 import type { Session } from '../Session';
 import type {
@@ -26,7 +29,7 @@ import MessageReaction from './MessageReaction';
 import Application, { NewTeam } from './Application';
 import InteractionFactory from './interactions/InteractionFactory';
 import * as Routes from '../Routes';
-import { StickerItem } from './Sticker';
+import type { StickerItem } from './Sticker';
 
 /**
  * @link https://discord.com/developers/docs/resources/channel#allowed-mentions-object
@@ -588,7 +591,9 @@ export class Message implements Model {
 			Routes.CHANNEL_MESSAGE(this.channelId, this.id)
 		);
 
-		if (!message?.id) return;
+		if (!message?.id) {
+			return;
+		}
 
 		return new Message(this.session, message);
 	}

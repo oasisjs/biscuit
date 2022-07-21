@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 import type { DiscordEmbed, EmbedTypes } from '@biscuit/api-types';
 
 export interface Embed {
@@ -18,11 +19,11 @@ export interface Embed {
 		iconURL?: string;
 		proxyIconURL?: string;
 	};
-	fields?: Array<{
+	fields?: {
 		name: string;
 		value: string;
 		inline?: boolean;
-	}>;
+	}[];
 	thumbnail?: {
 		url: string;
 		proxyURL?: string;

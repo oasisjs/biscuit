@@ -1,10 +1,11 @@
+/* eslint-disable arrow-parens */
 import type { Model } from '../Base';
 import type { Session } from '../../Session';
 import type {
 	DiscordInteraction,
 	DiscordMessage,
 	DiscordMessageComponents,
-} from '../@biscuit/api-types';
+} from '@biscuit/api-types';
 import type CommandInteraction from './CommandInteraction';
 import type PingInteraction from './PingInteraction';
 import type ComponentInteraction from './ComponentInteraction';
@@ -13,10 +14,7 @@ import type AutoCompleteInteraction from './AutoCompleteInteraction';
 import type { CreateMessage } from '../Message';
 import type { MessageFlags } from '../../Util';
 import type { EditWebhookMessage } from '../Webhook';
-import {
-	InteractionResponseTypes,
-	InteractionTypes,
-} from '../@biscuit/api-types';
+import { InteractionResponseTypes, InteractionTypes } from '@biscuit/api-types';
 import { Snowflake } from '../../Snowflake';
 import User from '../User';
 import Member from '../Member';
@@ -244,6 +242,7 @@ export abstract class BaseInteraction implements Model {
 	async respond(resp: {
 		with: InteractionApplicationCommandCallbackData;
 	}): Promise<Message | undefined>;
+
 	async respond(
 		resp:
 			| InteractionResponse

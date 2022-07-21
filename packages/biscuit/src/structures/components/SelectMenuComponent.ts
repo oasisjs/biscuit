@@ -1,7 +1,7 @@
 import type { Session } from '../../Session';
-import type { DiscordComponent } from '../@biscuit/api-types';
+import type { DiscordComponent } from '@biscuit/api-types';
 import type { SelectMenuComponent, SelectMenuOption } from './Component';
-import { MessageComponentTypes } from '../@biscuit/api-types';
+import { MessageComponentTypes } from '@biscuit/api-types';
 import BaseComponent from './Component';
 import Emoji from '../Emoji';
 

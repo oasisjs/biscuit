@@ -1,3 +1,6 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable arrow-parens */
+/* eslint-disable @typescript-eslint/prefer-optional-chain */
 import type { Session } from '../Session';
 import type { Snowflake } from '../Snowflake';
 import type {
@@ -10,8 +13,8 @@ import type {
 	ScheduledEventEntityType,
 	ScheduledEventPrivacyLevel,
 	ScheduledEventStatus,
+	TargetTypes,
 } from '@biscuit/api-types';
-import { TargetTypes } from '@biscuit/api-types';
 import { GuildChannel } from './channels';
 import { Member } from './Member';
 import { Guild, InviteGuild } from './guilds';

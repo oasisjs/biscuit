@@ -1,3 +1,6 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable lines-between-class-members */
+/* eslint-disable arrow-parens */
 import type {
 	ActivityTypes,
 	DiscordActivityButton,
@@ -7,7 +10,7 @@ import type {
 } from '@biscuit/api-types';
 import type { Session } from '../Session';
 import { User } from './User';
-import { Snowflake } from '../Snowflake';
+import type { Snowflake } from '../Snowflake';
 import type { ComponentEmoji } from '../Util';
 
 export interface ActivityAssets {

@@ -1,14 +1,11 @@
 import type { Model } from '../Base';
 import type { Snowflake } from '../../Snowflake';
 import type { Session } from '../../Session';
-import type {
-	DiscordInteraction,
-	InteractionTypes,
-} from '../@biscuit/api-types';
+import type { DiscordInteraction, InteractionTypes } from '@biscuit/api-types';
 import {
 	InteractionResponseTypes,
 	MessageComponentTypes,
-} from '../@biscuit/api-types';
+} from '@biscuit/api-types';
 import BaseInteraction from './BaseInteraction';
 import Message from '../Message';
 
@@ -30,7 +27,7 @@ export class ComponentInteraction extends BaseInteraction implements Model {
 	values?: string[];
 	message: Message;
 
-	//TODO: create interface/class for components types
+	// TODO: create interface/class for components types
 	isButton(): boolean {
 		return this.componentType === MessageComponentTypes.Button;
 	}

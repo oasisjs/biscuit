@@ -1,11 +1,12 @@
-import {
+/* eslint-disable arrow-parens */
+import type {
 	AutoModerationActionType,
 	AutoModerationEventTypes,
 	AutoModerationTriggerTypes,
 	DiscordAutoModerationRule,
 	DiscordAutoModerationRuleTriggerMetadataPresets,
 } from '@biscuit/api-types';
-import { Model } from './Base';
+import type { Model } from './Base';
 import type { Session } from '../Session';
 import type { Snowflake } from '../Snowflake';
 
@@ -50,6 +51,7 @@ export class AutoModerationRule implements Model {
 		this.exemptRoles = data.exempt_roles;
 		this.exemptChannels = data.exempt_channels;
 	}
+
 	session: Session;
 	id: Snowflake;
 	guildId: Snowflake;

@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 import type { Session } from '../Session';
 import type { DiscordWelcomeScreen } from '@biscuit/api-types';
 import WelcomeChannel from './WelcomeChannel';

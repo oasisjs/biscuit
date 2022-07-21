@@ -1,10 +1,11 @@
-import type { DiscordSelectOption } from '../../@biscuit/api-types';
+import type { DiscordSelectOption } from '@biscuit/api-types';
 import type { ComponentEmoji } from '../../../Util';
 
 export class SelectMenuOptionBuilder {
 	constructor() {
 		this.#data = {} as DiscordSelectOption;
 	}
+
 	#data: DiscordSelectOption;
 
 	setLabel(label: string): SelectMenuOptionBuilder {

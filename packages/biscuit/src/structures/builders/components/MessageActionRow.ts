@@ -1,7 +1,8 @@
+/* eslint-disable arrow-parens */
 import type {
 	DiscordActionRow,
 	MessageComponentTypes,
-} from '../../@biscuit/api-types';
+} from '@biscuit/api-types';
 import type { ComponentBuilder } from '../../../Util';
 
 export class ActionRowBuilder<T extends ComponentBuilder> {
@@ -9,6 +10,7 @@ export class ActionRowBuilder<T extends ComponentBuilder> {
 		this.components = [] as T[];
 		this.type = 1;
 	}
+
 	components: T[];
 	type: MessageComponentTypes.ActionRow;
 

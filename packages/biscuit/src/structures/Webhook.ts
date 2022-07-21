@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 import type { Model } from './Base';
 import type { Session } from '../Session';
 import type { Snowflake } from '../Snowflake';

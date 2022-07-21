@@ -3,10 +3,10 @@ import type { Snowflake } from '../../Snowflake';
 import type {
 	DiscordInteraction,
 	DiscordMessageInteraction,
-} from '../@biscuit/api-types';
-import { InteractionTypes } from '../@biscuit/api-types';
+} from '@biscuit/api-types';
+import { InteractionTypes } from '@biscuit/api-types';
 import User from '../User';
-import Member from '../Member';
+import type Member from '../Member';
 import CommandInteraction from './CommandInteraction';
 import ComponentInteraction from './ComponentInteraction';
 import PingInteraction from './PingInteraction';

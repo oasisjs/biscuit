@@ -1,7 +1,8 @@
-import { Model } from './Base';
+/* eslint-disable arrow-parens */
+import type { Model } from './Base';
 import type { Snowflake } from '../Snowflake';
 import type { Session } from '../Session';
-import {
+import type {
 	DiscordApplication,
 	DiscordInstallParams,
 	DiscordTeam,

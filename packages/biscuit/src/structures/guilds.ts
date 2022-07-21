@@ -1,3 +1,5 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable arrow-parens */
 import type { Model } from './Base';
 import type { Session } from '../Session';
 import type {
@@ -22,14 +24,16 @@ import type {
 	VerificationLevels,
 	VideoQualityModes,
 	DiscordGuildPreview,
+	PremiumTiers,
 } from '@biscuit/api-types';
 import type { ImageFormat, ImageSize } from '../Util';
-import { GuildFeatures, PremiumTiers } from '@biscuit/api-types';
+import { GuildFeatures } from '@biscuit/api-types';
 import { Snowflake } from '../Snowflake';
 import Util from '../Util';
 import * as Routes from '../Routes';
 import WelcomeScreen from './WelcomeScreen';
-import { GuildChannel, ReturnThreadsArchive, ThreadChannel } from './channels';
+import type { ReturnThreadsArchive } from './channels';
+import { GuildChannel, ThreadChannel } from './channels';
 import ThreadMember from './ThreadMember';
 import Member from './Member';
 import Role from './Role';
@@ -268,6 +272,7 @@ export class GuildPreview implements Model {
 		this.approximatePresenceCount = data.approximate_presence_count;
 		this.stickers = data.stickers.map((x) => new Sticker(this.session, x));
 	}
+
 	session: Session;
 	/** guild id */
 	id: Snowflake;

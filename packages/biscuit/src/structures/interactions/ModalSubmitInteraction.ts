@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 import type { Model } from '../Base';
 import type { Snowflake } from '../../Snowflake';
 import type { Session } from '../../Session';
@@ -6,7 +7,7 @@ import type {
 	DiscordMessageComponents,
 	InteractionTypes,
 	MessageComponentTypes,
-} from '../@biscuit/api-types';
+} from '@biscuit/api-types';
 import BaseInteraction from './BaseInteraction';
 import Message from '../Message';
 

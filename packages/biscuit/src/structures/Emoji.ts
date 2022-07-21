@@ -11,6 +11,7 @@ export class Emoji {
 		this.requireColons = !!data.require_colons;
 		this.session = session;
 	}
+
 	readonly id?: Snowflake;
 	readonly session: Session;
 

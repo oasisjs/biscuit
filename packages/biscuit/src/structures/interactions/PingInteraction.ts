@@ -5,8 +5,8 @@ import type {
 	ApplicationCommandTypes,
 	DiscordInteraction,
 	InteractionTypes,
-} from '../@biscuit/api-types';
-import { InteractionResponseTypes } from '../@biscuit/api-types';
+} from '@biscuit/api-types';
+import { InteractionResponseTypes } from '@biscuit/api-types';
 import BaseInteraction from './BaseInteraction';
 import * as Routes from '../../Routes';
 

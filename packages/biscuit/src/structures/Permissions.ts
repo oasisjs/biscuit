@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 import { BitwisePermissionFlags } from '@biscuit/api-types';
 
 export type PermissionString = keyof typeof BitwisePermissionFlags;

@@ -1,7 +1,10 @@
 import type { Session } from '../../Session';
-import type { ButtonStyles, DiscordComponent } from '../@biscuit/api-types';
+import type {
+	MessageComponentTypes,
+	ButtonStyles,
+	DiscordComponent,
+} from '@biscuit/api-types';
 import type { ButtonComponent } from './Component';
-import { MessageComponentTypes } from '../@biscuit/api-types';
 import BaseComponent from './Component';
 import Emoji from '../Emoji';
 
@@ -30,6 +33,7 @@ export class Button extends BaseComponent implements ButtonComponent {
 		| ButtonStyles.Secondary
 		| ButtonStyles.Success
 		| ButtonStyles.Danger;
+
 	disabled?: boolean;
 	emoji?: Emoji;
 }

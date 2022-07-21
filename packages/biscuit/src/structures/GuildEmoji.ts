@@ -17,6 +17,7 @@ export class GuildEmoji extends Emoji implements Model {
 		this.managed = !!data.managed;
 		this.id = super.id!;
 	}
+
 	guildId: Snowflake;
 	roles?: Snowflake[];
 	user?: User;

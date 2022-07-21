@@ -2,9 +2,9 @@ import type { Session } from '../../Session';
 import type {
 	DiscordComponent,
 	DiscordInputTextComponent,
-} from '../@biscuit/api-types';
+} from '@biscuit/api-types';
 import type { Component } from './Component';
-import { ButtonStyles, MessageComponentTypes } from '../@biscuit/api-types';
+import { ButtonStyles, MessageComponentTypes } from '@biscuit/api-types';
 import ActionRow from './ActionRowComponent';
 import Button from './ButtonComponent';
 import LinkButton from './ButtonComponent';

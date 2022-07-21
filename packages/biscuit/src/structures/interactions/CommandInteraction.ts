@@ -6,7 +6,7 @@ import type {
 	DiscordInteraction,
 	DiscordMemberWithUser,
 	InteractionTypes,
-} from '../@biscuit/api-types';
+} from '@biscuit/api-types';
 import BaseInteraction from './BaseInteraction';
 import CommandInteractionOptionResolver from './CommandInteractionOptionResolver';
 import Attachment from '../Attachment';
@@ -92,6 +92,7 @@ export class CommandInteraction extends BaseInteraction implements Model {
 		attachments: Map<Snowflake, Attachment>;
 		messages: Map<Snowflake, Message>;
 	};
+
 	options: CommandInteractionOptionResolver;
 }
 
