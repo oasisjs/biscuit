@@ -1,4 +1,5 @@
 {
+	"name": "biscuit",
 	"private": true,
 	"workspaces": [
 		"packages/*"

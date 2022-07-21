@@ -1,5 +1,5 @@
 {
-	"name": "api-types",
+	"name": "@biscuit/api-types",
 	"version": "1.0.0",
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",

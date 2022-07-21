@@ -1,5 +1,5 @@
 {
-	"name": "core",
+	"name": "@biscuit/core",
 	"version": "1.0.0",
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",
@@ -13,8 +13,8 @@
 		"dev": "tsup --watch"
 	},
 	"dependencies": {
-		"@biscuit/api-types": "*",
-		"@biscuit/discordeno": "*"
+		"@biscuit/api-types": "^1.0.0",
+		"@biscuit/discordeno": "^1.0.0"
 	},
 	"devDependencies": {
 		"tsup": "^6.1.3"

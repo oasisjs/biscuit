@@ -1,14 +1,14 @@
 {
 	"$schema": "https://turborepo.org/schema.json",
 	"pipeline": {
-		"api-types#build": {
+		"@biscuit/api-types#build": {
 			"dependsOn": []
 		},
-		"discordeno#build": {
-			"dependsOn": ["api-types#build"]
+		"@biscuit/discordeno#build": {
+			"dependsOn": ["@biscuit/api-types#build"]
 		},
-		"core#build": {
-			"dependsOn": ["api-types#build", "discordeno#build"]
+		"@biscuit/core#build": {
+			"dependsOn": ["@biscuit/api-types#build", "@biscuit/discordeno#build"]
 		},
 		"lint": {
 			"outputs": []
