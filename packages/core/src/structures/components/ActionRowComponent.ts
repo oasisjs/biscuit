@@ -1,4 +1,3 @@
-/* eslint-disable arrow-parens */
 import type { Session } from '../../Session';
 import type {
 	DiscordComponent,
@@ -18,7 +17,7 @@ export class ActionRow extends BaseComponent implements ActionRowComponent {
 
 		this.session = session;
 		this.type = data.type as MessageComponentTypes.ActionRow;
-		this.components = data.components!.map((component) => {
+		this.components = data.components!.map(component => {
 			switch (component.type) {
 				case MessageComponentTypes.Button:
 					if (component.style === ButtonStyles.Link) {

@@ -1,5 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable arrow-parens */
 import type { Model } from './Base';
 import type { Session } from '../Session';
 import type {
@@ -265,12 +263,12 @@ export class GuildPreview implements Model {
 			? Util.iconHashToBigInt(data.discovery_splash)
 			: undefined;
 		this.emojis = data.emojis.map(
-			(x) => new GuildEmoji(this.session, x, this.id)
+			x => new GuildEmoji(this.session, x, this.id)
 		);
 		this.features = data.features;
 		this.approximateMemberCount = data.approximate_member_count;
 		this.approximatePresenceCount = data.approximate_presence_count;
-		this.stickers = data.stickers.map((x) => new Sticker(this.session, x));
+		this.stickers = data.stickers.map(x => new Sticker(this.session, x));
 	}
 
 	session: Session;
@@ -506,28 +504,28 @@ export class Guild extends BaseGuild implements Model {
 		this.explicitContentFilterLevel = data.explicit_content_filter;
 		this.premiumTier = data.premium_tier;
 		this.members = new Map(
-			data.members?.map((member) => [
+			data.members?.map(member => [
 				data.id,
 				new Member(session, { ...member, user: member.user! }, data.id),
 			])
 		);
 
 		this.roles = new Map(
-			data.roles.map((role) => [
+			data.roles.map(role => [
 				data.id,
 				new Role(session, role, data.id),
 			])
 		);
 
 		this.emojis = new Map(
-			data.emojis.map((guildEmoji) => [
+			data.emojis.map(guildEmoji => [
 				guildEmoji.id!,
 				new GuildEmoji(session, guildEmoji, data.id),
 			])
 		);
 
 		this.channels = new Map(
-			data.channels?.map((guildChannel) => [
+			data.channels?.map(guildChannel => [
 				guildChannel.id,
 				new GuildChannel(session, guildChannel, data.id),
 			])
@@ -828,7 +826,7 @@ export class Guild extends BaseGuild implements Model {
 			options
 		);
 
-		return roles.map((role) => new Role(this.session, role, this.id));
+		return roles.map(role => new Role(this.session, role, this.id));
 	}
 
 	/**
@@ -876,7 +874,7 @@ export class Guild extends BaseGuild implements Model {
 			DiscordInviteMetadata[]
 		>(this.session.rest, 'GET', Routes.GUILD_INVITES(this.id));
 
-		return invites.map((invite) => new Invite(this.session, invite));
+		return invites.map(invite => new Invite(this.session, invite));
 	}
 
 	/**
@@ -897,7 +895,7 @@ export class Guild extends BaseGuild implements Model {
 				? {
 						delete_message_days: options.deleteMessageDays,
 						reason: options.reason,
-				  }
+				}
 				: {}
 		);
 	}
@@ -1012,13 +1010,13 @@ export class Guild extends BaseGuild implements Model {
 
 		return {
 			threads: Object.fromEntries(
-				threads.map((thread) => [
+				threads.map(thread => [
 					thread.id,
 					new ThreadChannel(this.session, thread, this.id),
 				])
 			),
 			members: Object.fromEntries(
-				members.map((threadMember) => [
+				members.map(threadMember => [
 					threadMember.id,
 					new ThreadMember(this.session, threadMember),
 				])
@@ -1080,8 +1078,8 @@ export class Guild extends BaseGuild implements Model {
 					'iconURL' in options
 						? options.iconURL && urlToBase64(options.iconURL)
 						: options.iconHash &&
-						  Util.iconBigintToHash(options.iconHash),
-				channels: options.channels?.map((channel) => ({
+						Util.iconBigintToHash(options.iconHash),
+				channels: options.channels?.map(channel => ({
 					name: channel.name,
 					nsfw: channel.nsfw,
 					id: channel.id,
@@ -1093,7 +1091,7 @@ export class Guild extends BaseGuild implements Model {
 					video_quality_mode: channel.videoQualityMode,
 					rate_limit_per_user: channel.rateLimitPerUser,
 				})),
-				roles: options.roles?.map((role) => ({
+				roles: options.roles?.map(role => ({
 					name: role.name,
 					id: role.id,
 					color: role.color,
@@ -1158,24 +1156,24 @@ export class Guild extends BaseGuild implements Model {
 					'iconURL' in options
 						? options.iconURL && urlToBase64(options.iconURL)
 						: options.iconHash &&
-						  Util.iconBigintToHash(options.iconHash),
+						Util.iconBigintToHash(options.iconHash),
 				// extra props
 				splash:
 					'splashURL' in options
 						? options.splashURL && urlToBase64(options.splashURL)
 						: options.iconHash &&
-						  Util.iconBigintToHash(options.iconHash),
+						Util.iconBigintToHash(options.iconHash),
 				banner:
 					'bannerURL' in options
 						? options.bannerURL && urlToBase64(options.bannerURL)
 						: options.bannerHash &&
-						  Util.iconBigintToHash(options.bannerHash),
+						Util.iconBigintToHash(options.bannerHash),
 				discovery_splash:
 					'discoverySplashURL' in options
 						? options.discoverySplashURL &&
-						  urlToBase64(options.discoverySplashURL)
+						urlToBase64(options.discoverySplashURL)
 						: options.discoverySplashHash &&
-						  Util.iconBigintToHash(options.discoverySplashHash),
+						Util.iconBigintToHash(options.discoverySplashHash),
 				owner_id: options.ownerId,
 				rules_channel_id: options.rulesChannelId,
 				public_updates_channel_id: options.publicUpdatesChannelId,
@@ -1230,7 +1228,7 @@ export class Guild extends BaseGuild implements Model {
 			'GET',
 			Routes.GUILD_BANS(this.id, options)
 		);
-		return bans.map((x) => {
+		return bans.map(x => {
 			return {
 				reason: x.reason ?? undefined,
 				user: new User(this.session, x.user),

@@ -1,6 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable arrow-parens */
-/* eslint-disable @typescript-eslint/no-duplicate-imports */
 import type {
 	ApplicationCommandPermissionTypes,
 	AtLeastOne,
@@ -12,9 +9,9 @@ import type {
 	GatewayBot,
 	GatewayIntents,
 	Localization,
+	DiscordGatewayPayload,
 } from '@biscuit/api-types';
 
-import type { DiscordGatewayPayload } from '@biscuit/api-types';
 import type { Shard } from '@biscuit/discordeno';
 import {
 	createGatewayManager,
@@ -175,9 +172,9 @@ export class Session extends EventEmitter {
 
 		this.rest = createRestManager({
 			token: this.options.token,
-			debug: (text) => {
+			debug: text => {
 				// TODO: set this using the event emitter
-				super.rawListeners('debug')?.forEach((fn) => fn(text));
+				super.rawListeners('debug')?.forEach(fn => fn(text));
 			},
 			secretKey: this.options.rest?.secretKey ?? undefined,
 		});
@@ -262,7 +259,7 @@ export class Session extends EventEmitter {
 				status: status.status,
 				since: null,
 				afk: false,
-				activities: status.activities.map((activity) => {
+				activities: status.activities.map(activity => {
 					return {
 						name: activity.name,
 						type: activity.type,
@@ -323,7 +320,7 @@ export class Session extends EventEmitter {
 						name: options.name,
 						name_localizations: options.nameLocalizations,
 						type: options.type,
-				  }
+				}
 				: {
 						name: options.name,
 						name_localizations: options.nameLocalizations,
@@ -336,10 +333,10 @@ export class Session extends EventEmitter {
 							options.defaultMemberPermissions
 								? new Permissions(
 										options.defaultMemberPermissions
-								  ).bitfield.toString()
+								).bitfield.toString()
 								: undefined,
 						dm_permission: options.dmPermission,
-				  }
+				}
 		);
 	}
 
@@ -355,7 +352,7 @@ export class Session extends EventEmitter {
 						this.applicationId,
 						guildId,
 						id
-				  )
+				)
 				: Routes.APPLICATION_COMMANDS(this.applicationId, id)
 		);
 	}
@@ -396,7 +393,7 @@ export class Session extends EventEmitter {
 						options.guildId,
 						id,
 						options?.withLocalizations
-				  )
+				)
 				: Routes.APPLICATION_COMMANDS(this.applicationId, id)
 		);
 	}
@@ -446,13 +443,13 @@ export class Session extends EventEmitter {
 				? {
 						name: options.name,
 						type: options.type,
-				  }
+				}
 				: {
 						name: options.name,
 						description: options.description,
 						type: options.type,
 						options: options.options,
-				  }
+				}
 		);
 	}
 
@@ -469,18 +466,18 @@ export class Session extends EventEmitter {
 			guildId
 				? Routes.GUILD_APPLICATION_COMMANDS(this.applicationId, guildId)
 				: Routes.APPLICATION_COMMANDS(this.applicationId),
-			options.map((o) =>
+			options.map(o =>
 				this.isContextApplicationCommand(o)
 					? {
 							name: o.name,
 							type: o.type,
-					  }
+					}
 					: {
 							name: o.name,
 							description: o.description,
 							type: o.type,
 							options: o.options,
-					  }
+					}
 			)
 		);
 	}

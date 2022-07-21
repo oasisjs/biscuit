@@ -1,13 +1,10 @@
-/* eslint-disable brace-style */
-/* eslint-disable arrow-parens */
 import type { Localization, PermissionStrings } from '@biscuit/api-types';
 import { ApplicationCommandTypes } from '@biscuit/api-types';
 import { OptionBased } from './ApplicationCommandOption';
 import type { CreateApplicationCommand } from '../../../Session';
 
 export abstract class ApplicationCommandBuilder
-	implements CreateApplicationCommand
-{
+	implements CreateApplicationCommand {
 	constructor(
 		type: ApplicationCommandTypes = ApplicationCommandTypes.ChatInput,
 		name = '',
@@ -105,7 +102,7 @@ export class ChatInputApplicationCommandBuilder extends ApplicationCommandBuilde
 			type: ApplicationCommandTypes.ChatInput,
 			name: this.name,
 			description: this.description,
-			options: this.options?.map((o) => o.toJSON()) ?? [],
+			options: this.options?.map(o => o.toJSON()) ?? [],
 			defaultMemberPermissions: this.defaultMemberPermissions,
 			nameLocalizations: this.nameLocalizations,
 			descriptionLocalizations: this.descriptionLocalizations,

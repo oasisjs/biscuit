@@ -1,4 +1,3 @@
-/* eslint-disable arrow-parens */
 import type {
 	DiscordInteractionDataOption,
 	DiscordInteractionDataResolved,
@@ -125,7 +124,7 @@ export class CommandInteractionOptionResolver {
 
 		if (
 			required === true &&
-			properties.every((prop) => typeof option[prop] === 'undefined')
+			properties.every(prop => typeof option[prop] === 'undefined')
 		) {
 			throw new TypeError(
 				`Properties ${properties.join(
@@ -145,14 +144,14 @@ export class CommandInteractionOptionResolver {
 
 	get(name: string | number, required?: boolean) {
 		const option: CommandInteractionOption | undefined =
-			this.hoistedOptions.find((o) =>
+			this.hoistedOptions.find(o =>
 				typeof name === 'number'
 					? o.name === name.toString()
 					: o.name === name
 			);
 
 		if (!option) {
-			if (required && name in this.hoistedOptions.map((o) => o.name)) {
+			if (required && name in this.hoistedOptions.map(o => o.name)) {
 				throw new TypeError('Option marked as required was undefined');
 			}
 
@@ -307,7 +306,7 @@ export class CommandInteractionOptionResolver {
 		| undefined
 		| CommandInteractionOption {
 		const focusedOption: CommandInteractionOption | void =
-			this.hoistedOptions.find((option) => option.focused);
+			this.hoistedOptions.find(option => option.focused);
 
 		if (!focusedOption) {
 			throw new TypeError('No option found');

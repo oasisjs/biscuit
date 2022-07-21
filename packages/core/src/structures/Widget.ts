@@ -1,4 +1,3 @@
-/* eslint-disable arrow-parens */
 import type { DiscordGuildWidget } from '@biscuit/api-types';
 import type { Session } from '../Session';
 import type { Snowflake } from '../Snowflake';

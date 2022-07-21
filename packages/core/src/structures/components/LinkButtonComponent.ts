@@ -1,7 +1,6 @@
 import type { Session } from '../../Session';
-import type { ButtonStyles, DiscordComponent } from '@biscuit/api-types';
+import type { ButtonStyles, DiscordComponent, MessageComponentTypes } from '@biscuit/api-types';
 import type { LinkButtonComponent } from './Component';
-import { MessageComponentTypes } from '@biscuit/api-types';
 import BaseComponent from './Component';
 import Emoji from '../Emoji';
 

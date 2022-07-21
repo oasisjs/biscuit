@@ -1,7 +1,3 @@
-/* eslint-disable arrow-parens */
-/* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-/* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /** Types */
@@ -283,7 +279,7 @@ export class TextChannel {
 						target_type: options.targetType,
 						target_user_id: options.targetUserId,
 						target_application_id: options.targetApplicationId,
-				  }
+				}
 				: {}
 		);
 
@@ -298,7 +294,7 @@ export class TextChannel {
 	async fetchMessages(
 		options?: Routes.GetMessagesOptions
 	): Promise<Message[] | []> {
-		if (options?.limit! > 100) {
+		if (options && options.limit! > 100) {
 			throw Error('Values must be between 0-100');
 		}
 		const messages = await this.session.rest.runMethod<DiscordMessage[]>(
@@ -307,7 +303,7 @@ export class TextChannel {
 			Routes.CHANNEL_MESSAGES(this.id, options)
 		);
 		return messages[0]
-			? messages.map((x) => new Message(this.session, x))
+			? messages.map(x => new Message(this.session, x))
 			: [];
 	}
 
@@ -581,7 +577,7 @@ export class GuildChannel extends BaseChannel implements Model {
 			DiscordInviteMetadata[]
 		>(this.session.rest, 'GET', Routes.CHANNEL_INVITES(this.id));
 
-		return invites.map((invite) => new Invite(this.session, invite));
+		return invites.map(invite => new Invite(this.session, invite));
 	}
 
 	async edit(options: EditNewsChannelOptions): Promise<NewsChannel>;
@@ -649,6 +645,7 @@ export class GuildChannel extends BaseChannel implements Model {
 				break;
 		}
 
+		// eslint-disable-next-line @typescript-eslint/naming-convention
 		const { threads, members, has_more } =
 			await this.session.rest.runMethod<DiscordListArchivedThreads>(
 				this.session.rest,
@@ -658,13 +655,13 @@ export class GuildChannel extends BaseChannel implements Model {
 
 		return {
 			threads: Object.fromEntries(
-				threads.map((thread) => [
+				threads.map(thread => [
 					thread.id,
 					new ThreadChannel(this.session, thread, this.id),
 				])
 			) as Record<Snowflake, ThreadChannel>,
 			members: Object.fromEntries(
-				members.map((threadMember) => [
+				members.map(threadMember => [
 					threadMember.id,
 					new ThreadMember(this.session, threadMember),
 				])
@@ -759,7 +756,7 @@ export class DMChannel extends BaseChannel implements Model {
 		super(session, data);
 		this.user = new User(
 			this.session,
-			data.recipents!.find((r) => r.id !== this.session.botId)!
+			data.recipents!.find(r => r.id !== this.session.botId)!
 		);
 		this.type = data.type as ChannelTypes.DM | ChannelTypes.GroupDm;
 		if (data.last_message_id) {
@@ -920,7 +917,7 @@ export class ThreadChannel extends GuildChannel implements Model {
 		>(this.session.rest, 'GET', Routes.THREAD_MEMBERS(this.id));
 
 		return members.map(
-			(threadMember) => new ThreadMember(this.session, threadMember)
+			threadMember => new ThreadMember(this.session, threadMember)
 		);
 	}
 }
@@ -1038,7 +1035,7 @@ export class ChannelFactory {
 	static permissionOverwrites(
 		overwrites: DiscordOverwrite[]
 	): PermissionsOverwrites[] {
-		return overwrites.map((v) => {
+		return overwrites.map(v => {
 			return {
 				id: v.id,
 				type: v.type,

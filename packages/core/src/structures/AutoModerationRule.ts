@@ -1,4 +1,3 @@
-/* eslint-disable arrow-parens */
 import type {
 	AutoModerationActionType,
 	AutoModerationEventTypes,
@@ -38,7 +37,7 @@ export class AutoModerationRule implements Model {
 			keywordFilter: data.trigger_metadata.keyword_filter,
 			presets: data.trigger_metadata.presets,
 		};
-		this.actions = data.actions.map((action) =>
+		this.actions = data.actions.map(action =>
 			Object.create({
 				type: action.type,
 				metadata: {

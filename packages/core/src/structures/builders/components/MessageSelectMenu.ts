@@ -1,4 +1,3 @@
-/* eslint-disable arrow-parens */
 import {
 	type DiscordSelectMenuComponent,
 	MessageComponentTypes,
@@ -51,7 +50,7 @@ export class SelectMenuBuilder {
 		return {
 			...this.#data,
 			type: this.type,
-			options: this.options.map((option) => option.toJSON()),
+			options: this.options.map(option => option.toJSON()),
 		};
 	}
 }

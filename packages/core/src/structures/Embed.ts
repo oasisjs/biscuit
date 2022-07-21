@@ -1,4 +1,3 @@
-/* eslint-disable arrow-parens */
 import type { DiscordEmbed, EmbedTypes } from '@biscuit/api-types';
 
 export interface Embed {
@@ -67,7 +66,7 @@ export function embed(data: Embed): DiscordEmbed {
 			icon_url: data.footer.iconURL,
 			proxy_icon_url: data.footer.proxyIconURL,
 		},
-		fields: data.fields?.map((f) => {
+		fields: data.fields?.map(f => {
 			return {
 				name: f.name,
 				value: f.value,
