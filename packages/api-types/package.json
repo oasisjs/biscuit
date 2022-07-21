@@ -12,7 +12,7 @@
 		"clean": "rm -rf dist && rm -rf .turbo",
 		"dev": "tsup --watch"
 	},
-	"dependencies": {
+	"devDependencies": {
 		"tsup": "^6.1.3"
 	}
 }

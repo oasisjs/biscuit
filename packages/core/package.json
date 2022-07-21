@@ -14,7 +14,9 @@
 	},
 	"dependencies": {
 		"@biscuit/api-types": "*",
-		"@biscuit/discordeno": "*",
+		"@biscuit/discordeno": "*"
+	},
+	"devDependencies": {
 		"tsup": "^6.1.3"
 	}
 }
