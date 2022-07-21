@@ -1,1 +1,3 @@
-export { Client } from './client';
+export { Session } from './session';
+
+export * from './structures/application';
