@@ -1,0 +1,32 @@
+{
+  "name": "biscuit",
+  "version": "0.2.1",
+  "description": "A Discord library that is easy to use but reliable on its core",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oasisjs/biscuit.git"
+  },
+  "keywords": [
+    "discord",
+    "discordjs",
+    "discordeno",
+    "npm",
+    "node",
+    "deno",
+    "discord-api",
+    "eris"
+  ],
+  "author": "yuzudev",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/oasisjs/biscuit/issues"
+  },
+  "homepage": "https://github.com/oasisjs/biscuit#readme",
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
+}
