@@ -1,9 +1,11 @@
 {
 	"name": "@biscuit/api-types",
 	"version": "1.0.0",
-	"main": "dist/index.js",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"source": "./src/index.ts",
 	"files": [
-		"dist"
+		"dist/**"
 	],
 	"scripts": {
 		"build": "tsc",
