@@ -1,6 +1,3 @@
-/* eslint-disable arrow-parens */
-/* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable @typescript-eslint/no-duplicate-imports */
 import type { Model } from './Base';
 import type { Session } from '../Session';
 import type {
@@ -17,10 +14,9 @@ import type { Channel } from './channels';
 import type { Component } from './components/Component';
 import type { GetReactions } from '../Routes';
 import type { MessageInteraction } from './interactions/InteractionFactory';
-import { MessageFlags } from '../Util';
+import Util, { MessageFlags } from '../Util';
 import { Snowflake } from '../Snowflake';
 import { ChannelFactory, ThreadChannel } from './channels';
-import Util from '../Util';
 import User from './User';
 import Member from './Member';
 import Attachment from './Attachment';
@@ -83,7 +79,7 @@ export type EmojiResolvable =
 	| {
 			name: string;
 			id: Snowflake;
-	  };
+	};
 
 /**
  * A partial {@link User} to represent the author of a message sent by a webhook
@@ -110,10 +106,10 @@ export class Message implements Model {
 		this.applicationId = data.application_id;
 
 		this.mentions = {
-			users: data.mentions?.map((user) => new User(session, user)) ?? [],
+			users: data.mentions?.map(user => new User(session, user)) ?? [],
 			roleIds: data.mention_roles ?? [],
 			channels:
-				data.mention_channels?.map((channel) =>
+				data.mention_channels?.map(channel =>
 					ChannelFactory.from(session, channel)
 				) ?? [],
 		};
@@ -136,10 +132,10 @@ export class Message implements Model {
 
 		this.reactions =
 			data.reactions?.map(
-				(react) => new MessageReaction(session, react)
+				react => new MessageReaction(session, react)
 			) ?? [];
 		this.attachments = data.attachments.map(
-			(attachment) => new Attachment(session, attachment)
+			attachment => new Attachment(session, attachment)
 		);
 		this.embeds = data.embeds;
 
@@ -181,7 +177,7 @@ export class Message implements Model {
 		}
 
 		this.components =
-			data.components?.map((component) =>
+			data.components?.map(component =>
 				ComponentFactory.from(session, component)
 			) ?? [];
 
@@ -193,7 +189,7 @@ export class Message implements Model {
 		}
 
 		if (data.sticker_items) {
-			this.stickers = data.sticker_items.map((si) => {
+			this.stickers = data.sticker_items.map(si => {
 				return {
 					id: si.id,
 					name: si.name,
@@ -465,7 +461,7 @@ export class Message implements Model {
 							fail_if_not_exists:
 								options.messageReference.failIfNotExists ??
 								true,
-					  }
+					}
 					: undefined,
 				embeds: options.embeds,
 				tts: options.tts,
@@ -515,7 +511,7 @@ export class Message implements Model {
 						this.id,
 						r,
 						options.userId
-				  )
+				)
 				: Routes.CHANNEL_MESSAGE_REACTION_ME(this.channelId, this.id, r)
 		);
 	}
@@ -544,7 +540,7 @@ export class Message implements Model {
 			)
 		);
 
-		return users.map((user) => new User(this.session, user));
+		return users.map(user => new User(this.session, user));
 	}
 
 	/**

@@ -1,4 +1,3 @@
-/* eslint-disable lines-between-class-members */
 import type { Model } from './Base';
 import type { Snowflake } from '../Snowflake';
 import type { Session } from '../Session';
@@ -34,6 +33,7 @@ export class ScheduledEvent implements Model {
 		this.userCount = data.user_count;
 		this.image = data.image ? data.image : undefined;
 	}
+
 	session: Session;
 	id: Snowflake;
 	guildId: Snowflake;

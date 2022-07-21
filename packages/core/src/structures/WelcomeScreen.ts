@@ -1,4 +1,3 @@
-/* eslint-disable arrow-parens */
 import type { Session } from '../Session';
 import type { DiscordWelcomeScreen } from '@biscuit/api-types';
 import WelcomeChannel from './WelcomeChannel';
@@ -10,7 +9,7 @@ export class WelcomeScreen {
 	constructor(session: Session, data: DiscordWelcomeScreen) {
 		this.session = session;
 		this.welcomeChannels = data.welcome_channels.map(
-			(welcomeChannel) => new WelcomeChannel(session, welcomeChannel)
+			welcomeChannel => new WelcomeChannel(session, welcomeChannel)
 		);
 
 		if (data.description) {

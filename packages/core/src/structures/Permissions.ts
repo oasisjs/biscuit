@@ -1,4 +1,3 @@
-/* eslint-disable arrow-parens */
 import { BitwisePermissionFlags } from '@biscuit/api-types';
 
 export type PermissionString = keyof typeof BitwisePermissionFlags;
@@ -35,7 +34,7 @@ export class Permissions {
 			case 'object':
 				return Permissions.resolve(
 					bit
-						.map((p) => BigInt(Permissions.Flags[p]))
+						.map(p => BigInt(Permissions.Flags[p]))
 						.reduce((acc, cur) => acc | cur, 0n)
 				);
 			default:

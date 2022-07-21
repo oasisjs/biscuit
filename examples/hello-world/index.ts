@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 import { GatewayIntents } from '@biscuit/api-types';
 import Biscuit from '@biscuit/core';
 
@@ -7,7 +9,7 @@ const intents =
 	GatewayIntents.GuildMessages;
 
 const session = new Biscuit({
-	token: '',
+	token: process.env.DISCORD!,
 	intents,
 });
 
@@ -16,7 +18,7 @@ session.on('ready', ({ user }) => {
 });
 
 session.on('messageCreate', (message) => {
-	if (message.content.startsWith('!ping')) {
+	if (message.content.startsWith('./ping')) {
 		message.reply({ content: 'pong!' });
 	}
 });

@@ -1,6 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable arrow-parens */
-/* eslint-disable @typescript-eslint/prefer-optional-chain */
 import type { Session } from '../Session';
 import type { Snowflake } from '../Snowflake';
 import type {
@@ -123,12 +120,12 @@ export class Invite {
 			? new Application(
 					session,
 					data.target_application as DiscordApplication
-			  )
+			)
 			: undefined;
 		this.targetType = data.target_type;
 
 		if (data.channel) {
-			const guildId = data.guild && data.guild?.id ? data.guild.id : '';
+			const guildId = data.guild?.id ? data.guild.id : '';
 			this.channel = new GuildChannel(
 				session,
 				data.channel as DiscordChannel,
@@ -175,10 +172,10 @@ export class Invite {
 		}
 
 		if (data.stage_instance) {
-			const guildId = data.guild && data.guild?.id ? data.guild.id : '';
+			const guildId = data.guild?.id ? data.guild.id : '';
 			this.stageInstance = {
 				members: data.stage_instance.members.map(
-					(m) =>
+					m =>
 						new Member(session, m as DiscordMemberWithUser, guildId)
 				),
 				participantCount: data.stage_instance.participant_count,

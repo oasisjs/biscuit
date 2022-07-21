@@ -1,6 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable lines-between-class-members */
-/* eslint-disable arrow-parens */
 import type {
 	ActivityTypes,
 	DiscordActivityButton,
@@ -58,7 +55,7 @@ export class Presence {
 		this.user = new User(this.session, data.user);
 		this.guildId = data.guild_id;
 		this.status = StatusTypes[data.status];
-		this.activities = data.activities.map<Activities>((activity) =>
+		this.activities = data.activities.map<Activities>(activity =>
 			Object.create({
 				name: activity.name,
 				type: activity.type,
@@ -76,7 +73,7 @@ export class Presence {
 							largeText: activity.assets.large_text,
 							smallImage: activity.assets.small_image,
 							smallText: activity.assets.small_text,
-					  }
+					}
 					: null,
 				secrets: activity.secrets ? activity.secrets : undefined,
 				instance: !!activity.instance,
@@ -86,6 +83,7 @@ export class Presence {
 		);
 		this.clientStatus = data.client_status;
 	}
+
 	session: Session;
 	user: User;
 	guildId: Snowflake;

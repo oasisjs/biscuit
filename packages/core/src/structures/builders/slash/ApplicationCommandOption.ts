@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-use-before-define */
-/* eslint-disable arrow-parens */
 import {
 	ApplicationCommandOptionTypes,
 	type ChannelTypes,
@@ -128,7 +127,7 @@ export class OptionBuilderLimitedValues extends OptionBuilder {
 	override toJSON(): ApplicationCommandOption {
 		return {
 			...super.toJSON(),
-			choices: this.choices?.map((c) => c.toJSON()) ?? [],
+			choices: this.choices?.map(c => c.toJSON()) ?? [],
 			minValue: this.minValue,
 			maxValue: this.maxValue,
 		};
@@ -159,7 +158,7 @@ export class OptionBuilderString extends OptionBuilder {
 	override toJSON(): ApplicationCommandOption {
 		return {
 			...super.toJSON(),
-			choices: this.choices?.map((c) => c.toJSON()) ?? [],
+			choices: this.choices?.map(c => c.toJSON()) ?? [],
 		};
 	}
 }
@@ -367,7 +366,7 @@ export class OptionBuilderNested extends OptionBuilder {
 			type: this.type,
 			name: this.name,
 			description: this.description,
-			options: this.options?.map((o) => o.toJSON()) ?? [],
+			options: this.options?.map(o => o.toJSON()) ?? [],
 			required: this.required ? true : false,
 		};
 	}

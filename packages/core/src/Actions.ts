@@ -1,5 +1,3 @@
-/* eslint-disable arrow-parens */
-/* eslint-disable no-mixed-spaces-and-tabs */
 import type {
 	DiscordAutoModerationActionExecution,
 	DiscordAutoModerationRule,
@@ -264,7 +262,7 @@ export const TYPING_START: RawHandler<DiscordTypingStart> = (
 					session,
 					payload.member as DiscordMemberWithUser,
 					payload.guild_id
-			  )
+			)
 			: undefined,
 	});
 };
@@ -378,7 +376,7 @@ export const THREAD_MEMBERS_UPDATE: RawHandler<DiscordThreadMembersUpdate> = (
 	session.emit('threadMembersUpdate', {
 		memberCount: payload.member_count,
 		addedMembers: payload.added_members
-			? payload.added_members.map((tm) => new ThreadMember(session, tm))
+			? payload.added_members.map(tm => new ThreadMember(session, tm))
 			: undefined,
 		removedMemberIds: payload.removed_member_ids
 			? payload.removed_member_ids
@@ -397,10 +395,10 @@ export const THREAD_LIST_SYNC: RawHandler<DiscordThreadListSync> = (
 		guildId: payload.guild_id,
 		channelIds: payload.channel_ids ?? [],
 		threads: payload.threads.map(
-			(channel) => new ThreadChannel(session, channel, payload.guild_id)
+			channel => new ThreadChannel(session, channel, payload.guild_id)
 		),
 		members: payload.members.map(
-			(member) => new ThreadMember(session, member)
+			member => new ThreadMember(session, member)
 		),
 	});
 };

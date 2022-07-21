@@ -1,8 +1,8 @@
 import type Emoji from '../Emoji';
 import {
-	ButtonStyles,
+	type ButtonStyles,
 	MessageComponentTypes,
-	TextStyles,
+	type TextStyles,
 } from '@biscuit/api-types';
 
 export class BaseComponent {
@@ -32,7 +32,7 @@ export class BaseComponent {
 /** Action Row Component */
 export interface ActionRowComponent {
 	type: MessageComponentTypes.ActionRow;
-	components: Array<Exclude<Component, ActionRowComponent>>;
+	components: Exclude<Component, ActionRowComponent>[];
 }
 
 /** All Components */

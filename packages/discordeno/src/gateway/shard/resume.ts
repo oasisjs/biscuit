@@ -1,4 +1,3 @@
-/* eslint-disable arrow-parens */
 import { GatewayOpcodes } from '@biscuit/api-types';
 import type { Shard } from './types';
 import { ShardSocketCloseCodes, ShardState } from './types';
@@ -43,7 +42,7 @@ export async function resume(shard: Shard): Promise<void> {
 		true
 	);
 
-	return new Promise((resolve) => {
+	return new Promise(resolve => {
 		shard.resolves.set('RESUMED', () => resolve());
 		// If it is attempted to resume with an invalid session id,
 		// Discord sends an invalid session payload

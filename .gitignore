@@ -22,6 +22,7 @@ coverage
 out/
 dist/
 build
+package-lock.json
 
 # misc
 .DS_Store
@@ -38,6 +39,7 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+.env
 
 # turbo
 .turbo

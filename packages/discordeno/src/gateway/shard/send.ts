@@ -1,4 +1,3 @@
-/* eslint-disable arrow-parens */
 import type { Shard, ShardSocketRequest } from './types';
 
 async function checkOffline(
@@ -6,7 +5,7 @@ async function checkOffline(
 	highPriority: boolean
 ): Promise<void> {
 	if (!shard.isOpen()) {
-		await new Promise((resolve) => {
+		await new Promise(resolve => {
 			if (highPriority) {
 				// Higher priority requests get added at the beginning of the array.
 				shard.offlineSendQueue.unshift(resolve);

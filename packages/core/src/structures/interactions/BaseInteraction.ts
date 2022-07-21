@@ -1,4 +1,3 @@
-/* eslint-disable arrow-parens */
 import type { Model } from '../Base';
 import type { Session } from '../../Session';
 import type {
@@ -151,7 +150,7 @@ export abstract class BaseInteraction implements Model {
 					users: options.allowedMentions.users,
 					roles: options.allowedMentions.roles,
 				},
-				attachments: options.attachments?.map((attachment) => {
+				attachments: options.attachments?.map(attachment => {
 					return {
 						id: attachment.id,
 						filename: attachment.name,

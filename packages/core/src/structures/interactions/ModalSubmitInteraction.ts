@@ -1,4 +1,3 @@
-/* eslint-disable arrow-parens */
 import type { Model } from '../Base';
 import type { Snowflake } from '../../Snowflake';
 import type { Session } from '../../Session';
@@ -40,7 +39,7 @@ export class ModalSubmitInteraction extends BaseInteraction implements Model {
 	static transformComponent(component: DiscordMessageComponents[number]) {
 		return {
 			type: component.type,
-			components: component.components.map((component) => {
+			components: component.components.map(component => {
 				return {
 					customId: component.custom_id,
 					value: (component as typeof component & { value: string })

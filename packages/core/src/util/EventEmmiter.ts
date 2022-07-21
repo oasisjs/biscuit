@@ -1,8 +1,4 @@
-/* eslint-disable arrow-parens */
 /* eslint-disable @typescript-eslint/ban-types */
-// This module is browser-compatible.
-
-// deno-lint-ignore-file ban-types
 
 /**
  * An event emitter (observer pattern)
@@ -61,7 +57,7 @@ export class EventEmitter {
 			return false;
 		}
 
-		listener.forEach((f) => f(...args));
+		listener.forEach(f => f(...args));
 
 		return true;
 	}

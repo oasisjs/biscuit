@@ -1,4 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 /** https://discord.com/developers/docs/resources/user#user-object-premium-types */
 export enum PremiumTypes {
 	None,
@@ -1249,9 +1248,9 @@ export type Camelize<T> = {
 	// eslint-disable-next-line @typescript-eslint/array-type
 	[K in keyof T as CamelCase<string & K>]: T[K] extends Array<infer U>
 		? // eslint-disable-next-line @typescript-eslint/ban-types
-		  U extends {}
+		U extends {}
 			? // eslint-disable-next-line @typescript-eslint/array-type
-			  Array<Camelize<U>>
+			Array<Camelize<U>>
 			: T[K]
 		: // eslint-disable-next-line @typescript-eslint/ban-types
 		T[K] extends {}
@@ -1263,7 +1262,7 @@ export type PickPartial<T, K extends keyof T> = {
 	[P in keyof T]?: T[P] | undefined;
 } & { [P in K]: T[P] };
 
-// deno-lint-ignore no-explicit-any
+
 export type OmitFirstFnArg<F> = F extends (x: any, ...args: infer P) => infer R
 	? (...args: P) => R
 	: never;

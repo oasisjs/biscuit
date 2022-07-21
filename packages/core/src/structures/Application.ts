@@ -1,4 +1,3 @@
-/* eslint-disable arrow-parens */
 import type { Model } from './Base';
 import type { Snowflake } from '../Snowflake';
 import type { Session } from '../Session';
@@ -42,7 +41,7 @@ export function NewTeam(session: Session, data: DiscordTeam): Team {
 	return {
 		icon: data.icon ? data.icon : undefined,
 		id: data.id,
-		members: data.members.map((member) => {
+		members: data.members.map(member => {
 			return {
 				membershipState: member.membership_state,
 				permissions: member.permissions,

@@ -1,5 +1,3 @@
-/* eslint-disable arrow-parens */
-/* eslint-disable lines-between-class-members */
 import type {
 	DiscordSticker,
 	DiscordStickerPack,
@@ -43,6 +41,7 @@ export class Sticker implements Model {
 		this.user = data.user ? new User(this.session, data.user) : undefined;
 		this.sortValue = data.sort_value;
 	}
+
 	session: Session;
 	id: Snowflake;
 	packId?: Snowflake;
@@ -64,7 +63,7 @@ export class Sticker implements Model {
 		);
 		return {
 			id: data.id,
-			stickers: data.stickers.map((st) => new Sticker(this.session, st)),
+			stickers: data.stickers.map(st => new Sticker(this.session, st)),
 			name: data.name,
 			skuId: data.sku_id,
 			coverStickerId: data.cover_sticker_id,

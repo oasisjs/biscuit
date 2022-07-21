@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-/* eslint-disable arrow-parens */
 import type { PickPartial } from '@biscuit/api-types';
 import { delay } from './delay';
 
@@ -139,7 +138,7 @@ async function acquire(
 	// check whether its currently allowed to acquire.
 	if (!bucket.allowAcquire) {
 		// create, push, and wait until the current running acquiring is finished.
-		await new Promise((resolve) => {
+		await new Promise(resolve => {
 			if (highPriority) {
 				bucket.waiting.unshift(resolve);
 			} else {
