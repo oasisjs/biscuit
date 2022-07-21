@@ -1209,16 +1209,9 @@ export enum Locales {
 
 export type Localization = Partial<Record<Locales, string>>;
 
-/** @todo fix-tmp */
-
-declare let Blob: {
-	prototype: typeof Blob;
-	new (): typeof Blob;
-};
-
 export interface FileContent {
 	/** The file blob */
-	blob: typeof Blob;
+	blob: Blob;
 	/** The name of the file */
 	name: string;
 }

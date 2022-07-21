@@ -100,13 +100,15 @@ export async function sendRequest<T>(
 				++rest.invalidRequests;
 
 				if (!rest.invalidRequestsTimeoutId) {
-					rest.invalidRequestsTimeoutId = setTimeout(() => {
+					const it: any = setTimeout(() => {
 						rest.debug(
 							`[REST - processGlobalQueue] Resetting invalid optionss counter in setTimeout.`
 						);
 						rest.invalidRequests = 0;
 						rest.invalidRequestsTimeoutId = 0;
 					}, rest.invalidRequestsInterval);
+
+					rest.invalidRequestsTimeoutId = it;
 				}
 			}
 

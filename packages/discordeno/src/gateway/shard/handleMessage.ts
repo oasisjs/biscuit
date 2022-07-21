@@ -8,7 +8,9 @@ import type {
 import { GatewayOpcodes } from '@biscuit/api-types';
 import { createLeakyBucket } from '../../util/bucket';
 import { delay } from '../../util/delay';
-import { decompressWith } from './deps';
+
+import { inflateSync as decompressWith } from 'node:zlib';
+
 import type { Shard } from './types';
 import { GATEWAY_RATE_LIMIT_RESET_INTERVAL, ShardState } from './types';
 
@@ -23,9 +25,9 @@ export async function handleMessage(
 	// If message compression is enabled,
 	// Discord might send zlib compressed payloads.
 	if (shard.gatewayConfig.compress && message instanceof Blob) {
-		message = decoder.decode(
-			decompressWith(new Uint8Array(await message.arrayBuffer()))
-		);
+		const buff = new Uint8Array(await message.arrayBuffer());
+
+		message = decoder.decode(decompressWith(buff));
 	}
 
 	// Safeguard incase decompression failed to make a string.
