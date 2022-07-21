@@ -7,7 +7,7 @@ const intents =
 	GatewayIntents.GuildMessages;
 
 const session = new Biscuit({
-	token: '',
+	token: 'OTk4NzA2MjU4MjA5MTY1MzI0.GXsBx-.EhrIuKkSJezwcUMIqFmePYG-hQVV8fs10akfF0',
 	intents,
 });
 
