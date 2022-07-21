@@ -1,0 +1,23 @@
+{
+	"$schema": "https://turborepo.org/schema.json",
+	"pipeline": {
+		"@biscuit/api-types#build": {
+			"dependsOn": []
+		},
+		"@biscuit/discordeno#build": {
+			"dependsOn": ["@biscuit/api-types#build"]
+		},
+		"@biscuit/core#build": {
+			"dependsOn": ["@biscuit/api-types#build", "@biscuit/discordeno#build"]
+		},
+		"lint": {
+			"outputs": []
+		},
+		"dev": {
+			"cache": false
+		},
+		"clean": {
+			"cache": false
+		}
+	}
+}

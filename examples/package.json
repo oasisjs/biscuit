@@ -1,0 +1,6 @@
+{
+  "name": "examples",
+  "scripts": {
+    "hello-world": "tsc --project tsconfig.json"
+  }
+}
