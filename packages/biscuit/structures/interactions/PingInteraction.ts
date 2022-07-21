@@ -1,10 +1,10 @@
-import type { Model } from '../Base.ts';
-import type { Snowflake } from '../../Snowflake.ts';
-import type { Session } from '../../Session.ts';
-import type { ApplicationCommandTypes, DiscordInteraction, InteractionTypes } from '../../../discordeno/mod.ts';
-import { InteractionResponseTypes } from '../../../discordeno/mod.ts';
-import BaseInteraction from './BaseInteraction.ts';
-import * as Routes from '../../Routes.ts';
+import type { Model } from '../Base';
+import type { Snowflake } from '../../Snowflake';
+import type { Session } from '../../Session';
+import type { ApplicationCommandTypes, DiscordInteraction, InteractionTypes } from '../../../discordeno/mod';
+import { InteractionResponseTypes } from '../../../discordeno/mod';
+import BaseInteraction from './BaseInteraction';
+import * as Routes from '../../Routes';
 
 export class PingInteraction extends BaseInteraction implements Model {
     constructor(session: Session, data: DiscordInteraction) {

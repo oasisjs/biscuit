@@ -1,8 +1,8 @@
-import type { Model } from './Base.ts';
-import type { Session } from '../Session.ts';
-import type { Snowflake } from '../Snowflake.ts';
-import type { DiscordStageInstance as DiscordAutoClosingStageInstance } from '../../discordeno/mod.ts';
-import * as Routes from '../Routes.ts';
+import type { Model } from './Base';
+import type { Session } from '../Session';
+import type { Snowflake } from '../Snowflake';
+import type { DiscordStageInstance as DiscordAutoClosingStageInstance } from '../../discordeno/mod';
+import * as Routes from '../Routes';
 
 export interface DiscordStageInstanceB extends DiscordAutoClosingStageInstance {
     privacy_level: PrivacyLevels;

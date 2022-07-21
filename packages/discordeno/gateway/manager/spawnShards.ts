@@ -1,8 +1,8 @@
-import { GatewayIntents } from '../../../api-types/shared.ts';
-import { createLeakyBucket } from '../../util/bucket.ts';
-import { createShard } from '../shard/createShard.ts';
-import { Shard } from '../shard/types.ts';
-import { createGatewayManager, GatewayManager } from './gatewayManager.ts';
+import { GatewayIntents } from '../../../api-types/shared';
+import { createLeakyBucket } from '../../util/bucket';
+import { createShard } from '../shard/createShard';
+import { Shard } from '../shard/types';
+import { createGatewayManager, GatewayManager } from './gatewayManager';
 
 /** Begin spawning shards. */
 export function spawnShards(gateway: GatewayManager) {

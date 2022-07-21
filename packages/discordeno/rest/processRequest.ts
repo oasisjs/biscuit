@@ -1,6 +1,6 @@
-import { RestManager } from './restManager.ts';
-import { BASE_URL } from '../util/constants.ts';
-import { RestPayload, RestRequest } from './rest.ts';
+import { RestManager } from './restManager';
+import { BASE_URL } from '../util/constants';
+import { RestPayload, RestRequest } from './rest';
 
 /** Processes a request and assigns it to a queue or creates a queue if none exists for it. */
 export function processRequest(rest: RestManager, request: RestRequest, payload: RestPayload) {

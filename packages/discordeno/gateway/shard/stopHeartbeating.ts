@@ -1,4 +1,4 @@
-import { Shard } from './types.ts';
+import { Shard } from './types';
 
 export function stopHeartbeating(shard: Shard): void {
     // Clear the regular heartbeat interval.

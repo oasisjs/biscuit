@@ -1,5 +1,5 @@
-import type { DiscordSelectOption } from '../../../../discordeno/mod.ts';
-import type { ComponentEmoji } from '../../../Util.ts';
+import type { DiscordSelectOption } from '../../../../discordeno/mod';
+import type { ComponentEmoji } from '../../../Util';
 
 export class SelectMenuOptionBuilder {
     constructor() {

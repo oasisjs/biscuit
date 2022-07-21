@@ -1,6 +1,6 @@
 // Biscuit Discord library showcase
 
-import Biscuit, { GatewayIntents } from 'https://deno.land/x/biscuit/mod.ts';
+import Biscuit, { GatewayIntents } from 'https://deno.land/x/biscuit/mod';
 
 const intents = GatewayIntents.MessageContent | GatewayIntents.Guilds | GatewayIntents.GuildMessages;
 const session = new Biscuit({ token: Deno.args[0], intents });

@@ -1,77 +1,77 @@
 // structures
-import { Session } from './Session.ts';
+import { Session } from './Session';
 export default Session;
 
-export * from './structures/Application.ts';
-export * from './structures/Attachment.ts';
-export * from './structures/AutoModerationExecution.ts';
-export * from './structures/AutoModerationRule.ts';
-export * from './structures/Base.ts';
-export * from './structures/Embed.ts';
-export * from './structures/Emoji.ts';
-export * from './structures/GuildEmoji.ts';
-export * from './structures/GuildScheduledEvent.ts';
-export * from './structures/Integration.ts';
-export * from './structures/Invite.ts';
-export * from './structures/Member.ts';
-export * from './structures/Message.ts';
-export * from './structures/MessageReaction.ts';
-export * from './structures/Permissions.ts';
-export * from './structures/Presence.ts';
-export * from './structures/Role.ts';
-export * from './structures/StageInstance.ts';
-export * from './structures/Sticker.ts';
-export * from './structures/ThreadMember.ts';
-export * from './structures/User.ts';
-export * from './structures/Webhook.ts';
-export * from './structures/WelcomeChannel.ts';
-export * from './structures/WelcomeScreen.ts';
+export * from './structures/Application';
+export * from './structures/Attachment';
+export * from './structures/AutoModerationExecution';
+export * from './structures/AutoModerationRule';
+export * from './structures/Base';
+export * from './structures/Embed';
+export * from './structures/Emoji';
+export * from './structures/GuildEmoji';
+export * from './structures/GuildScheduledEvent';
+export * from './structures/Integration';
+export * from './structures/Invite';
+export * from './structures/Member';
+export * from './structures/Message';
+export * from './structures/MessageReaction';
+export * from './structures/Permissions';
+export * from './structures/Presence';
+export * from './structures/Role';
+export * from './structures/StageInstance';
+export * from './structures/Sticker';
+export * from './structures/ThreadMember';
+export * from './structures/User';
+export * from './structures/Webhook';
+export * from './structures/WelcomeChannel';
+export * from './structures/WelcomeScreen';
 
 // channels
-export * from './structures/channels.ts';
+export * from './structures/channels';
 
 // components
-export * from './structures/components/ActionRowComponent.ts';
-export * from './structures/components/ButtonComponent.ts';
-export * from './structures/components/Component.ts';
-export * from './structures/components/LinkButtonComponent.ts';
-export * from './structures/components/SelectMenuComponent.ts';
-export * from './structures/components/TextInputComponent.ts';
+export * from './structures/components/ActionRowComponent';
+export * from './structures/components/ButtonComponent';
+export * from './structures/components/Component';
+export * from './structures/components/LinkButtonComponent';
+export * from './structures/components/SelectMenuComponent';
+export * from './structures/components/TextInputComponent';
 
 // guilds
-export * from './structures/guilds.ts';
+export * from './structures/guilds';
 
 // builders
-export * from './structures/builders/EmbedBuilder.ts';
-export * from './structures/builders/components/InputTextComponentBuilder.ts';
-export * from './structures/builders/components/MessageActionRow.ts';
-export * from './structures/builders/components/MessageButton.ts';
-export * from './structures/builders/components/MessageSelectMenu.ts';
-export * from './structures/builders/components/SelectMenuOptionBuilder.ts';
-export * from './structures/builders/slash/ApplicationCommand.ts';
-export * from './structures/builders/slash/ApplicationCommandOption.ts';
+export * from './structures/builders/EmbedBuilder';
+export * from './structures/builders/components/InputTextComponentBuilder';
+export * from './structures/builders/components/MessageActionRow';
+export * from './structures/builders/components/MessageButton';
+export * from './structures/builders/components/MessageSelectMenu';
+export * from './structures/builders/components/SelectMenuOptionBuilder';
+export * from './structures/builders/slash/ApplicationCommand';
+export * from './structures/builders/slash/ApplicationCommandOption';
 
 // interactions
-export * from './structures/interactions/AutoCompleteInteraction.ts';
-export * from './structures/interactions/BaseInteraction.ts';
-export * from './structures/interactions/CommandInteraction.ts';
-export * from './structures/interactions/CommandInteractionOptionResolver.ts';
-export * from './structures/interactions/ComponentInteraction.ts';
-export * from './structures/interactions/InteractionFactory.ts';
-export * from './structures/interactions/ModalSubmitInteraction.ts';
-export * from './structures/interactions/PingInteraction.ts';
+export * from './structures/interactions/AutoCompleteInteraction';
+export * from './structures/interactions/BaseInteraction';
+export * from './structures/interactions/CommandInteraction';
+export * from './structures/interactions/CommandInteractionOptionResolver';
+export * from './structures/interactions/ComponentInteraction';
+export * from './structures/interactions/InteractionFactory';
+export * from './structures/interactions/ModalSubmitInteraction';
+export * from './structures/interactions/PingInteraction';
 
 // etc
-export * from './Snowflake.ts';
+export * from './Snowflake';
 
 // session
-export * from './Session.ts';
+export * from './Session';
 
 // util
-export * from './Util.ts';
-export * from './util/urlToBase64.ts';
-export * from './util/EventEmmiter.ts';
+export * from './Util';
+export * from './util/urlToBase64';
+export * from './util/EventEmmiter';
 
 // routes
-export * as Routes from './Routes.ts';
-export * as Cdn from './Cdn.ts';
+export * as Routes from './Routes';
+export * as Cdn from './Cdn';

@@ -1,22 +1,22 @@
-import type { Model } from '../Base.ts';
-import type { Session } from '../../Session.ts';
-import type { DiscordInteraction, DiscordMessage, DiscordMessageComponents } from '../../../discordeno/mod.ts';
-import type CommandInteraction from './CommandInteraction.ts';
-import type PingInteraction from './PingInteraction.ts';
-import type ComponentInteraction from './ComponentInteraction.ts';
-import type ModalSubmitInteraction from './ModalSubmitInteraction.ts';
-import type AutoCompleteInteraction from './AutoCompleteInteraction.ts';
-import type { CreateMessage } from '../Message.ts';
-import type { MessageFlags } from '../../Util.ts';
-import type { EditWebhookMessage } from '../Webhook.ts';
-import { InteractionResponseTypes, InteractionTypes } from '../../../discordeno/mod.ts';
-import { Snowflake } from '../../Snowflake.ts';
-import User from '../User.ts';
-import Member from '../Member.ts';
-import Message from '../Message.ts';
-import Permsisions from '../Permissions.ts';
-import Webhook from '../Webhook.ts';
-import * as Routes from '../../Routes.ts';
+import type { Model } from '../Base';
+import type { Session } from '../../Session';
+import type { DiscordInteraction, DiscordMessage, DiscordMessageComponents } from '../../../discordeno/mod';
+import type CommandInteraction from './CommandInteraction';
+import type PingInteraction from './PingInteraction';
+import type ComponentInteraction from './ComponentInteraction';
+import type ModalSubmitInteraction from './ModalSubmitInteraction';
+import type AutoCompleteInteraction from './AutoCompleteInteraction';
+import type { CreateMessage } from '../Message';
+import type { MessageFlags } from '../../Util';
+import type { EditWebhookMessage } from '../Webhook';
+import { InteractionResponseTypes, InteractionTypes } from '../../../discordeno/mod';
+import { Snowflake } from '../../Snowflake';
+import User from '../User';
+import Member from '../Member';
+import Message from '../Message';
+import Permsisions from '../Permissions';
+import Webhook from '../Webhook';
+import * as Routes from '../../Routes';
 
 /**
  * @link https://discord.com/developers/docs/interactions/slash-commands#interaction-response

@@ -1,8 +1,8 @@
-import type { Model } from './Base.ts';
-import type { Snowflake } from '../Snowflake.ts';
-import type { Session } from '../Session.ts';
-import type { DiscordIntegration, IntegrationExpireBehaviors } from '../../discordeno/mod.ts';
-import User from './User.ts';
+import type { Model } from './Base';
+import type { Snowflake } from '../Snowflake';
+import type { Session } from '../Session';
+import type { DiscordIntegration, IntegrationExpireBehaviors } from '../../discordeno/mod';
+import User from './User';
 
 export interface IntegrationAccount {
     id: Snowflake;

@@ -1,7 +1,7 @@
-import { RestManager } from './restManager.ts';
-import { FileContent } from '../../api-types/shared.ts';
-import { USER_AGENT } from '../util/constants.ts';
-import { RequestMethod, RestPayload, RestRequest } from './rest.ts';
+import { RestManager } from './restManager';
+import { FileContent } from '../../api-types/shared';
+import { USER_AGENT } from '../util/constants';
+import { RequestMethod, RestPayload, RestRequest } from './rest';
 
 /** Creates the request body and headers that are necessary to send a request. Will handle different types of methods and everything necessary for discord. */
 // export function createRequestBody(rest: RestManager, queuedRequest: { request: RestRequest; payload: RestPayload }) {

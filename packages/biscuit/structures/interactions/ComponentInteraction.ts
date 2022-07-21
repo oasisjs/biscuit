@@ -1,10 +1,10 @@
-import type { Model } from '../Base.ts';
-import type { Snowflake } from '../../Snowflake.ts';
-import type { Session } from '../../Session.ts';
-import type { DiscordInteraction, InteractionTypes } from '../../../discordeno/mod.ts';
-import { InteractionResponseTypes, MessageComponentTypes } from '../../../discordeno/mod.ts';
-import BaseInteraction from './BaseInteraction.ts';
-import Message from '../Message.ts';
+import type { Model } from '../Base';
+import type { Snowflake } from '../../Snowflake';
+import type { Session } from '../../Session';
+import type { DiscordInteraction, InteractionTypes } from '../../../discordeno/mod';
+import { InteractionResponseTypes, MessageComponentTypes } from '../../../discordeno/mod';
+import BaseInteraction from './BaseInteraction';
+import Message from '../Message';
 
 export class ComponentInteraction extends BaseInteraction implements Model {
     constructor(session: Session, data: DiscordInteraction) {

@@ -1,8 +1,8 @@
-import type { Model } from './Base.ts';
-import type { Session } from '../Session.ts';
-import type { Snowflake } from '../Snowflake.ts';
-import type { DiscordThreadMember } from '../../discordeno/mod.ts';
-import * as Routes from '../Routes.ts';
+import type { Model } from './Base';
+import type { Session } from '../Session';
+import type { Snowflake } from '../Snowflake';
+import type { DiscordThreadMember } from '../../discordeno/mod';
+import * as Routes from '../Routes';
 
 /**
  * A member that comes from a thread

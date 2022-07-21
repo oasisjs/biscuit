@@ -1,5 +1,5 @@
-import { GatewayOpcodes } from '../../../api-types/shared.ts';
-import { Shard, ShardSocketCloseCodes, ShardState } from './types.ts';
+import { GatewayOpcodes } from '../../../api-types/shared';
+import { Shard, ShardSocketCloseCodes, ShardState } from './types';
 
 export async function resume(shard: Shard): Promise<void> {
     //   gateway.debug("GW RESUMING", { shardId });

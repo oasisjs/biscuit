@@ -37,34 +37,34 @@ import type {
     DiscordTypingStart,
     DiscordUser,
     DiscordWebhookUpdate,
-} from '../discordeno/mod.ts';
+} from '../discordeno/mod';
 
-import type { Snowflake } from './Snowflake.ts';
-import type { Session } from './Session.ts';
-import type { Interaction } from './structures/interactions/InteractionFactory.ts';
+import type { Snowflake } from './Snowflake';
+import type { Session } from './Session';
+import type { Interaction } from './structures/interactions/InteractionFactory';
 
-import { AutoModerationRule } from './structures/AutoModerationRule.ts';
-import { AutoModerationExecution } from './structures/AutoModerationExecution.ts';
-import { type Channel, ChannelFactory, GuildChannel, ThreadChannel } from './structures/channels.ts';
-import { type DiscordStageInstanceB, StageInstance } from './structures/StageInstance.ts';
-import { ScheduledEvent } from './structures/GuildScheduledEvent.ts';
-import { Presence } from './structures/Presence.ts';
+import { AutoModerationRule } from './structures/AutoModerationRule';
+import { AutoModerationExecution } from './structures/AutoModerationExecution';
+import { type Channel, ChannelFactory, GuildChannel, ThreadChannel } from './structures/channels';
+import { type DiscordStageInstanceB, StageInstance } from './structures/StageInstance';
+import { ScheduledEvent } from './structures/GuildScheduledEvent';
+import { Presence } from './structures/Presence';
 
-import ThreadMember from './structures/ThreadMember.ts';
-import Member from './structures/Member.ts';
-import Message from './structures/Message.ts';
-import User from './structures/User.ts';
-import Integration from './structures/Integration.ts';
-import { Guild } from './structures/guilds.ts';
-import InteractionFactory from './structures/interactions/InteractionFactory.ts';
-import { InviteCreate, NewInviteCreate } from './structures/Invite.ts';
+import ThreadMember from './structures/ThreadMember';
+import Member from './structures/Member';
+import Message from './structures/Message';
+import User from './structures/User';
+import Integration from './structures/Integration';
+import { Guild } from './structures/guilds';
+import InteractionFactory from './structures/interactions/InteractionFactory';
+import { InviteCreate, NewInviteCreate } from './structures/Invite';
 import {
     MessageReactionAdd,
     MessageReactionRemove,
     MessageReactionRemoveAll,
     MessageReactionRemoveEmoji,
     NewMessageReactionAdd,
-} from './structures/MessageReaction.ts';
+} from './structures/MessageReaction';
 
 export type RawHandler<T> = (...args: [Session, number, T]) => void;
 export type Handler<T extends [obj?: unknown, ddy?: unknown]> = (...args: T) => unknown;

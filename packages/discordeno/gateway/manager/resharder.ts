@@ -1,5 +1,5 @@
-import { GatewayBot } from '../../types/shared.ts';
-import { createGatewayManager, GatewayManager } from './gatewayManager.ts';
+import { GatewayBot } from '../../types/shared';
+import { createGatewayManager, GatewayManager } from './gatewayManager';
 
 export type Resharder = ReturnType<typeof activateResharder>;
 

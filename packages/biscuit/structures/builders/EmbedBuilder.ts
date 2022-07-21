@@ -1,4 +1,4 @@
-import type { DiscordEmbed, DiscordEmbedField, DiscordEmbedProvider } from '../../../discordeno/mod.ts';
+import type { DiscordEmbed, DiscordEmbedField, DiscordEmbedProvider } from '../../../discordeno/mod';
 
 export interface EmbedFooter {
     text: string;

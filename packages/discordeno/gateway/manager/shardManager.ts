@@ -1,7 +1,7 @@
-import { DiscordGatewayPayload } from '../../../api-types/discord.ts';
-import { PickPartial } from '../../../api-types/shared.ts';
-import { CreateShard, createShard } from '../shard/createShard.ts';
-import { Shard, ShardGatewayConfig } from '../shard/types.ts';
+import { DiscordGatewayPayload } from '../../../api-types/discord';
+import { PickPartial } from '../../../api-types/shared';
+import { CreateShard, createShard } from '../shard/createShard';
+import { Shard, ShardGatewayConfig } from '../shard/types';
 
 // TODO: debug
 

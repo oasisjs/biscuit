@@ -1,7 +1,7 @@
-import type { Session } from '../Session.ts';
-import type { DiscordMemberWithUser, DiscordMessageReactionAdd, DiscordReaction } from '../../discordeno/mod.ts';
-import Emoji from './Emoji.ts';
-import Member from './Member.ts';
+import type { Session } from '../Session';
+import type { DiscordMemberWithUser, DiscordMessageReactionAdd, DiscordReaction } from '../../discordeno/mod';
+import Emoji from './Emoji';
+import Member from './Member';
 
 /** 
  * Represents when a new reaction was added to a message. 

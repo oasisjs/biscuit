@@ -9,29 +9,29 @@ import type {
     GatewayBot,
     GatewayIntents,
     Localization,
-} from '../discordeno/mod.ts';
+} from '../discordeno/mod';
 
-import type { DiscordGatewayPayload, Shard } from '../discordeno/mod.ts';
-import type { Events } from './Actions.ts';
-import type { PermissionResolvable } from './structures/Permissions.ts';
-import type { Activities, StatusTypes } from './structures/Presence.ts';
+import type { DiscordGatewayPayload, Shard } from '../discordeno/mod';
+import type { Events } from './Actions';
+import type { PermissionResolvable } from './structures/Permissions';
+import type { Activities, StatusTypes } from './structures/Presence';
 
-import { Permissions } from './structures/Permissions.ts';
-import { Snowflake } from './Snowflake.ts';
-import { EventEmitter } from './util/EventEmmiter.ts';
+import { Permissions } from './structures/Permissions';
+import { Snowflake } from './Snowflake';
+import { EventEmitter } from './util/EventEmmiter';
 import {
     ApplicationCommandTypes,
     createGatewayManager,
     createRestManager,
     GatewayOpcodes,
     getBotIdFromToken,
-} from '../discordeno/mod.ts';
+} from '../discordeno/mod';
 
-import User from './structures/User.ts';
-import { urlToBase64 } from './util/urlToBase64.ts';
+import User from './structures/User';
+import { urlToBase64 } from './util/urlToBase64';
 
-import * as Routes from './Routes.ts';
-import * as Actions from './Actions.ts';
+import * as Routes from './Routes';
+import * as Actions from './Actions';
 
 export type DiscordRawEventHandler = (shard: Shard, data: DiscordGatewayPayload) => unknown;
 

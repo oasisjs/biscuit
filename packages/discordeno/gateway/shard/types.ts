@@ -1,6 +1,6 @@
-import { DiscordGatewayPayload } from '../../../api-types/discord.ts';
-import { GatewayOpcodes } from '../../../api-types/shared.ts';
-import { createShard } from './createShard.ts';
+import { DiscordGatewayPayload } from '../../../api-types/discord';
+import { GatewayOpcodes } from '../../../api-types/shared';
+import { createShard } from './createShard';
 
 // TODO: think whether we also need an identifiedShard function
 

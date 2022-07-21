@@ -1,8 +1,8 @@
 /** Types */
-import type { Model } from './Base.ts';
-import type { Snowflake } from '../Snowflake.ts';
-import type { Session } from '../Session.ts';
-import type { PermissionsOverwrites } from '../Util.ts';
+import type { Model } from './Base';
+import type { Snowflake } from '../Snowflake';
+import type { Session } from '../Session';
+import type { PermissionsOverwrites } from '../Util';
 
 /** External from vendor */
 import {
@@ -18,20 +18,20 @@ import {
     GatewayOpcodes,
     TargetTypes,
     VideoQualityModes,
-} from '../../discordeno/mod.ts';
+} from '../../discordeno/mod';
 
 /** Functions and others */
-import { calculateShardId } from '../../discordeno/gateway/calculateShardId.ts';
-import { urlToBase64 } from '../util/urlToBase64.ts';
+import { calculateShardId } from '../../discordeno/gateway/calculateShardId';
+import { urlToBase64 } from '../util/urlToBase64';
 
 /** Classes and routes */
-import * as Routes from '../Routes.ts';
-import Message, { CreateMessage, EditMessage, EmojiResolvable } from './Message.ts';
-import Invite from './Invite.ts';
-import Webhook from './Webhook.ts';
-import User from './User.ts';
-import ThreadMember from './ThreadMember.ts';
-import Permissions from './Permissions.ts';
+import * as Routes from '../Routes';
+import Message, { CreateMessage, EditMessage, EmojiResolvable } from './Message';
+import Invite from './Invite';
+import Webhook from './Webhook';
+import User from './User';
+import ThreadMember from './ThreadMember';
+import Permissions from './Permissions';
 
 /**
  * Abstract class that represents the base for creating a new channel.

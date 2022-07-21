@@ -1,4 +1,4 @@
-import { BitwisePermissionFlags } from '../../discordeno/mod.ts';
+import { BitwisePermissionFlags } from '../../discordeno/mod';
 
 export type PermissionString = keyof typeof BitwisePermissionFlags;
 export type PermissionResolvable =

@@ -1,5 +1,5 @@
-import type { Snowflake } from './Snowflake.ts';
-import { baseEndpoints as Endpoints } from '../discordeno/mod.ts';
+import type { Snowflake } from './Snowflake';
+import { baseEndpoints as Endpoints } from '../discordeno/mod';
 
 export function USER_AVATAR(userId: Snowflake, icon: string): string {
     return `${Endpoints.CDN_URL}/avatars/${userId}/${icon}`;

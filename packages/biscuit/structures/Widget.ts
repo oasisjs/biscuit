@@ -1,8 +1,8 @@
-import { DiscordGuildWidget } from "../../api-types/discord.ts";
-import { Session } from "../Session.ts";
-import { Snowflake } from "../Snowflake.ts";
-import { Model } from "./Base.ts";
-import { PartialChannel } from './channels.ts';
+import { DiscordGuildWidget } from "../../api-types/discord";
+import { Session } from "../Session";
+import { Snowflake } from "../Snowflake";
+import { Model } from "./Base";
+import { PartialChannel } from './channels';
 
 export interface WidgetMember {
     id?: string;

@@ -42,7 +42,7 @@ import {
     VideoQualityModes,
     VisibilityTypes,
     WebhookTypes,
-} from './shared.ts';
+} from './shared';
 
 /** https://discord.com/developers/docs/resources/user#user-object */
 export interface DiscordUser {

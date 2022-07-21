@@ -1,6 +1,6 @@
-import type { ButtonBuilder, InputTextBuilder, SelectMenuBuilder } from './mod.ts';
-import type { Permissions } from './structures/Permissions.ts';
-import type { Snowflake } from './Snowflake.ts';
+import type { ButtonBuilder, InputTextBuilder, SelectMenuBuilder } from './mod';
+import type { Permissions } from './structures/Permissions';
+import type { Snowflake } from './Snowflake';
 
 /*
  * Represents a session's cache

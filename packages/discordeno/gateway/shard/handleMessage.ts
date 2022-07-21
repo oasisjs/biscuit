@@ -1,9 +1,9 @@
-import { DiscordGatewayPayload, DiscordHello, DiscordReady } from '../../../api-types/discord.ts';
-import { GatewayOpcodes } from '../../../api-types/shared.ts';
-import { createLeakyBucket } from '../../util/bucket.ts';
-import { delay } from '../../util/delay.ts';
-import { decompressWith } from './deps.ts';
-import { GATEWAY_RATE_LIMIT_RESET_INTERVAL, Shard, ShardState } from './types.ts';
+import { DiscordGatewayPayload, DiscordHello, DiscordReady } from '../../../api-types/discord';
+import { GatewayOpcodes } from '../../../api-types/shared';
+import { createLeakyBucket } from '../../util/bucket';
+import { delay } from '../../util/delay';
+import { decompressWith } from './deps';
+import { GATEWAY_RATE_LIMIT_RESET_INTERVAL, Shard, ShardState } from './types';
 
 const decoder = new TextDecoder();
 

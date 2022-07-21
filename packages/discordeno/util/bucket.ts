@@ -1,5 +1,5 @@
-import { PickPartial } from '../../api-types/shared.ts';
-import { delay } from './delay.ts';
+import { PickPartial } from '../../api-types/shared';
+import { delay } from './delay';
 
 /** A Leaky Bucket.
  * Useful for rate limiting purposes.

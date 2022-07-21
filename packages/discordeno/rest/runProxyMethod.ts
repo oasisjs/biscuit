@@ -1,5 +1,5 @@
-import { RestManager } from './restManager.ts';
-import { RestRequestRejection, RestRequestResponse } from './rest.ts';
+import { RestManager } from './restManager';
+import { RestRequestRejection, RestRequestResponse } from './rest';
 
 export type ProxyMethodResponse<T> = Omit<RestRequestResponse | RestRequestRejection, 'body'> & { body?: T };
 

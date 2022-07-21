@@ -1,7 +1,7 @@
-import { AutoModerationTriggerTypes, DiscordAutoModerationActionExecution } from '../../discordeno/mod.ts';
-import type { Session } from '../Session.ts';
-import type { Snowflake } from '../Snowflake.ts';
-import { AutoModerationAction } from './AutoModerationRule.ts';
+import { AutoModerationTriggerTypes, DiscordAutoModerationActionExecution } from '../../discordeno/mod';
+import type { Session } from '../Session';
+import type { Snowflake } from '../Snowflake';
+import { AutoModerationAction } from './AutoModerationRule';
 
 export class AutoModerationExecution {
     constructor(session: Session, data: DiscordAutoModerationActionExecution) {

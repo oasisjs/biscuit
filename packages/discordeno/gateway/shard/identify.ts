@@ -1,5 +1,5 @@
-import { GatewayOpcodes } from '../../../api-types/shared.ts';
-import { Shard, ShardSocketCloseCodes, ShardState } from './types.ts';
+import { GatewayOpcodes } from '../../../api-types/shared';
+import { Shard, ShardSocketCloseCodes, ShardState } from './types';
 
 export async function identify(shard: Shard): Promise<void> {
     // A new identify has been requested even though there is already a connection open.

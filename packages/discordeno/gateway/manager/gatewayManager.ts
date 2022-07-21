@@ -1,22 +1,22 @@
-import { DiscordGatewayPayload } from '../../../api-types/discord.ts';
-import { GatewayBot, PickPartial } from '../../../api-types/shared.ts';
-import { LeakyBucket } from '../../util/bucket.ts';
-import { CreateShard, createShard } from '../shard/createShard.ts';
-import { Shard, ShardGatewayConfig } from '../shard/types.ts';
-import { calculateTotalShards } from './calculateTotalShards.ts';
-import { calculateWorkerId } from './calculateWorkerId.ts';
+import { DiscordGatewayPayload } from '../../../api-types/discord';
+import { GatewayBot, PickPartial } from '../../../api-types/shared';
+import { LeakyBucket } from '../../util/bucket';
+import { CreateShard, createShard } from '../shard/createShard';
+import { Shard, ShardGatewayConfig } from '../shard/types';
+import { calculateTotalShards } from './calculateTotalShards';
+import { calculateWorkerId } from './calculateWorkerId';
 // import {
 // markNewGuildShardId,
 // resharder,
 // resharderCloseOldShards,
 // resharderIsPending,
 // reshardingEditGuildShardIds,
-// } from "./resharder.ts";
-import { spawnShards } from './spawnShards.ts';
-import { prepareBuckets } from './prepareBuckets.ts';
-import { tellWorkerToIdentify } from './tellWorkerToIdentify.ts';
-import { createShardManager, ShardManager } from './shardManager.ts';
-import { stop } from './stop.ts';
+// } from "./resharder";
+import { spawnShards } from './spawnShards';
+import { prepareBuckets } from './prepareBuckets';
+import { tellWorkerToIdentify } from './tellWorkerToIdentify';
+import { createShardManager, ShardManager } from './shardManager';
+import { stop } from './stop';
 
 export type GatewayManager = ReturnType<typeof createGatewayManager>;
 

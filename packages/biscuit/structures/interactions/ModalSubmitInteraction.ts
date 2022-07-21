@@ -1,14 +1,14 @@
-import type { Model } from '../Base.ts';
-import type { Snowflake } from '../../Snowflake.ts';
-import type { Session } from '../../Session.ts';
+import type { Model } from '../Base';
+import type { Snowflake } from '../../Snowflake';
+import type { Session } from '../../Session';
 import type {
     DiscordInteraction,
     DiscordMessageComponents,
     InteractionTypes,
     MessageComponentTypes,
-} from '../../../discordeno/mod.ts';
-import BaseInteraction from './BaseInteraction.ts';
-import Message from '../Message.ts';
+} from '../../../discordeno/mod';
+import BaseInteraction from './BaseInteraction';
+import Message from '../Message';
 
 export class ModalSubmitInteraction extends BaseInteraction implements Model {
     constructor(session: Session, data: DiscordInteraction) {

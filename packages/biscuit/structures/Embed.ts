@@ -1,4 +1,4 @@
-import type { DiscordEmbed, EmbedTypes } from '../../discordeno/mod.ts';
+import type { DiscordEmbed, EmbedTypes } from '../../discordeno/mod';
 
 export interface Embed {
     title?: string;

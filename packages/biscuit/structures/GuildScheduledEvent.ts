@@ -1,14 +1,14 @@
-import type { Model } from './Base.ts';
-import type { Snowflake } from '../Snowflake.ts';
-import type { Session } from '../Session.ts';
-import { PrivacyLevels } from './StageInstance.ts';
+import type { Model } from './Base';
+import type { Snowflake } from '../Snowflake';
+import type { Session } from '../Session';
+import { PrivacyLevels } from './StageInstance';
 import type {
     DiscordScheduledEvent,
     DiscordScheduledEventEntityMetadata,
     ScheduledEventEntityType,
     ScheduledEventStatus,
-} from '../../discordeno/mod.ts';
-import User from './User.ts';
+} from '../../discordeno/mod';
+import User from './User';
 
 export class ScheduledEvent implements Model {
     constructor(session: Session, data: DiscordScheduledEvent) {

@@ -1,9 +1,9 @@
-import type { DiscordSticker, DiscordStickerPack, StickerFormatTypes, StickerTypes } from '../../discordeno/mod.ts';
-import type { Model } from './Base.ts';
-import type { Snowflake } from '../Snowflake.ts';
-import type { Session } from '../Session.ts';
-import { User } from './User.ts';
-import * as Routes from '../Routes.ts';
+import type { DiscordSticker, DiscordStickerPack, StickerFormatTypes, StickerTypes } from '../../discordeno/mod';
+import type { Model } from './Base';
+import type { Snowflake } from '../Snowflake';
+import type { Session } from '../Session';
+import { User } from './User';
+import * as Routes from '../Routes';
 
 export interface StickerItem {
     id: Snowflake;

@@ -1,5 +1,5 @@
-import type Emoji from '../Emoji.ts';
-import { ButtonStyles, MessageComponentTypes, TextStyles } from '../../../discordeno/mod.ts';
+import type Emoji from '../Emoji';
+import { ButtonStyles, MessageComponentTypes, TextStyles } from '../../../discordeno/mod';
 
 export class BaseComponent {
     constructor(type: MessageComponentTypes) {

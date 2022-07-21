@@ -1,5 +1,5 @@
-import type { Session } from '../Session.ts';
-import type { Snowflake } from '../Snowflake.ts';
+import type { Session } from '../Session';
+import type { Snowflake } from '../Snowflake';
 import type {
     DiscordApplication,
     DiscordChannel,
@@ -10,13 +10,13 @@ import type {
     ScheduledEventEntityType,
     ScheduledEventPrivacyLevel,
     ScheduledEventStatus,
-} from '../../discordeno/mod.ts';
-import { TargetTypes } from '../../discordeno/mod.ts';
-import { GuildChannel } from './channels.ts';
-import { Member } from './Member.ts';
-import { Guild, InviteGuild } from './guilds.ts';
-import User from './User.ts';
-import Application from './Application.ts';
+} from '../../discordeno/mod';
+import { TargetTypes } from '../../discordeno/mod';
+import { GuildChannel } from './channels';
+import { Member } from './Member';
+import { Guild, InviteGuild } from './guilds';
+import User from './User';
+import Application from './Application';
 
 export interface InviteStageInstance {
     /** The members speaking in the Stage */

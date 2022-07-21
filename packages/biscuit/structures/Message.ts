@@ -1,5 +1,5 @@
-import type { Model } from './Base.ts';
-import type { Session } from '../Session.ts';
+import type { Model } from './Base';
+import type { Session } from '../Session';
 import type {
     AllowedMentionsTypes,
     DiscordEmbed,
@@ -9,24 +9,24 @@ import type {
     FileContent,
     MessageActivityTypes,
     MessageTypes,
-} from '../../discordeno/mod.ts';
-import type { Channel } from './channels.ts';
-import type { Component } from './components/Component.ts';
-import type { GetReactions } from '../Routes.ts';
-import type { MessageInteraction } from './interactions/InteractionFactory.ts';
-import { MessageFlags } from '../Util.ts';
-import { Snowflake } from '../Snowflake.ts';
-import { ChannelFactory, ThreadChannel } from './channels.ts';
-import Util from '../Util.ts';
-import User from './User.ts';
-import Member from './Member.ts';
-import Attachment from './Attachment.ts';
-import ComponentFactory from './components/ComponentFactory.ts';
-import MessageReaction from './MessageReaction.ts';
-import Application, { NewTeam } from './Application.ts';
-import InteractionFactory from './interactions/InteractionFactory.ts';
-import * as Routes from '../Routes.ts';
-import { StickerItem } from './Sticker.ts';
+} from '../../discordeno/mod';
+import type { Channel } from './channels';
+import type { Component } from './components/Component';
+import type { GetReactions } from '../Routes';
+import type { MessageInteraction } from './interactions/InteractionFactory';
+import { MessageFlags } from '../Util';
+import { Snowflake } from '../Snowflake';
+import { ChannelFactory, ThreadChannel } from './channels';
+import Util from '../Util';
+import User from './User';
+import Member from './Member';
+import Attachment from './Attachment';
+import ComponentFactory from './components/ComponentFactory';
+import MessageReaction from './MessageReaction';
+import Application, { NewTeam } from './Application';
+import InteractionFactory from './interactions/InteractionFactory';
+import * as Routes from '../Routes';
+import { StickerItem } from './Sticker';
 
 /**
  * @link https://discord.com/developers/docs/resources/channel#allowed-mentions-object
@@ -39,7 +39,7 @@ export interface AllowedMentions {
 }
 
 /**
- * @link https://github.com/denoland/deno_doc/blob/main/lib/types.d.ts
+ * @link https://github.com/denoland/deno_doc/blob/main/lib/types.d
  * channelId is optional when creating a reply, but will always be present when receiving an event/response that includes this data model.
  */
 export interface CreateMessageReference {

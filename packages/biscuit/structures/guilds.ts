@@ -1,5 +1,5 @@
-import type { Model } from './Base.ts';
-import type { Session } from '../Session.ts';
+import type { Model } from './Base';
+import type { Session } from '../Session';
 import type {
     ChannelTypes,
     DefaultMessageNotificationLevels,
@@ -22,23 +22,23 @@ import type {
     VerificationLevels,
     VideoQualityModes,
     DiscordGuildPreview
-} from '../../discordeno/mod.ts';
-import type { ImageFormat, ImageSize } from '../Util.ts';
-import { GuildFeatures, PremiumTiers } from '../../discordeno/mod.ts';
-import { Snowflake } from '../Snowflake.ts';
-import Util from '../Util.ts';
-import * as Routes from '../Routes.ts';
-import WelcomeScreen from './WelcomeScreen.ts';
-import { GuildChannel, ReturnThreadsArchive, ThreadChannel } from './channels.ts';
-import ThreadMember from './ThreadMember.ts';
-import Member from './Member.ts';
-import Role from './Role.ts';
-import GuildEmoji from './GuildEmoji.ts';
-import { urlToBase64 } from '../util/urlToBase64.ts';
-import Invite from './Invite.ts';
-import User from './User.ts';
-import { Widget } from './Widget.ts';
-import Sticker from './Sticker.ts';
+} from '../../discordeno/mod';
+import type { ImageFormat, ImageSize } from '../Util';
+import { GuildFeatures, PremiumTiers } from '../../discordeno/mod';
+import { Snowflake } from '../Snowflake';
+import Util from '../Util';
+import * as Routes from '../Routes';
+import WelcomeScreen from './WelcomeScreen';
+import { GuildChannel, ReturnThreadsArchive, ThreadChannel } from './channels';
+import ThreadMember from './ThreadMember';
+import Member from './Member';
+import Role from './Role';
+import GuildEmoji from './GuildEmoji';
+import { urlToBase64 } from '../util/urlToBase64';
+import Invite from './Invite';
+import User from './User';
+import { Widget } from './Widget';
+import Sticker from './Sticker';
 
 /** BaseGuild */
 /**

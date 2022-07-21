@@ -1,14 +1,14 @@
-import { Model } from './Base.ts';
-import type { Snowflake } from '../Snowflake.ts';
-import type { Session } from '../Session.ts';
+import { Model } from './Base';
+import type { Snowflake } from '../Snowflake';
+import type { Session } from '../Session';
 import {
     DiscordApplication,
     DiscordInstallParams,
     DiscordTeam,
     DiscordUser,
     TeamMembershipStates,
-} from '../../discordeno/mod.ts';
-import User from './User.ts';
+} from '../../discordeno/mod';
+import User from './User';
 
 type SummaryDeprecated = '';
 

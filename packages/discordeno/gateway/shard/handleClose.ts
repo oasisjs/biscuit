@@ -1,5 +1,5 @@
-import { GatewayCloseEventCodes } from '../../../api-types/shared.ts';
-import { Shard, ShardSocketCloseCodes, ShardState } from './types.ts';
+import { GatewayCloseEventCodes } from '../../../api-types/shared';
+import { Shard, ShardSocketCloseCodes, ShardState } from './types';
 
 export async function handleClose(shard: Shard, close: CloseEvent): Promise<void> {
     //   gateway.debug("GW CLOSED", { shardId, payload: event });

@@ -1,5 +1,5 @@
-import { identify } from './identify.ts';
-import { handleMessage } from './handleMessage.ts';
+import { identify } from './identify';
+import { handleMessage } from './handleMessage';
 import {
     DEFAULT_HEARTBEAT_INTERVAL,
     GATEWAY_RATE_LIMIT_RESET_INTERVAL,
@@ -11,21 +11,21 @@ import {
     ShardSocketCloseCodes,
     ShardSocketRequest,
     ShardState,
-} from './types.ts';
-import { startHeartbeating } from './startHeartbeating.ts';
-import { stopHeartbeating } from './stopHeartbeating.ts';
-import { resume } from './resume.ts';
-import { createLeakyBucket, LeakyBucket } from '../../util/bucket.ts';
-import { calculateSafeRequests } from './calculateSafeRequests.ts';
-import { send } from './send.ts';
-import { handleClose } from './handleClose.ts';
-import { connect } from './connect.ts';
-import { close } from './close.ts';
-import { shutdown } from './shutdown.ts';
-import { isOpen } from './isOpen.ts';
-import { DiscordGatewayPayload, DiscordStatusUpdate } from '../../../api-types/discord.ts';
-import { GatewayIntents, PickPartial } from '../../../api-types/shared.ts';
-import { API_VERSION } from '../../util/constants.ts';
+} from './types';
+import { startHeartbeating } from './startHeartbeating';
+import { stopHeartbeating } from './stopHeartbeating';
+import { resume } from './resume';
+import { createLeakyBucket, LeakyBucket } from '../../util/bucket';
+import { calculateSafeRequests } from './calculateSafeRequests';
+import { send } from './send';
+import { handleClose } from './handleClose';
+import { connect } from './connect';
+import { close } from './close';
+import { shutdown } from './shutdown';
+import { isOpen } from './isOpen';
+import { DiscordGatewayPayload, DiscordStatusUpdate } from '../../../api-types/discord';
+import { GatewayIntents, PickPartial } from '../../../api-types/shared';
+import { API_VERSION } from '../../util/constants';
 
 // TODO: debug
 // TODO: function overwrite

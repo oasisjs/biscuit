@@ -1,6 +1,6 @@
-import type { Model } from './Base.ts';
-import type { Session } from '../Session.ts';
-import type { Snowflake } from '../Snowflake.ts';
+import type { Model } from './Base';
+import type { Session } from '../Session';
+import type { Snowflake } from '../Snowflake';
 import type {
     DiscordEmbed,
     DiscordMessage,
@@ -8,14 +8,14 @@ import type {
     DiscordWebhook,
     FileContent,
     WebhookTypes,
-} from '../../discordeno/mod.ts';
-import type { WebhookOptions } from '../Routes.ts';
-import type { Attachment } from './Attachment.ts';
-import type { AllowedMentions, CreateMessage } from './Message.ts';
-import Util from '../Util.ts';
-import User from './User.ts';
-import Message from './Message.ts';
-import * as Routes from '../Routes.ts';
+} from '../../discordeno/mod';
+import type { WebhookOptions } from '../Routes';
+import type { Attachment } from './Attachment';
+import type { AllowedMentions, CreateMessage } from './Message';
+import Util from '../Util';
+import User from './User';
+import Message from './Message';
+import * as Routes from '../Routes';
 
 /**
  * @link https://discord.com/developers/docs/resources/webhook#edit-webhook-message-jsonform-params

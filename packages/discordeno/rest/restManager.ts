@@ -1,19 +1,19 @@
-import { checkRateLimits } from './checkRateLimits.ts';
-import { cleanupQueues } from './cleanupQueues.ts';
-import { createRequestBody } from './createRequestBody.ts';
-import { processGlobalQueue } from './processGlobalQueue.ts';
-import { processQueue } from './processQueue.ts';
-import { processRateLimitedPaths } from './processRateLimitedPaths.ts';
-import { processRequest } from './processRequest.ts';
-import { processRequestHeaders } from './processRequestHeaders.ts';
-import { convertRestError } from './convertRestError.ts';
-import { RestPayload, RestRateLimitedPath, RestRequest } from './rest.ts';
-import { runMethod } from './runMethod.ts';
-import { simplifyUrl } from './simplifyUrl.ts';
-import { baseEndpoints } from '../util/constants.ts';
-import { API_VERSION } from '../util/constants.ts';
-import { removeTokenPrefix } from '../util/token.ts';
-import { sendRequest } from './sendRequest.ts';
+import { checkRateLimits } from './checkRateLimits';
+import { cleanupQueues } from './cleanupQueues';
+import { createRequestBody } from './createRequestBody';
+import { processGlobalQueue } from './processGlobalQueue';
+import { processQueue } from './processQueue';
+import { processRateLimitedPaths } from './processRateLimitedPaths';
+import { processRequest } from './processRequest';
+import { processRequestHeaders } from './processRequestHeaders';
+import { convertRestError } from './convertRestError';
+import { RestPayload, RestRateLimitedPath, RestRequest } from './rest';
+import { runMethod } from './runMethod';
+import { simplifyUrl } from './simplifyUrl';
+import { baseEndpoints } from '../util/constants';
+import { API_VERSION } from '../util/constants';
+import { removeTokenPrefix } from '../util/token';
+import { sendRequest } from './sendRequest';
 
 export function createRestManager(options: CreateRestManagerOptions) {
     const version = options.version || API_VERSION;

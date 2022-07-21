@@ -1,7 +1,7 @@
-import { HTTPResponseCodes } from '../../api-types/shared.ts';
-import { BASE_URL } from '../util/constants.ts';
-import { RequestMethod } from './rest.ts';
-import { RestManager } from './restManager.ts';
+import { HTTPResponseCodes } from '../../api-types/shared';
+import { BASE_URL } from '../util/constants';
+import { RequestMethod } from './rest';
+import { RestManager } from './restManager';
 
 export interface RestSendRequestOptions {
     url: string;

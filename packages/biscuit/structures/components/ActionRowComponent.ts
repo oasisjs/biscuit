@@ -1,12 +1,12 @@
-import type { Session } from '../../Session.ts';
-import type { DiscordComponent, DiscordInputTextComponent } from '../../../discordeno/mod.ts';
-import type { ActionRowComponent, Component } from './Component.ts';
-import { ButtonStyles, MessageComponentTypes } from '../../../discordeno/mod.ts';
-import BaseComponent from './Component.ts';
-import Button from './ButtonComponent.ts';
-import LinkButton from './LinkButtonComponent.ts';
-import SelectMenu from './SelectMenuComponent.ts';
-import InputText from './TextInputComponent.ts';
+import type { Session } from '../../Session';
+import type { DiscordComponent, DiscordInputTextComponent } from '../../../discordeno/mod';
+import type { ActionRowComponent, Component } from './Component';
+import { ButtonStyles, MessageComponentTypes } from '../../../discordeno/mod';
+import BaseComponent from './Component';
+import Button from './ButtonComponent';
+import LinkButton from './LinkButtonComponent';
+import SelectMenu from './SelectMenuComponent';
+import InputText from './TextInputComponent';
 
 export class ActionRow extends BaseComponent implements ActionRowComponent {
     constructor(session: Session, data: DiscordComponent) {

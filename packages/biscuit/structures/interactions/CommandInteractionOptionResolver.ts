@@ -1,5 +1,5 @@
-import type { DiscordInteractionDataOption, DiscordInteractionDataResolved } from '../../../discordeno/mod.ts';
-import { ApplicationCommandOptionTypes } from '../../../discordeno/mod.ts';
+import type { DiscordInteractionDataOption, DiscordInteractionDataResolved } from '../../../discordeno/mod';
+import { ApplicationCommandOptionTypes } from '../../../discordeno/mod';
 
 export function transformOasisInteractionDataOption(o: DiscordInteractionDataOption): CommandInteractionOption {
     const output: CommandInteractionOption = { ...o, Otherwise: o.value as string | boolean | number | undefined };

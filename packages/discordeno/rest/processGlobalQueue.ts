@@ -1,5 +1,5 @@
-import { RestManager } from './restManager.ts';
-import { HTTPResponseCodes } from '../../api-types/shared.ts';
+import { RestManager } from './restManager';
+import { HTTPResponseCodes } from '../../api-types/shared';
 
 export async function processGlobalQueue(rest: RestManager) {
     // IF QUEUE IS EMPTY EXIT

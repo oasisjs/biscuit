@@ -1,7 +1,7 @@
-import type { Localization, PermissionStrings } from '../../../../discordeno/mod.ts';
-import { ApplicationCommandTypes } from '../../../../discordeno/mod.ts';
-import { OptionBased } from './ApplicationCommandOption.ts';
-import { CreateApplicationCommand } from '../../../Session.ts';
+import type { Localization, PermissionStrings } from '../../../../discordeno/mod';
+import { ApplicationCommandTypes } from '../../../../discordeno/mod';
+import { OptionBased } from './ApplicationCommandOption';
+import { CreateApplicationCommand } from '../../../Session';
 
 export abstract class ApplicationCommandBuilder implements CreateApplicationCommand {
     constructor(
