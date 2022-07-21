@@ -1,4 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 import type {
 	ActivityTypes,
 	AllowedMentionsTypes,
@@ -1153,26 +1152,26 @@ export interface DiscordActionRow {
 				| DiscordSelectMenuComponent
 				| DiscordButtonComponent
 				| DiscordInputTextComponent
-		  ]
+		]
 		| [DiscordButtonComponent, DiscordButtonComponent]
 		| [
 				DiscordButtonComponent,
 				DiscordButtonComponent,
 				DiscordButtonComponent
-		  ]
+		]
 		| [
 				DiscordButtonComponent,
 				DiscordButtonComponent,
 				DiscordButtonComponent,
 				DiscordButtonComponent
-		  ]
+		]
 		| [
 				DiscordButtonComponent,
 				DiscordButtonComponent,
 				DiscordButtonComponent,
 				DiscordButtonComponent,
 				DiscordButtonComponent
-		  ];
+		];
 }
 
 export interface DiscordSelectMenuComponent {
@@ -1604,7 +1603,7 @@ export type DiscordAuditLogChange =
 				| 'id'
 				| 'location'
 				| 'command_id';
-	  }
+	}
 	| {
 			new_value: number;
 			old_value: number;
@@ -1631,12 +1630,12 @@ export type DiscordAuditLogChange =
 				| 'entity_type'
 				| 'status'
 				| 'communication_disabled_until';
-	  }
+	}
 	| {
 			new_value: Partial<DiscordRole>[];
 			old_value?: Partial<DiscordRole>[];
 			key: '$add' | '$remove';
-	  }
+	}
 	| {
 			new_value: boolean;
 			old_value: boolean;
@@ -1652,17 +1651,17 @@ export type DiscordAuditLogChange =
 				| 'archived'
 				| 'locked'
 				| 'invitable';
-	  }
+	}
 	| {
 			new_value: DiscordOverwrite[];
 			old_value: DiscordOverwrite[];
 			key: 'permission_overwrites';
-	  }
+	}
 	| {
 			new_value: string | number;
 			old_value: string | number;
 			key: 'type';
-	  };
+	};
 
 /** https://discord.com/developers/docs/resources/audit-log#audit-log-entry-object-optional-audit-entry-info */
 export interface DiscordOptionalAuditEntryInfo {

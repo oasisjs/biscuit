@@ -1,5 +1,3 @@
-/* eslint-disable brace-style */
-/* eslint-disable arrow-parens */
 import type {
 	DiscordGatewayPayload,
 	DiscordHello,
@@ -138,12 +136,12 @@ export async function handleMessage(
 		shard.events.resumed?.(shard);
 
 		// Continue the requests which have been queued since the shard went offline.
-		shard.offlineSendQueue.map((resolve) => resolve());
+		shard.offlineSendQueue.map(resolve => resolve());
 
 		shard.resolves.get('RESUMED')?.(messageData);
 		shard.resolves.delete('RESUMED');
-	} // Important for future resumes.
-	else if (messageData.t === 'READY') {
+		// Important for future resumes.
+	} else if (messageData.t === 'READY') {
 		const payload = messageData.d as DiscordReady;
 
 		shard.sessionId = payload.session_id;
@@ -151,7 +149,7 @@ export async function handleMessage(
 
 		// Continue the requests which have been queued since the shard went offline.
 		// Important when this is a re-identify
-		shard.offlineSendQueue.map((resolve) => resolve());
+		shard.offlineSendQueue.map(resolve => resolve());
 
 		shard.resolves.get('READY')?.(messageData);
 		shard.resolves.delete('READY');

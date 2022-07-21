@@ -1,6 +1,3 @@
-/* eslint-disable arrow-parens */
-/* eslint-disable quote-props */
-/* eslint-disable no-console */
 import type { RestManager } from './restManager';
 import { API_VERSION, BASE_URL, baseEndpoints } from '../util/constants';
 import type {
@@ -36,13 +33,12 @@ export async function runMethod<T = any>(
 		const result = await fetch(`${baseEndpoints.BASE_URL}${route}`, {
 			body: body ? JSON.stringify(body) : undefined,
 			headers: {
-				Authorization: rest.secretKey,
+				'Authorization': rest.secretKey,
 				'Content-Type': 'application/json',
 			},
 			method,
-		}).catch((error) => {
+		}).catch(error => {
 			errorStack.message = (error as Error)?.message;
-			console.error(error);
 			throw errorStack;
 		});
 

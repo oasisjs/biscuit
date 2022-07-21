@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/no-duplicate-imports */
 import { checkRateLimits } from './checkRateLimits';
 import { cleanupQueues } from './cleanupQueues';
 import { createRequestBody } from './createRequestBody';
@@ -12,8 +11,7 @@ import { convertRestError } from './convertRestError';
 import type { RestPayload, RestRateLimitedPath, RestRequest } from './rest';
 import { runMethod } from './runMethod';
 import { simplifyUrl } from './simplifyUrl';
-import { baseEndpoints } from '../util/constants';
-import { API_VERSION } from '../util/constants';
+import { baseEndpoints, API_VERSION } from '../util/constants';
 import { removeTokenPrefix } from '../util/token';
 import { sendRequest } from './sendRequest';
 

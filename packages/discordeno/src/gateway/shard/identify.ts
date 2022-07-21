@@ -1,4 +1,3 @@
-/* eslint-disable arrow-parens */
 import { GatewayOpcodes } from '@biscuit/api-types';
 import type { Shard } from './types';
 import { ShardSocketCloseCodes, ShardState } from './types';
@@ -42,7 +41,7 @@ export async function identify(shard: Shard): Promise<void> {
 		true
 	);
 
-	return new Promise((resolve) => {
+	return new Promise(resolve => {
 		shard.resolves.set('READY', () => {
 			shard.events.identified?.(shard);
 			resolve();

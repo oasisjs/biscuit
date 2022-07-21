@@ -1,5 +1,3 @@
-/* eslint-disable arrow-parens */
-/* eslint-disable no-console */
 import type { Shard } from './types';
 import { ShardState } from './types';
 import WebSocket from 'ws';
@@ -24,7 +22,7 @@ export async function connect(shard: Shard): Promise<void> {
 	shard.socket = socket;
 
 	// TODO: proper event handling
-	socket.onerror = (event: any) => console.log({ error: event });
+	socket.onerror = (event: any) => { throw new Error(event); };
 
 	socket.onclose = (event: any) => shard.handleClose(event);
 
@@ -35,7 +33,7 @@ export async function connect(shard: Shard): Promise<void> {
 		shard.handleMessage(message);
 	};
 
-	return new Promise((resolve) => {
+	return new Promise(resolve => {
 		socket.onopen = () => {
 			// START WSL GATEWAY PATCH
 			setTimeout(() => {
