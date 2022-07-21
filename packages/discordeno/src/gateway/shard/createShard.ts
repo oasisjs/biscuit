@@ -31,6 +31,7 @@ import type {
 	PickPartial,
 } from '@biscuit/api-types';
 import { API_VERSION } from '../../util/constants';
+import type WebSocket from 'ws';
 
 // TODO: debug
 // TODO: function overwrite

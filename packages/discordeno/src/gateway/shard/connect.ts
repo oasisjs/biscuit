@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 import type { Shard } from './types';
 import { ShardState } from './types';
+import WebSocket from 'ws';
 
 // TODO: Remove code marked WSL GATEWAY PATCH once a bug in bun is fixed:
 //   `https://github.com/Jarred-Sumner/bun/issues/521`
@@ -23,11 +24,11 @@ export async function connect(shard: Shard): Promise<void> {
 	shard.socket = socket;
 
 	// TODO: proper event handling
-	socket.onerror = (event) => console.log({ error: event });
+	socket.onerror = (event: any) => console.log({ error: event });
 
-	socket.onclose = (event) => shard.handleClose(event);
+	socket.onclose = (event: any) => shard.handleClose(event);
 
-	socket.onmessage = (message) => {
+	socket.onmessage = (message: any) => {
 		// START WSL GATEWAY PATCH
 		gotHello = true;
 		// END WSL GATEWAY PATCH
