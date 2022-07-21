@@ -11,6 +11,9 @@
 		"build": "tsc",
 		"dev": "tsc --watch"
 	},
+	"directories": {
+		"lib": "src"
+	},
 	"publishConfig": {
 		"access": "public"
 	}

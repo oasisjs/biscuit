@@ -11,8 +11,11 @@
 		"build": "tsc",
 		"dev": "tsc --watch"
 	},
+	"directories": {
+		"lib": "src"
+	},
 	"dependencies": {
-		"@biscuit/api-types": "workspace:*",
+		"@biscuit/api-types": "*",
 		"ws": "^8.8.1"
 	},
 	"devDependencies": {

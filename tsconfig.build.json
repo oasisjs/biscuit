@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"module": "ESNext",
+		"module": "CommonJS",
 		"target": "ES2021",
 		"lib": ["ESNext", "WebWorker"],
 		"moduleResolution": "node",
