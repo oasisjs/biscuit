@@ -1,15 +1,22 @@
 {
 	"name": "@biscuit/discordeno",
 	"version": "1.0.0",
-	"main": "./src/index.ts",
+	"main": "dist/index.js",
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"build": "tsc",
 		"dev": "tsc --watch"
 	},
 	"dependencies": {
+		"@biscuit/api-types": "workspace:^",
 		"ws": "^8.8.1"
 	},
 	"devDependencies": {
 		"@types/ws": "^8.5.3"
+	},
+	"publishConfig": {
+		"access": "public"
 	}
 }

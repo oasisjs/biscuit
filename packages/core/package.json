@@ -1,9 +1,26 @@
 {
 	"name": "@biscuit/core",
 	"version": "1.0.0",
-	"main": "./src/index.ts",
+	"main": "dist/index.js",
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"build": "tsc",
 		"dev": "tsc --watch"
+	},
+	"exports": {
+		"./package.json": "./package.json",
+		".": {
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.js"
+		}
+	},
+	"dependencies": {
+		"@biscuit/api-types": "workspace:^",
+		"@biscuit/discordeno": "workspace:^"
+	},
+	"publishConfig": {
+		"access": "public"
 	}
 }
