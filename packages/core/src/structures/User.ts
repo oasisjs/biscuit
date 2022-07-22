@@ -29,7 +29,7 @@ export class User implements Model {
 		this.mfaEnabled = !!data.mfa_enabled;
 		this.locale = data.locale;
 		this.email = data.email ? data.email : undefined;
-		this.verified = data.verified;
+		this.verified = !!data.verified;
 		this.flags = data.flags;
 	}
 
@@ -73,7 +73,7 @@ export class User implements Model {
 	flags?: UserFlags;
 
 	/** whether the email on this account has been verified */
-	verified?: boolean;
+	verified: boolean;
 
 	/** the type of Nitro subscription on a user's account */
 	premiumType?: PremiumTypes;
